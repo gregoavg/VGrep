@@ -1,0 +1,488 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.grego.vgrep.gui;
+
+import com.grego.vgrep.control.ReaderFactory;
+import com.grego.vgrep.gui.model.ReferenceTableModel;
+import com.grego.vgrep.model.IFileList;
+import com.grego.vgrep.model.reader.IReader;
+import com.grego.vgrep.utils.MyStringUtils;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ *
+ * @author grigo_000
+ */
+public class MainFormUI extends javax.swing.JFrame implements ActionListener, TableModelListener {
+
+    /**
+     * Creates new form MainFormUI
+     */
+    private final IFileList fileList;
+    private final ApplicationContext ctx = new ClassPathXmlApplicationContext("/spring/spring.xml");
+
+    public MainFormUI() {
+        initComponents();
+        setActions();
+        fileList = (IFileList) ctx.getBean("IFileList");
+        initRefTable();
+    }
+
+    private void setActions() {
+        this.jButtonAddTarget.addActionListener(this);
+        this.jButtonAddTarget.setActionCommand("targetFile");
+
+        this.jButtonSetInfo.addActionListener(this);
+        this.jButtonSetInfo.setActionCommand("infoFile");
+    }
+
+    private void initRefTable() {
+        this.jTableRef.setModel(new ReferenceTableModel());
+        this.jTableRef.getModel().addTableModelListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        final JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(this);
+        File file = null;
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            file = fc.getSelectedFile();
+            jTextAreaLogs.append("File name:" + file.getName() + "File path: " + file.getPath() + "\n");
+        }
+        else
+        {
+            jTextAreaLogs.append("Open command cancelled by user.\n");
+        }
+        addFile(file, e);
+    }
+
+    private void addFile(File file, ActionEvent e) {
+        if (file != null)
+        {
+            if (e.getActionCommand().equals(jButtonAddTarget.getActionCommand()))
+            {
+                fileList.setTargetFile(file);
+                jTextFieldTarget.setText(file.getName());
+            }
+            else
+            {
+                fileList.setInfoFile(file);
+                this.jTextFieldInfo.setText(file.getName());
+            }
+        }
+    }
+
+    private void prepareNewRefernce() {
+        jTextFieldTarget.setText(null);
+        jTextFieldInfo.setText(null);
+        jTextAreaLogs.setText(null);
+        fileList.removeFiles();
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        this.jTextAreaLogs.append("References found!!\n");
+        this.jTableRef.updateUI();
+    }
+
+    private void findReferences() throws IOException {
+        if (fileList.getInfoFileHolder().hasFile() && fileList.getTargetFileHolder().hasFile())
+        {
+            IReader infoReader = ReaderFactory.getInstance(fileList.getInfoFileHolder().getFileType());
+            infoReader.setFile(fileList.getInfoFileHolder().getFile());
+
+            IReader targetReader = ReaderFactory.getInstance(fileList.getTargetFileHolder().getFileType());
+            targetReader.setFile(fileList.getTargetFileHolder().getFile());
+
+            Collection<String> infoFileContents = MyStringUtils.textToLineCollection(infoReader.read(), "\n");
+            Collection<String> targetFileContents = MyStringUtils.textToLineCollection(targetReader.read(), "\n");
+            
+            PrepareReferencesUI preview = new PrepareReferencesUI(infoFileContents, targetFileContents, jTableRef.getModel());
+            preview.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Please select files to proceed for reference check!", "Information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void removeTargetFile() {
+        fileList.getTargetFileHolder().removeFile();
+        this.jTextFieldTarget.setText(null);
+        this.jTextAreaLogs.append("Target file removed\n");
+    }
+
+    private void removeInfoFile() {
+        fileList.getInfoFileHolder().removeFile();
+        this.jTextFieldInfo.setText(null);
+        this.jTextAreaLogs.append("Info file removed\n");
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanelMain = new javax.swing.JPanel();
+        jScrollPaneLogs = new javax.swing.JScrollPane();
+        jTextAreaLogs = new javax.swing.JTextArea();
+        jPanelSettings = new javax.swing.JPanel();
+        jLabelSetInfo = new javax.swing.JLabel();
+        jTextFieldInfo = new javax.swing.JTextField();
+        jButtonSetInfo = new javax.swing.JButton();
+        jLabelAddTarget = new javax.swing.JLabel();
+        jTextFieldTarget = new javax.swing.JTextField();
+        jButtonAddTarget = new javax.swing.JButton();
+        jButtonFindRef = new javax.swing.JButton();
+        jSeparator = new javax.swing.JSeparator();
+        jScrollPane = new javax.swing.JScrollPane();
+        jTableRef = new javax.swing.JTable();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuItemNew = new javax.swing.JMenuItem();
+        jMenuItemExport = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuEdit = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemRemoveInfo = new javax.swing.JMenuItem();
+        jMenuItemRemoveTarget = new javax.swing.JMenuItem();
+        jMenuItemFindReferences = new javax.swing.JMenuItem();
+        jMenuItemSearch = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemAbout = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Visual File Grep");
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(600, 500));
+        setModalExclusionType(null);
+        setName("jFrameMain"); // NOI18N
+
+        jPanelMain.setEnabled(false);
+        jPanelMain.setFocusable(false);
+        jPanelMain.setName("jPanelMain"); // NOI18N
+        jPanelMain.setVerifyInputWhenFocusTarget(false);
+
+        jScrollPaneLogs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logs", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14))); // NOI18N
+
+        jTextAreaLogs.setEditable(false);
+        jTextAreaLogs.setColumns(20);
+        jTextAreaLogs.setLineWrap(true);
+        jTextAreaLogs.setRows(5);
+        jScrollPaneLogs.setViewportView(jTextAreaLogs);
+
+        jLabelSetInfo.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        jLabelSetInfo.setText("Add info file:");
+
+        jTextFieldInfo.setEditable(false);
+        jTextFieldInfo.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+
+        jButtonSetInfo.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jButtonSetInfo.setText("...");
+
+        jLabelAddTarget.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        jLabelAddTarget.setText("Add target File:");
+
+        jTextFieldTarget.setEditable(false);
+        jTextFieldTarget.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+
+        jButtonAddTarget.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jButtonAddTarget.setText("...");
+
+        jButtonFindRef.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jButtonFindRef.setText("Find References");
+        jButtonFindRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFindRefActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelSettingsLayout = new javax.swing.GroupLayout(jPanelSettings);
+        jPanelSettings.setLayout(jPanelSettingsLayout);
+        jPanelSettingsLayout.setHorizontalGroup(
+            jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSetInfo)
+                    .addComponent(jLabelAddTarget))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                        .addComponent(jTextFieldTarget, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAddTarget)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(jButtonFindRef))
+                    .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                        .addComponent(jTextFieldInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSetInfo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelSettingsLayout.setVerticalGroup(
+            jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSetInfo)
+                    .addComponent(jTextFieldInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSetInfo))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAddTarget)
+                    .addComponent(jTextFieldTarget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddTarget)
+                    .addComponent(jButtonFindRef))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reference Panel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Calibri", 0, 36), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        jTableRef.setAutoCreateRowSorter(true);
+        jTableRef.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jTableRef.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableRef.setRowHeight(22);
+        jScrollPane.setViewportView(jTableRef);
+
+        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
+        jPanelMain.setLayout(jPanelMainLayout);
+        jPanelMainLayout.setHorizontalGroup(
+            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator)
+                    .addComponent(jPanelSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneLogs)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanelMainLayout.setVerticalGroup(
+            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneLogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jMenuFile.setText("File");
+
+        jMenuItemNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemNew.setText("New Reference...");
+        jMenuItemNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNewActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemNew);
+
+        jMenuItemExport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemExport.setText("Export to Text File");
+        jMenuItemExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExportActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemExport);
+
+        jMenuItem3.setText("Exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItem3);
+
+        jMenuBar.add(jMenuFile);
+
+        jMenuEdit.setText("Edit");
+
+        jMenu1.setText("Remove");
+
+        jMenuItemRemoveInfo.setText("Info File");
+        jMenuItemRemoveInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRemoveInfoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemRemoveInfo);
+
+        jMenuItemRemoveTarget.setText("Target File");
+        jMenuItemRemoveTarget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRemoveTargetActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemRemoveTarget);
+
+        jMenuEdit.add(jMenu1);
+
+        jMenuItemFindReferences.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFindReferences.setText("Find References");
+        jMenuItemFindReferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFindReferencesActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuItemFindReferences);
+
+        jMenuItemSearch.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemSearch.setText("Search");
+        jMenuEdit.add(jMenuItemSearch);
+
+        jMenuBar.add(jMenuEdit);
+
+        jMenuHelp.setText("Help");
+
+        jMenuItem2.setText("Help Contents");
+        jMenuHelp.add(jMenuItem2);
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemAbout);
+
+        jMenuBar.add(jMenuHelp);
+
+        setJMenuBar(jMenuBar);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getAccessibleContext().setAccessibleName("Visual Grep");
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed
+        prepareNewRefernce();
+    }//GEN-LAST:event_jMenuItemNewActionPerformed
+
+    private void jMenuItemRemoveTargetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveTargetActionPerformed
+        this.removeTargetFile();
+    }//GEN-LAST:event_jMenuItemRemoveTargetActionPerformed
+
+    private void jMenuItemRemoveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveInfoActionPerformed
+        this.removeInfoFile();
+    }//GEN-LAST:event_jMenuItemRemoveInfoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButtonFindRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindRefActionPerformed
+        try
+        {
+            this.findReferences();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainFormUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonFindRefActionPerformed
+
+    private void jMenuItemFindReferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindReferencesActionPerformed
+        try
+        {
+            this.findReferences();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainFormUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemFindReferencesActionPerformed
+
+    private void jMenuItemExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemExportActionPerformed
+
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+        new AboutDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddTarget;
+    private javax.swing.JButton jButtonFindRef;
+    private javax.swing.JButton jButtonSetInfo;
+    private javax.swing.JLabel jLabelAddTarget;
+    private javax.swing.JLabel jLabelSetInfo;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemExport;
+    private javax.swing.JMenuItem jMenuItemFindReferences;
+    private javax.swing.JMenuItem jMenuItemNew;
+    private javax.swing.JMenuItem jMenuItemRemoveInfo;
+    private javax.swing.JMenuItem jMenuItemRemoveTarget;
+    private javax.swing.JMenuItem jMenuItemSearch;
+    private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelSettings;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPaneLogs;
+    private javax.swing.JSeparator jSeparator;
+    private javax.swing.JTable jTableRef;
+    private javax.swing.JTextArea jTextAreaLogs;
+    private javax.swing.JTextField jTextFieldInfo;
+    private javax.swing.JTextField jTextFieldTarget;
+    // End of variables declaration//GEN-END:variables
+}
