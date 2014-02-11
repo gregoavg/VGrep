@@ -15,8 +15,8 @@ import java.util.Set;
  * @author Grigorios
  */
 public final class ReferenceBuilder {
-    
-    private final Set<IReference> referenceSet = new HashSet<IReference>();
+
+    private final Set<IReference> referenceSet = new HashSet<>();
     
     public ReferenceBuilder(Collection<String> infoCollection, Collection<String> targetCollection) {
         constructReferences(infoCollection, targetCollection);

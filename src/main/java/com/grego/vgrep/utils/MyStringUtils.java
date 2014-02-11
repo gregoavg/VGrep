@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import org.springframework.util.StringUtils;
 
 /**
  *
@@ -44,11 +43,4 @@ public final class MyStringUtils {
         Collection<String> lineCollection = Arrays.asList(lineArray);
         return lineCollection;
     }
-
-    public static Collection<String> removeDublicateNodes(Collection<String> stringCollection) {
-        String[] stringArray = stringCollection.toArray(new String[stringCollection.size()]);
-        stringArray = StringUtils.removeDuplicateStrings(stringArray);
-        return Arrays.asList(stringArray);
-    }
-
 }

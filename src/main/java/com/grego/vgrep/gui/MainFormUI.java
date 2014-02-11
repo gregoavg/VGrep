@@ -6,7 +6,8 @@ package com.grego.vgrep.gui;
 
 import com.grego.vgrep.control.ReaderFactory;
 import com.grego.vgrep.gui.model.ReferenceTableModel;
-import com.grego.vgrep.model.IFileList;
+import com.grego.vgrep.model.FileManager;
+import com.grego.vgrep.model.IFileManager;
 import com.grego.vgrep.model.reader.IReader;
 import com.grego.vgrep.utils.MyStringUtils;
 import java.awt.event.ActionEvent;
@@ -20,8 +21,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -32,13 +31,11 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
     /**
      * Creates new form MainFormUI
      */
-    private final IFileList fileList;
-    private final ApplicationContext ctx = new ClassPathXmlApplicationContext("/spring/spring.xml");
+    private final IFileManager fileManager = new FileManager();
 
     public MainFormUI() {
         initComponents();
         setActions();
-        fileList = (IFileList) ctx.getBean("IFileList");
         initRefTable();
     }
 
@@ -78,12 +75,12 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
         {
             if (e.getActionCommand().equals(jButtonAddTarget.getActionCommand()))
             {
-                fileList.setTargetFile(file);
+                fileManager.setTargetFile(file);
                 jTextFieldTarget.setText(file.getName());
             }
             else
             {
-                fileList.setInfoFile(file);
+                fileManager.setInfoFile(file);
                 this.jTextFieldInfo.setText(file.getName());
             }
         }
@@ -93,7 +90,7 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
         jTextFieldTarget.setText(null);
         jTextFieldInfo.setText(null);
         jTextAreaLogs.setText(null);
-        fileList.removeFiles();
+        fileManager.removeFiles();
     }
 
     @Override
@@ -103,13 +100,13 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
     }
 
     private void findReferences() throws IOException {
-        if (fileList.getInfoFileHolder().hasFile() && fileList.getTargetFileHolder().hasFile())
+        if (fileManager.getInfoFileHolder().hasFile() && fileManager.getTargetFileHolder().hasFile())
         {
-            IReader infoReader = ReaderFactory.getInstance(fileList.getInfoFileHolder().getFileType());
-            infoReader.setFile(fileList.getInfoFileHolder().getFile());
+            IReader infoReader = ReaderFactory.getInstance(fileManager.getInfoFileHolder().getFileType());
+            infoReader.setFile(fileManager.getInfoFileHolder().getFile());
 
-            IReader targetReader = ReaderFactory.getInstance(fileList.getTargetFileHolder().getFileType());
-            targetReader.setFile(fileList.getTargetFileHolder().getFile());
+            IReader targetReader = ReaderFactory.getInstance(fileManager.getTargetFileHolder().getFileType());
+            targetReader.setFile(fileManager.getTargetFileHolder().getFile());
 
             Collection<String> infoFileContents = MyStringUtils.textToLineCollection(infoReader.read(), "\n");
             Collection<String> targetFileContents = MyStringUtils.textToLineCollection(targetReader.read(), "\n");
@@ -124,13 +121,13 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
     }
 
     private void removeTargetFile() {
-        fileList.getTargetFileHolder().removeFile();
+        fileManager.getTargetFileHolder().removeFile();
         this.jTextFieldTarget.setText(null);
         this.jTextAreaLogs.append("Target file removed\n");
     }
 
     private void removeInfoFile() {
-        fileList.getInfoFileHolder().removeFile();
+        fileManager.getInfoFileHolder().removeFile();
         this.jTextFieldInfo.setText(null);
         this.jTextAreaLogs.append("Info file removed\n");
     }

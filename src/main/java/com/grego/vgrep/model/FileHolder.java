@@ -14,15 +14,7 @@ import java.io.File;
  */
 public final class FileHolder implements IFileHolder {
 
-    private File file;
-
-    public FileHolder() {
-        this.file = null;
-    }
-    
-    public FileHolder(File file) {
-        this.file = file;
-    }
+    private File file = null;
     
     @Override
     public PersistanceType getFileType() {

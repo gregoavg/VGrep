@@ -10,7 +10,7 @@ import java.io.File;
  *
  * @author grigo_000
  */
-public interface IFileList {
+public interface IFileManager {
 
     IFileHolder getInfoFileHolder();
 
