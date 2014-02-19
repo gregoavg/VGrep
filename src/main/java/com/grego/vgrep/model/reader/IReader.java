@@ -12,11 +12,9 @@ import java.io.IOException;
  * @author grigo_000
  */
 public interface IReader {
-
-    File getFile();
-
-    void setFile(File file);
     
     String read() throws IOException;
+
+    public void setFile(File file);
     
 }

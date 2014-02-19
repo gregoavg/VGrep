@@ -4,17 +4,23 @@
  */
 package com.grego.vgrep.model.reader;
 
+import com.grego.vgrep.App;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author grigo_000
+ * @author grrowIndgo_000
  */
 public class XlsReader implements IReader {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(XlsReader.class);
     private File xlsFile;
 
     public XlsReader() {
@@ -23,12 +29,7 @@ public class XlsReader implements IReader {
     public XlsReader(File xlsFile) {
         this.xlsFile = xlsFile;
     }
-
-    @Override
-    public File getFile() {
-        return this.xlsFile;
-    }
-
+    
     @Override
     public void setFile(File file) {
         this.xlsFile = file;
@@ -36,26 +37,25 @@ public class XlsReader implements IReader {
 
     @Override
     public String read() throws IOException {
-       /* StringBuilder xlsContentBuilder = new StringBuilder();
+       StringBuilder xlsContentBuilder = new StringBuilder();
         try
         {
             Workbook w = Workbook.getWorkbook(xlsFile);
             Sheet sheet = w.getSheet(0);
-            for (int i = 0; i < sheet.getRows(); i++)
+            for (int rowInd = 0; rowInd < sheet.getRows(); rowInd++)
             {
-                for (int j = 0; j < sheet.getColumns(); j++)
+                for (int colInd = 0; colInd < sheet.getColumns(); colInd++)
                 {
-                    Cell cellData = sheet.getCell(j, i);
-                    xlsContentBuilder.append(cellData.getContents()).append(" ");
+                    Cell cell = sheet.getCell(colInd, rowInd);
+                    xlsContentBuilder.append(cell.getContents()).append(" ");
                 }
                 xlsContentBuilder.append("\n");
             }
         }
         catch (BiffException ex)
         {
-            Logger.getLogger(XlsReader.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage());
         }
-        return xlsContentBuilder.toString();*/
-        return null;
+        return xlsContentBuilder.toString();
     }
 }

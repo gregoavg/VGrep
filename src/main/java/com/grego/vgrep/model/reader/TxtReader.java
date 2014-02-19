@@ -26,11 +26,6 @@ public class TxtReader implements IReader {
     }
 
     @Override
-    public File getFile() {
-        return this.txtfile;
-    }
-
-    @Override
     public void setFile(File file) {
         this.txtfile = file;
     }

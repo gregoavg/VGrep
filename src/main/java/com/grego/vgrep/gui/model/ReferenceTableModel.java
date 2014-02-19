@@ -8,13 +8,12 @@ import com.grego.vgrep.model.IReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  * 
  * @author Grigorios
  */
-public class ReferenceTableModel extends AbstractTableModel implements TableModel {
+public class ReferenceTableModel extends AbstractTableModel {
 
     protected List<IReference> referenceList;
 
