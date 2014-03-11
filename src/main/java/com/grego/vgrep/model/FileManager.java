@@ -23,29 +23,29 @@ public final class FileManager implements IFileManager {
     }
 
     @Override
-    public IFileHolder getInfoFileHolder() {
-        return contentMapper.get(EContentType.INFO);
+    public void setFile(EContentType contentType, File file) {
+        contentMapper.get(contentType).setFile(file);
     }
 
     @Override
-    public IFileHolder getTargetFileHolder() {
-        return contentMapper.get(EContentType.TARGET);
+    public IFileHolder getFileHolder(EContentType contentType) {
+        return contentMapper.get(contentType);
     }
-
+    
     @Override
-    public void setInfoFile(File infoFile) {
-        contentMapper.get(EContentType.INFO).setFile(infoFile);
-    }
-
-    @Override
-    public void setTargetFile(File targerFile) {
-        contentMapper.get(EContentType.TARGET).setFile(targerFile);
-    }
-
-    @Override
-    public void removeFiles() {
+    public void clearFiles() {
         for(Entry entry : contentMapper.entrySet()) {
             ((IFileHolder) entry.getValue()).removeFile();
+        }
+    }
+
+    @Override
+    public void removeFile(File file) {
+        for(IFileHolder entry : contentMapper.values()) {
+            if(entry.getFile().equals(file))
+            {
+                entry.removeFile();
+            }
         }
     }
 }

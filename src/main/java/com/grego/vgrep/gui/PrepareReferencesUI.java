@@ -4,41 +4,15 @@
  */
 package com.grego.vgrep.gui;
 
-import com.grego.vgrep.control.ReferenceBuilder;
 import com.grego.vgrep.gui.model.PreviewTableModel;
-import com.grego.vgrep.gui.model.ReferenceTableModel;
-import com.grego.vgrep.model.IReference;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 
 /**
- * 
+ *
  * @author Grigorios
  */
-public class PrepareReferencesUI extends javax.swing.JFrame implements ComponentListener {
-
-    private final TableModel refTableModel;
-
-    /**
-     * Creates new form PrepareReferencesUI
-     * @param infoData
-     * @param targetData
-     * @param refTableModel 
-     */
-    public PrepareReferencesUI(Collection<String> infoData, Collection<String> targetData, TableModel refTableModel) {
-        initComponents();
-        resizeDivider();
-        addComponentListener(this);
-
-        this.refTableModel = refTableModel;
-        this.jTableInfo.setModel(new PreviewTableModel((List<String>) infoData));
-        this.jTableTarget.setModel(new PreviewTableModel((List<String>) targetData));
-    }
+public class PrepareReferencesUI extends javax.swing.JFrame {
 
     private void resizeDivider() {
         this.jSplitPaneTables.setDividerLocation(0.5);
@@ -163,25 +137,13 @@ public class PrepareReferencesUI extends javax.swing.JFrame implements Component
         int[] infoSelectedCols = jTableInfo.getSelectedColumns();
         int[] targetSelectedCols = jTableTarget.getSelectedColumns();
 
-        Collection<String> infoCollection = ((PreviewTableModel) jTableInfo.getModel()).getSelectedColumnsData(infoSelectedCols);
-        Collection<String> targetCollection = ((PreviewTableModel) jTableTarget.getModel()).getSelectedColumnsData(targetSelectedCols);
+        Collection<String> infoCollection = ((PreviewTableModel) jTableInfo.getModel()).getDataFromColumns(infoSelectedCols);
+        Collection<String> targetCollection = ((PreviewTableModel) jTableTarget.getModel()).getDataFromColumns(targetSelectedCols);
 
         if (infoCollection.isEmpty() && targetCollection.isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "Please select columns from both file preview\nto proceed!!",
                     "Reference Selection Info", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else
-        {
-            ReferenceBuilder refBuilder = new ReferenceBuilder(infoCollection, targetCollection);
-            
-            ReferenceTableModel tm = (ReferenceTableModel) refTableModel;
-            
-            Collection<IReference> references = refBuilder.getReferences();
-            tm.setReferenceList(new ArrayList<>(references));
-
-            JOptionPane.showMessageDialog(rootPane, "Number of references found: " + references.size());
-            this.dispose();
         }
     }//GEN-LAST:event_jButtonFinishActionPerformed
 
@@ -194,25 +156,4 @@ public class PrepareReferencesUI extends javax.swing.JFrame implements Component
     private javax.swing.JTable jTableInfo;
     private javax.swing.JTable jTableTarget;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void componentResized(ComponentEvent e) {
-        this.resizeDivider();
-    }
-
-    @Override
-    public void componentMoved(ComponentEvent e) {
-
-    }
-
-    @Override
-    public void componentShown(ComponentEvent e) {
-
-    }
-
-    @Override
-    public void componentHidden(ComponentEvent e) {
-
-    }
-
 }

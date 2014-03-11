@@ -4,9 +4,10 @@
  */
 package com.grego.vgrep.model;
 
-import com.grego.vgrep.control.PersistanceType;
+import com.grego.vgrep.control.EFileType;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
+import java.util.Objects;
 
 /**
  *
@@ -17,7 +18,7 @@ public final class FileHolder implements IFileHolder {
     private File file = null;
     
     @Override
-    public PersistanceType getFileType() {
+    public EFileType getFileType() {
         return FileUtils.getFileType(file);
     }
 
@@ -40,5 +41,32 @@ public final class FileHolder implements IFileHolder {
     public boolean hasFile() {
         return file != null;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.file);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final FileHolder other = (FileHolder) obj;
+        if (!Objects.equals(this.file, other.file))
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }

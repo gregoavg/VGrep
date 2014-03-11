@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.model;
 
-import com.grego.vgrep.control.PersistanceType;
+import com.grego.vgrep.control.EFileType;
 import java.io.File;
 
 /**
@@ -13,7 +13,7 @@ import java.io.File;
  */
 public interface IFileHolder {
     
-    public PersistanceType getFileType();
+    public EFileType getFileType();
     
     public void setFile(File file);
     

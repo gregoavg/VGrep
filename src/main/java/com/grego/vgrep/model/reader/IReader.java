@@ -15,6 +15,6 @@ public interface IReader {
     
     String read() throws IOException;
 
-    public void setFile(File file);
+    void setFile(File file);
     
 }

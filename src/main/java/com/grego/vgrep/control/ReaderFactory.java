@@ -15,7 +15,7 @@ import com.grego.vgrep.model.reader.XlsReader;
  */
 public class ReaderFactory {
     
-    public static IReader getInstance(PersistanceType type)
+    public static IReader getInstance(EFileType type)
     {
         switch( type )
         {

@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ReferenceTableModel extends AbstractTableModel {
 
-    protected List<IReference> referenceList;
+    private List<IReference> referenceList;
 
     public ReferenceTableModel() {
         this.referenceList = new ArrayList<>();

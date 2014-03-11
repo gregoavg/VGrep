@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.utils;
 
-import com.grego.vgrep.control.PersistanceType;
+import com.grego.vgrep.control.EFileType;
 import java.io.File;
 import java.util.UnknownFormatFlagsException;
 
@@ -14,7 +14,7 @@ import java.util.UnknownFormatFlagsException;
  */
 public final class FileUtils {
 
-    public static PersistanceType getFileType(File file) throws UnknownFormatFlagsException {
+    public static EFileType getFileType(File file) throws UnknownFormatFlagsException {
         String fileName = file.getName().toLowerCase();
         int beginIndex = fileName.lastIndexOf(".") + 1;
         String fileType = fileName.substring(beginIndex).trim();
@@ -22,13 +22,13 @@ public final class FileUtils {
         switch (fileType)
         {
             case "pdf":
-                return PersistanceType.PDF;
+                return EFileType.PDF;
             case "xls":
-                return PersistanceType.XLS;
+                return EFileType.XLS;
             case "txt":
-                return PersistanceType.TXT;
+                return EFileType.TXT;
             case "doc":
-                return PersistanceType.DOC;
+                return EFileType.DOC;
             default:
                 throw new UnknownFormatFlagsException("Unsupported file type exception!");
         }

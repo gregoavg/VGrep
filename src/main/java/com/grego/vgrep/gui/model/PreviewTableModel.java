@@ -16,34 +16,34 @@ import javax.swing.table.AbstractTableModel;
  */
 public final class PreviewTableModel extends AbstractTableModel {
 
-    private List<String> fileLines;
+    private List<String> contentLines;
 
     public PreviewTableModel(List<String> data) {
-        this.fileLines = data;
+        this.contentLines = data;
     }
 
     public List<String> getData() {
-        return fileLines;
+        return contentLines;
     }
 
     public void setData(List<String> data) {
-        this.fileLines = data;
+        this.contentLines = data;
         this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return this.fileLines.size();
+        return this.contentLines.size();
     }
 
     @Override
     public int getColumnCount() {
-        return TableUtils.getMaxColSize(fileLines);
+        return TableUtils.getMaxColSize(contentLines);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        String[] rowValue = fileLines.get(rowIndex).split(" ");
+        String[] rowValue = contentLines.get(rowIndex).split(" ");
         if (columnIndex > rowValue.length - 1)
         {
             return "";
@@ -54,7 +54,7 @@ public final class PreviewTableModel extends AbstractTableModel {
         }
     }
 
-    public Collection<String> getSelectedColumnsData(int[] selectedColumns) {
+    public Collection<String> getDataFromColumns(int[] selectedColumns) {
         Collection<String> selectedData = new ArrayList<>();
         for (int rowIndex = 0; rowIndex < this.getRowCount(); rowIndex++)
         {

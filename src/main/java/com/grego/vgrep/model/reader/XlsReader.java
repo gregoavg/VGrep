@@ -4,7 +4,6 @@
  */
 package com.grego.vgrep.model.reader;
 
-import com.grego.vgrep.App;
 import java.io.File;
 import java.io.IOException;
 import jxl.Cell;
@@ -54,7 +53,7 @@ public class XlsReader implements IReader {
         }
         catch (BiffException ex)
         {
-            LOGGER.error(ex.getMessage());
+            LOGGER.error(ex.getMessage());          
         }
         return xlsContentBuilder.toString();
     }

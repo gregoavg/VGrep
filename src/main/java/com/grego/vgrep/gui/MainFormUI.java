@@ -4,134 +4,82 @@
  */
 package com.grego.vgrep.gui;
 
-import com.grego.vgrep.control.ReaderFactory;
 import com.grego.vgrep.gui.model.ReferenceTableModel;
-import com.grego.vgrep.model.FileManager;
-import com.grego.vgrep.model.IFileManager;
-import com.grego.vgrep.model.reader.IReader;
-import com.grego.vgrep.utils.MyStringUtils;
+import com.grego.vgrep.gui.presenter.IComparePresenter;
+import com.grego.vgrep.model.EContentType;
+import com.grego.vgrep.model.IReference;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author grigo_000
  */
-public class MainFormUI extends javax.swing.JFrame implements ActionListener, TableModelListener {
+public final class MainFormUI extends JFrame implements ICompareView, ActionListener {
 
+    private IComparePresenter presenter = null;
     /**
      * Creates new form MainFormUI
      */
-    private final IFileManager fileManager = new FileManager();
-
     public MainFormUI() {
         initComponents();
-        setActions();
         initRefTable();
+        setActions();
     }
 
+    @Override
+    public void setPresenter(IComparePresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void update() {
+        jTextFieldInfo.setText(presenter.getFileName(EContentType.INFO));
+        jTextFieldTarget.setText(presenter.getFileName(EContentType.TARGET));
+    }
+    
     private void setActions() {
         this.jButtonAddTarget.addActionListener(this);
-        this.jButtonAddTarget.setActionCommand("targetFile");
+        this.jButtonAddTarget.setActionCommand("TARGET");
 
         this.jButtonSetInfo.addActionListener(this);
-        this.jButtonSetInfo.setActionCommand("infoFile");
+        this.jButtonSetInfo.setActionCommand("INFO");
     }
-
+    
+     //Hack: Need creational abstraction
     private void initRefTable() {
-        this.jTableRef.setModel(new ReferenceTableModel());
-        this.jTableRef.getModel().addTableModelListener(this);
+        
+        TableModel tm = new ReferenceTableModel((List<IReference>) presenter.getReferences());
+        tm.addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent tme) {
+                jTableRef.updateUI();
+            }
+        });
+        jTableRef.setModel(tm);
     }
-
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent ae) {
         final JFileChooser fc = new JFileChooser();
-        int returnVal = fc.showOpenDialog(this);
-        File file = null;
-        if (returnVal == JFileChooser.APPROVE_OPTION)
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
         {
-            file = fc.getSelectedFile();
-            jTextAreaLogs.append("File name:" + file.getName() + "File path: " + file.getPath() + "\n");
-        }
-        else
-        {
-            jTextAreaLogs.append("Open command cancelled by user.\n");
-        }
-        addFile(file, e);
-    }
-
-    private void addFile(File file, ActionEvent e) {
-        if (file != null)
-        {
-            if (e.getActionCommand().equals(jButtonAddTarget.getActionCommand()))
-            {
-                fileManager.setTargetFile(file);
-                jTextFieldTarget.setText(file.getName());
-            }
-            else
-            {
-                fileManager.setInfoFile(file);
-                this.jTextFieldInfo.setText(file.getName());
-            }
+            this.presenter.addFile(EContentType.valueOf(ae.getActionCommand()), fc.getSelectedFile());
         }
     }
-
-    private void prepareNewRefernce() {
-        jTextFieldTarget.setText(null);
-        jTextFieldInfo.setText(null);
-        jTextAreaLogs.setText(null);
-        fileManager.removeFiles();
-    }
-
+    
     @Override
-    public void tableChanged(TableModelEvent e) {
-        this.jTextAreaLogs.append("References found!!\n");
-        this.jTableRef.updateUI();
+    public void setVisibility(boolean state) {
+       this.setVisible(state);
     }
-
-    private void findReferences() throws IOException {
-        if (fileManager.getInfoFileHolder().hasFile() && fileManager.getTargetFileHolder().hasFile())
-        {
-            IReader infoReader = ReaderFactory.getInstance(fileManager.getInfoFileHolder().getFileType());
-            infoReader.setFile(fileManager.getInfoFileHolder().getFile());
-
-            IReader targetReader = ReaderFactory.getInstance(fileManager.getTargetFileHolder().getFileType());
-            targetReader.setFile(fileManager.getTargetFileHolder().getFile());
-
-            Collection<String> infoFileContents = MyStringUtils.textToLineCollection(infoReader.read(), "\n");
-            Collection<String> targetFileContents = MyStringUtils.textToLineCollection(targetReader.read(), "\n");
-            
-            PrepareReferencesUI preview = new PrepareReferencesUI(infoFileContents, targetFileContents, jTableRef.getModel());
-            preview.setVisible(true);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(rootPane, "Please select files to proceed for reference check!", "Information", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
-    private void removeTargetFile() {
-        fileManager.getTargetFileHolder().removeFile();
-        this.jTextFieldTarget.setText(null);
-        this.jTextAreaLogs.append("Target file removed\n");
-    }
-
-    private void removeInfoFile() {
-        fileManager.getInfoFileHolder().removeFile();
-        this.jTextFieldInfo.setText(null);
-        this.jTextAreaLogs.append("Info file removed\n");
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -407,15 +355,15 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed
-        prepareNewRefernce();
+        presenter.prepareForNewReference();
     }//GEN-LAST:event_jMenuItemNewActionPerformed
 
     private void jMenuItemRemoveTargetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveTargetActionPerformed
-        this.removeTargetFile();
+        presenter.removeFile(EContentType.TARGET);
     }//GEN-LAST:event_jMenuItemRemoveTargetActionPerformed
 
     private void jMenuItemRemoveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRemoveInfoActionPerformed
-        this.removeInfoFile();
+        presenter.removeFile(EContentType.TARGET);
     }//GEN-LAST:event_jMenuItemRemoveInfoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -423,25 +371,11 @@ public class MainFormUI extends javax.swing.JFrame implements ActionListener, Ta
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButtonFindRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindRefActionPerformed
-        try
-        {
-            this.findReferences();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(MainFormUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        presenter.findReferences();
     }//GEN-LAST:event_jButtonFindRefActionPerformed
 
     private void jMenuItemFindReferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindReferencesActionPerformed
-        try
-        {
-            this.findReferences();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(MainFormUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        presenter.findReferences();
     }//GEN-LAST:event_jMenuItemFindReferencesActionPerformed
 
     private void jMenuItemExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportActionPerformed

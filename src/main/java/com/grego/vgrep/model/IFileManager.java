@@ -12,14 +12,12 @@ import java.io.File;
  */
 public interface IFileManager {
 
-    IFileHolder getInfoFileHolder();
-
-    IFileHolder getTargetFileHolder();
-
-    void removeFiles();
-
-    void setInfoFile(File infoFile);
-
-    void setTargetFile(File targerFile);
+    void setFile(EContentType contentType, File file);
+    
+    void removeFile(File file);
+    
+    IFileHolder getFileHolder(EContentType contentType);
+    
+    void clearFiles();
     
 }

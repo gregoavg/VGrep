@@ -14,11 +14,11 @@ import java.util.Set;
  *
  * @author Grigorios
  */
-public final class ReferenceBuilder {
+public final class ReferenceCreator {
 
     private final Set<IReference> referenceSet = new HashSet<>();
     
-    public ReferenceBuilder(Collection<String> infoCollection, Collection<String> targetCollection) {
+    public ReferenceCreator(Collection<String> infoCollection, Collection<String> targetCollection) {
         constructReferences(infoCollection, targetCollection);
     }
     

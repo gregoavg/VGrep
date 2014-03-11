@@ -4,6 +4,8 @@
  */
 package com.grego.vgrep.gui;
 
+import java.awt.Frame;
+
 /**
  *
  * @author grigo_000
@@ -12,8 +14,10 @@ public class AboutDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form AboutDialog
+     * @param parent
+     * @param modal
      */
-    public AboutDialog(java.awt.Frame parent, boolean modal) {
+    public AboutDialog(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
