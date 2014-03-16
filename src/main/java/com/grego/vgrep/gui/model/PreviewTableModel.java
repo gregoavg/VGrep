@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.utils.TableUtils;
+import com.grego.vgrep.utils.MyStringUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -38,7 +38,7 @@ public final class PreviewTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return TableUtils.getMaxColSize(contentLines);
+        return MyStringUtils.getMaxLineWordCount(contentLines, " ");
     }
 
     @Override

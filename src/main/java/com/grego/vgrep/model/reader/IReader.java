@@ -4,17 +4,14 @@
  */
 package com.grego.vgrep.model.reader;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
- *
- * @author grigo_000
+ * 
+ * @author Grigorios
  */
 public interface IReader {
     
     String read() throws IOException;
-
-    void setFile(File file);
     
 }

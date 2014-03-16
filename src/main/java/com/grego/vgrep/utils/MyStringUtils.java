@@ -43,4 +43,17 @@ public final class MyStringUtils {
         Collection<String> lineCollection = Arrays.asList(lineArray);
         return lineCollection;
     }
+
+    public static int getMaxLineWordCount(Collection<String> dataRows, String splitter) {
+        int maxWordCount = 0;
+        for (String line : dataRows)
+        {
+            String[] lineWords = line.split(splitter);
+            if (lineWords.length > maxWordCount)
+            {
+                maxWordCount = lineWords.length;
+            }
+        }
+        return maxWordCount;
+    }
 }

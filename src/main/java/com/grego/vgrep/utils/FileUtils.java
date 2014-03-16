@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.utils;
 
-import com.grego.vgrep.control.EFileType;
+import com.grego.vgrep.model.reader.EFileType;
 import java.io.File;
 import java.util.UnknownFormatFlagsException;
 

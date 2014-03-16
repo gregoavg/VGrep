@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
  * 
  * @author Grigorios
  */
-public class ReferenceTableModel extends AbstractTableModel {
+public final class ReferenceTableModel extends AbstractTableModel {
 
     private List<IReference> referenceList;
 

@@ -14,36 +14,34 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.gui.presenter;
+package com.grego.vgrep.model.reader.fileReader;
 
-import com.grego.vgrep.gui.ICompareView;
-import com.grego.vgrep.gui.model.ICompareModel;
-import com.grego.vgrep.model.EContentType;
-import com.grego.vgrep.model.IReference;
+import com.grego.vgrep.model.reader.IReader;
 import java.io.File;
-import java.util.List;
-
+import java.io.IOException;
 
 /**
  *
  * @author Grigorios
  */
-public interface IComparePresenter {
+public abstract class AFileReader implements IReader {
     
-    ICompareModel getModel();
-    
-    void setView(ICompareView referenceView);
-    
-    void findReferences();
-    
-    void prepareForNewReference();
-    
-    void addFile(EContentType type, File file);
-    
-    void removeFile(EContentType type);
-    
-    String getFileName(EContentType type);
-    
-    List<IReference> getReferences();
+    protected File file;
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public abstract String read() throws IOException;
     
 }

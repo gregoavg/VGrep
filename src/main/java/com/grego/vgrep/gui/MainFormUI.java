@@ -7,10 +7,8 @@ package com.grego.vgrep.gui;
 import com.grego.vgrep.gui.model.ReferenceTableModel;
 import com.grego.vgrep.gui.presenter.IComparePresenter;
 import com.grego.vgrep.model.EContentType;
-import com.grego.vgrep.model.IReference;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.event.TableModelEvent;
@@ -29,13 +27,13 @@ public final class MainFormUI extends JFrame implements ICompareView, ActionList
      */
     public MainFormUI() {
         initComponents();
-        initRefTable();
         setActions();
     }
 
     @Override
     public void setPresenter(IComparePresenter presenter) {
         this.presenter = presenter;
+         initRefTable();
     }
 
     @Override
@@ -55,7 +53,7 @@ public final class MainFormUI extends JFrame implements ICompareView, ActionList
      //Hack: Need creational abstraction
     private void initRefTable() {
         
-        TableModel tm = new ReferenceTableModel((List<IReference>) presenter.getReferences());
+        TableModel tm = new ReferenceTableModel(presenter.getReferences());
         tm.addTableModelListener(new TableModelListener() {
 
             @Override

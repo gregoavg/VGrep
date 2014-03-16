@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.reader;
+package com.grego.vgrep.model.reader.fileReader;
 
-import java.io.File;
+import com.grego.vgrep.model.reader.fileReader.AFileReader;
 import java.io.IOException;
 import jxl.Cell;
 import jxl.Sheet;
@@ -17,29 +17,16 @@ import org.slf4j.LoggerFactory;
  *
  * @author grrowIndgo_000
  */
-public class XlsReader implements IReader {
+public class XlsReader extends AFileReader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsReader.class);
-    private File xlsFile;
-
-    public XlsReader() {
-    }
-
-    public XlsReader(File xlsFile) {
-        this.xlsFile = xlsFile;
-    }
-    
-    @Override
-    public void setFile(File file) {
-        this.xlsFile = file;
-    }
 
     @Override
     public String read() throws IOException {
        StringBuilder xlsContentBuilder = new StringBuilder();
         try
         {
-            Workbook w = Workbook.getWorkbook(xlsFile);
+            Workbook w = Workbook.getWorkbook(file);
             Sheet sheet = w.getSheet(0);
             for (int rowInd = 0; rowInd < sheet.getRows(); rowInd++)
             {

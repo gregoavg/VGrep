@@ -22,6 +22,7 @@ import com.grego.vgrep.model.IFileHolder;
 import com.grego.vgrep.model.IFileManager;
 import com.grego.vgrep.model.IReference;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ import java.util.List;
 public final class CompareModel implements ICompareModel {
     
     private final IFileManager fileManager = new FileManager();
-    private List<IReference> references;
+    private List<IReference> references = new ArrayList<>();
     
     @Override
     public void addFile(EContentType contentType, File file) {

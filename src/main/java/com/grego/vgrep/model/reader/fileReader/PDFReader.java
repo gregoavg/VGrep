@@ -2,37 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.reader;
+package com.grego.vgrep.model.reader.fileReader;
 
+import com.grego.vgrep.model.reader.fileReader.AFileReader;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-import java.io.File;
 import java.io.IOException;
 
 /**
- *
- * @author grigo_000
+ * 
+ * @author Grigorios
  */
-public class PDFReader implements IReader {
-
-    private File pdfFile;
-
-    public PDFReader() {
-        this.pdfFile = null;
-    }
-
-    public PDFReader(File pdfFile) {
-        this.pdfFile = pdfFile;
-    }
-
-    @Override
-    public void setFile(File file) {
-        this.pdfFile = file;
-    }
+public final class PDFReader extends AFileReader {
 
     @Override
     public String read() throws IOException {
-        PdfReader reader = new PdfReader(pdfFile.getPath());
+        PdfReader reader = new PdfReader(file.getPath());
         int numOfPages = reader.getNumberOfPages();
         
         StringBuilder pdfContentBuilder = new StringBuilder();

@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.control;
+package com.grego.vgrep.model.reader.factory;
 
+import com.grego.vgrep.model.reader.EFileType;
 import com.grego.vgrep.model.reader.IReader;
-import com.grego.vgrep.model.reader.PDFReader;
-import com.grego.vgrep.model.reader.TxtReader;
-import com.grego.vgrep.model.reader.XlsReader;
+import com.grego.vgrep.model.reader.fileReader.PDFReader;
+import com.grego.vgrep.model.reader.fileReader.TxtReader;
+import com.grego.vgrep.model.reader.fileReader.XlsReader;
 
 /**
  *

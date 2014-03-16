@@ -20,9 +20,9 @@ import com.grego.vgrep.gui.model.ICompareModel;
 import com.grego.vgrep.model.EContentType;
 import com.grego.vgrep.model.IReference;
 import java.io.File;
-import java.util.Collection;
+import java.util.List;
 
-public class ComparePresenter implements IComparePresenter {
+public final class ComparePresenter implements IComparePresenter {
 
     private final ICompareModel model;
     private ICompareView view;
@@ -66,7 +66,7 @@ public class ComparePresenter implements IComparePresenter {
     }
 
     @Override
-    public Collection<IReference> getReferences() {
+    public List<IReference> getReferences() {
         return model.getReferences();
     }
 

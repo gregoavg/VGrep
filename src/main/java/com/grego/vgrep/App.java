@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 public class App 
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+    
     public static void main( String[] args )
     {
         ICompareView view = new MainFormUI();
@@ -21,6 +22,6 @@ public class App
         presenter.setView(view);
         
         view.setVisibility(true);
-        LOGGER.info(" Application started");
+        LOGGER.info("Application started");
     }
 }
