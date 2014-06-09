@@ -17,17 +17,27 @@
 package com.grego.vgrep.gui.view;
 
 import com.grego.vgrep.gui.control.MainViewController;
+import com.grego.vgrep.gui.model.CompareModel;
+import com.grego.vgrep.gui.model.IModel;
 
 /**
  *
  * @author Grigorios
  */
 public class MainView extends JFxForm {
-
-    private final MainViewController controller = loader.getController();
+    
+    private final IModel model = new CompareModel();
     
     public MainView() {
         super("/fxml/MainFXML.fxml");
+        model.attachView(this);
+        ((MainViewController) controller).setModel(model);
+    }
+
+    @Override
+    public void update() {
+        System.out.println("UpdateFired!!!");
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

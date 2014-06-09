@@ -16,10 +16,12 @@
 
 package com.grego.vgrep.gui.control;
 
-import com.grego.vgrep.gui.model.CompareModel;
-import com.grego.vgrep.gui.model.ICompareModel;
+import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
+import com.grego.vgrep.model.data.FileData;
+import com.grego.vgrep.model.file.EDataType;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -36,18 +38,27 @@ public class MainViewController implements Initializable {
     @FXML
     Button button;
     
-    IViewManager viewManager = JFxViewManager.INSTANCE;
-    
-    //ICompareModel model = new CompareModel();
-    
+    private final IViewManager viewManager = JFxViewManager.INSTANCE;
+    private IModel model = null;
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+    }
+
+    public IModel getModel() {
+        return model;
+    }
+
+    public void setModel(IModel model) {
+        this.model = model;
     }
     
     @FXML
     void buttonPressed(ActionEvent ae) {
        //not implemented yet
+        File file = new File("/fxml/MainFXML.fxml");
+        model.addData(EDataType.SOURCE, new FileData(file));
     }
     
 }

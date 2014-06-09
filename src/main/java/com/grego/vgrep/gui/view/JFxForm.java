@@ -30,7 +30,8 @@ public abstract class JFxForm implements IView {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxForm.class);
     
     protected final FXMLLoader loader = new FXMLLoader();
-    protected Parent rootPane;
+    protected Parent rootPane = null;
+    protected Object controller = null;
 
     public JFxForm(String fxmlFilePath) {
         loadContents(fxmlFilePath);
@@ -51,11 +52,11 @@ public abstract class JFxForm implements IView {
         try
         {
             rootPane = loader.load(getClass().getResource("/fxml/MainFXML.fxml").openStream());
+            controller = loader.getController();
         }
         catch (IOException ex)
         {
             LOGGER.warn("I/O exception. Can not load contents from fxml file!",ex);
-
         }
     }
 

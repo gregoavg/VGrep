@@ -21,9 +21,11 @@ package com.grego.vgrep.gui.view;
  * @author Grigorios
  */
 public interface IView {
-    
+ 
     void setVisibility(boolean state);
     
     void dispose();
+    
+    void update();
     
 }

@@ -15,6 +15,7 @@
  */
 package com.grego.vgrep.gui.model;
 
+import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.model.file.EDataType;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.AData;
@@ -24,17 +25,23 @@ import java.util.List;
  *
  * @author Grigorios
  */
-public interface ICompareModel {
+public interface IModel {
 
     void addData(EDataType dataType, AData data);
     
+    void remove(EDataType dataType);
+    
     AData getData(EDataType dataType);
 
-    void remove(EDataType dataType);
-
-    void clearFiles();
+    void clearData();
 
     List<IReference> getReferences();
 
     void setReferences(List<IReference> references);
+    
+    void attachView(IView view);
+    
+    void detach(IView view);
+    
+    void fireDataChanged();
 }

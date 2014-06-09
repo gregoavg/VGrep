@@ -16,6 +16,7 @@
 
 package com.grego.vgrep.gui.model;
 
+import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.model.file.EDataType;
 import com.grego.vgrep.model.file.DataManager;
 import com.grego.vgrep.model.file.IDataManager;
@@ -28,24 +29,28 @@ import java.util.List;
  *
  * @author Grigorios
  */
-public final class CompareModel implements ICompareModel {
+public final class CompareModel implements IModel {
     
+    private final List<IView> attachedViews = new ArrayList<>();
     private final IDataManager dataManager = new DataManager();
     private List<IReference> references = new ArrayList<>();
     
     @Override
     public void addData(EDataType dataType, AData data) {
         dataManager.addData(dataType, data);
+        fireDataChanged();
     }
     
     @Override
     public void remove(EDataType dataType) {
         dataManager.remove(dataType);
+        fireDataChanged();
     }
     
     @Override
-    public void clearFiles() {
+    public void clearData() {
         dataManager.clearData();
+        fireDataChanged();
     }
 
     @Override
@@ -61,5 +66,20 @@ public final class CompareModel implements ICompareModel {
     @Override
     public void setReferences(List<IReference> references) {
         this.references = references;
+    }
+
+    @Override
+    public void attachView(IView view) {
+        attachedViews.add(view);
+    }
+
+    @Override
+    public void detach(IView view) {
+        attachedViews.remove(view);
+    }
+
+    @Override
+    public void fireDataChanged() {
+        attachedViews.forEach(IView::update);
     }
 }
