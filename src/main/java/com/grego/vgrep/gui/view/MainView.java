@@ -16,12 +16,16 @@
 
 package com.grego.vgrep.gui.view;
 
+import com.grego.vgrep.gui.control.MainViewController;
+
 /**
  *
  * @author Grigorios
  */
 public class MainView extends JFxForm {
 
+    private final MainViewController controller = loader.getController();
+    
     public MainView() {
         super("/fxml/MainFXML.fxml");
     }

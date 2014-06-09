@@ -28,7 +28,8 @@ import org.slf4j.LoggerFactory;
 public abstract class JFxForm implements IView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxForm.class);
-
+    
+    protected final FXMLLoader loader = new FXMLLoader();
     protected Parent rootPane;
 
     public JFxForm(String fxmlFilePath) {
@@ -42,13 +43,14 @@ public abstract class JFxForm implements IView {
 
     @Override
     public void dispose() {
+        
         //not implemented
     }
 
     private void loadContents(String fxmlFilePath) {
         try
         {
-            rootPane = FXMLLoader.load(getClass().getResource("/fxml/MainFXML.fxml"));
+            rootPane = loader.load(getClass().getResource("/fxml/MainFXML.fxml").openStream());
         }
         catch (IOException ex)
         {
@@ -60,5 +62,8 @@ public abstract class JFxForm implements IView {
     public Parent getRootPane() {
         return rootPane;
     }
-    
+
+    public FXMLLoader getLoader() {
+        return loader;
+    }
 }
