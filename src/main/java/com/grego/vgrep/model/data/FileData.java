@@ -13,28 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.model.file.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.AData;
-import java.util.List;
+package com.grego.vgrep.model.data;
+
+import com.grego.vgrep.model.reader.fileReader.EFileType;
+import com.grego.vgrep.utils.FileUtils;
+import java.io.File;
 
 /**
  *
  * @author Grigorios
  */
-public interface ICompareModel {
+public class FileData extends AData<File> {
 
-    void addData(EDataType dataType, AData data);
+    public FileData(File data) {
+        super(data);
+    }
     
-    AData getData(EDataType dataType);
-
-    void remove(EDataType dataType);
-
-    void clearFiles();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
+     public EFileType getFileType() {
+        return FileUtils.getFileType(super.data);
+    }
 }

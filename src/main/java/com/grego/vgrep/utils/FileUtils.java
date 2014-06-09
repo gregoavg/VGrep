@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.utils;
 
-import com.grego.vgrep.model.reader.EFileType;
+import com.grego.vgrep.model.reader.fileReader.EFileType;
 import java.io.File;
 import java.util.UnknownFormatFlagsException;
 
@@ -33,4 +33,5 @@ public final class FileUtils {
                 throw new UnknownFormatFlagsException("Unsupported file type exception!");
         }
     }
+
 }

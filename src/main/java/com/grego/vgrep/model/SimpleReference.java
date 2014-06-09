@@ -10,19 +10,19 @@ import java.util.Objects;
  *
  * @author grigo_000
  */
-public class Reference implements IReference {
+public class SimpleReference implements IReference<String,String> {
 
-    private final String info;
+    private final String source;
     private final String target;
 
-    public Reference(String info, String target) {
-        this.info = info;
+    public SimpleReference(String info, String target) {
+        this.source = info;
         this.target = target;
     }
 
     @Override
-    public String getInfo() {
-        return info;
+    public String getSource() {
+        return source;
     }
 
     @Override
@@ -32,13 +32,13 @@ public class Reference implements IReference {
 
     @Override
     public String getReferencedLine() {
-        return "Info: " + this.info + " Target: " + this.target;
+        return "Info: " + this.source + " Target: " + this.target;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.info);
+        hash = 13 * hash + Objects.hashCode(this.source);
         hash = 13 * hash + Objects.hashCode(this.target);
         return hash;
     }
@@ -53,8 +53,8 @@ public class Reference implements IReference {
         {
             return false;
         }
-        final Reference other = (Reference) obj;
-        if (!Objects.equals(this.info, other.info))
+        final SimpleReference other = (SimpleReference) obj;
+        if (!Objects.equals(this.source, other.source))
         {
             return false;
         }

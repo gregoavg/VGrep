@@ -4,8 +4,9 @@
  */
 package com.grego.vgrep.control;
 
+import com.grego.vgrep.model.file.IDataManager;
 import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.Reference;
+import com.grego.vgrep.model.SimpleReference;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,12 +19,8 @@ public final class ReferenceCreator {
 
     private final Set<IReference> referenceSet = new HashSet<>();
     
-    public ReferenceCreator(Collection<String> infoCollection, Collection<String> targetCollection) {
-        constructReferences(infoCollection, targetCollection);
-    }
-    
-    public Set<IReference> getReferences() {
-        return referenceSet;
+    public ReferenceCreator(IDataManager fileManager) {
+        
     }
     
     private void constructReferences(Collection<String> infoCollection, Collection<String> targetCollection) {
@@ -37,12 +34,17 @@ public final class ReferenceCreator {
                 {
                     if (target.contains(regEx))
                     {
-                        IReference ref = new Reference(info, target);
+                        IReference ref = new SimpleReference(info, target);
                         referenceSet.add(ref);
                     }
                 }
             }
         }
     }
+    
+    public Set<IReference> getReferences() {
+        return referenceSet;
+    }
+    
 
 }

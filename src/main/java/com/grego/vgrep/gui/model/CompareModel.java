@@ -16,12 +16,11 @@
 
 package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.model.EContentType;
-import com.grego.vgrep.model.FileManager;
-import com.grego.vgrep.model.IFileHolder;
-import com.grego.vgrep.model.IFileManager;
+import com.grego.vgrep.model.file.EDataType;
+import com.grego.vgrep.model.file.DataManager;
+import com.grego.vgrep.model.file.IDataManager;
 import com.grego.vgrep.model.IReference;
-import java.io.File;
+import com.grego.vgrep.model.data.AData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,27 +30,27 @@ import java.util.List;
  */
 public final class CompareModel implements ICompareModel {
     
-    private final IFileManager fileManager = new FileManager();
+    private final IDataManager dataManager = new DataManager();
     private List<IReference> references = new ArrayList<>();
     
     @Override
-    public void addFile(EContentType contentType, File file) {
-        fileManager.setFile(contentType, file);
+    public void addData(EDataType dataType, AData data) {
+        dataManager.addData(dataType, data);
     }
     
     @Override
-    public void removeFile(File file) {
-        fileManager.removeFile(file);
+    public void remove(EDataType dataType) {
+        dataManager.remove(dataType);
     }
     
     @Override
     public void clearFiles() {
-        fileManager.clearFiles();
+        dataManager.clearData();
     }
 
     @Override
-    public IFileHolder getFileHolder(EContentType contentType) {
-        return fileManager.getFileHolder(contentType);
+    public AData getData(EDataType contentType) {
+        return dataManager.getData(contentType);
     }
 
     @Override

@@ -13,28 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.model.file.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.AData;
-import java.util.List;
+package com.grego.vgrep.gui.view;
 
 /**
  *
  * @author Grigorios
  */
-public interface ICompareModel {
+public class MainView extends JFxForm {
 
-    void addData(EDataType dataType, AData data);
+    public MainView() {
+        super("/fxml/MainFXML.fxml");
+    }
     
-    AData getData(EDataType dataType);
-
-    void remove(EDataType dataType);
-
-    void clearFiles();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
 }

@@ -7,12 +7,14 @@ package com.grego.vgrep.model;
 /**
  *
  * @author grigo_000
+ * @param <S> source of reference 
+ * @param <T> target of reference
  */
-public interface IReference {
+public interface IReference<S,T> {
 
-    String getTarget();
+    S getSource();
 
-    String getInfo();
+    T getTarget();
     
     String getReferencedLine();
 }

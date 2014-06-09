@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.model.file.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.AData;
-import java.util.List;
+package com.grego.vgrep.model.holder;
 
 /**
  *
  * @author Grigorios
+ * @param <T> The class type of instance object to be hold
  */
-public interface ICompareModel {
-
-    void addData(EDataType dataType, AData data);
+public interface IHolder<T> {
     
-    AData getData(EDataType dataType);
-
-    void remove(EDataType dataType);
-
-    void clearFiles();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
+    void hold(T t);
+    
+    T getHoldingItem(); 
+    
+    void removeItem();
+    
+    boolean isHolding();
 }

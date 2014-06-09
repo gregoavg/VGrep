@@ -36,7 +36,7 @@ public final class ReferenceTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return this.referenceList.size();
+        return referenceList.size();
     }
 
     @Override
@@ -60,16 +60,7 @@ public final class ReferenceTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        IReference ref = this.referenceList.get(rowIndex);
-        String value = "";
-        switch (columnIndex)
-        {
-            case 0:
-                value = ref.getInfo();
-                break;
-            case 1:
-                value = ref.getTarget();
-        }
-        return value;
+        IReference ref = referenceList.get(rowIndex);
+        return columnIndex == 0 ? ref.getReferencedLine() : "";
     }
 }

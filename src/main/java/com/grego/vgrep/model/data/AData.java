@@ -13,28 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.model.file.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.AData;
-import java.util.List;
+package com.grego.vgrep.model.data;
+
 
 /**
  *
  * @author Grigorios
+ * @param <T> type of data that this class represents
  */
-public interface ICompareModel {
-
-    void addData(EDataType dataType, AData data);
+public abstract class AData<T> {
     
-    AData getData(EDataType dataType);
+    protected final T data;
 
-    void remove(EDataType dataType);
+    public AData(T data) {
+        this.data = data;
+    }
 
-    void clearFiles();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
+    public T getData() {
+        return data;
+    }
 }
