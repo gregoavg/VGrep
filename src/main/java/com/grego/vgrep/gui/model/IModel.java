@@ -41,7 +41,7 @@ public interface IModel {
     
     void attachView(IView view);
     
-    void detach(IView view);
+    void detachView(IView view);
     
     void fireDataChanged();
 }

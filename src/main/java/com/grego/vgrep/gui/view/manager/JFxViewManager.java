@@ -17,7 +17,7 @@
 package com.grego.vgrep.gui.view.manager;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.gui.view.JFxForm;
+import com.grego.vgrep.gui.view.JFxView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -29,13 +29,13 @@ public enum JFxViewManager implements IViewManager {
     INSTANCE;
 
     private final Stage stage = new Stage();
-    private JFxForm currentDisplay = null;
+    private JFxView currentDisplay = null;
 
     @Override
     public void setDisplay(IView view) {
-        if(view instanceof JFxForm)
+        if(view instanceof JFxView)
         {
-            currentDisplay = (JFxForm) view;
+            currentDisplay = (JFxView) view;
             stage.setScene(new Scene(currentDisplay.getRootPane()));
         }
     }

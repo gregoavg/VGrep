@@ -19,15 +19,13 @@ package com.grego.vgrep.gui.control;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
-import com.grego.vgrep.model.data.FileData;
-import com.grego.vgrep.model.file.EDataType;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,8 +33,7 @@ import javafx.scene.control.Button;
  */
 public class MainViewController implements Initializable {
 
-    @FXML
-    Button button;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
     
     private final IViewManager viewManager = JFxViewManager.INSTANCE;
     private IModel model = null;
@@ -55,10 +52,9 @@ public class MainViewController implements Initializable {
     }
     
     @FXML
-    void buttonPressed(ActionEvent ae) {
-       //not implemented yet
-        File file = new File("/fxml/MainFXML.fxml");
-        model.addData(EDataType.SOURCE, new FileData(file));
+    public void sourceFilePathClick(ActionEvent event) {
+        //test MVC request to update view need to be changed with actual request
+        model.fireDataChanged();
     }
-    
+   
 }

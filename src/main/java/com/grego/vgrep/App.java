@@ -15,6 +15,7 @@
  */
 package com.grego.vgrep;
 
+import com.grego.vgrep.gui.model.CompareModel;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
 import com.grego.vgrep.gui.view.MainView;
 import com.grego.vgrep.gui.view.manager.IViewManager;
@@ -44,7 +45,8 @@ public class App extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.close();
         
-        viewManager.setDisplay(new MainView());
+        MainView mainView = new MainView(new CompareModel());
+        viewManager.setDisplay(mainView);
         viewManager.setVisibility(true);
     }
 

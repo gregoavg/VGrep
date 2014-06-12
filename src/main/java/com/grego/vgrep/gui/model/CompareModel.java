@@ -23,7 +23,9 @@ import com.grego.vgrep.model.file.IDataManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.AData;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -31,7 +33,7 @@ import java.util.List;
  */
 public final class CompareModel implements IModel {
     
-    private final List<IView> attachedViews = new ArrayList<>();
+    private final Set<IView> attachedViews = new HashSet<>();
     private final IDataManager dataManager = new DataManager();
     private List<IReference> references = new ArrayList<>();
     
@@ -74,7 +76,7 @@ public final class CompareModel implements IModel {
     }
 
     @Override
-    public void detach(IView view) {
+    public void detachView(IView view) {
         attachedViews.remove(view);
     }
 

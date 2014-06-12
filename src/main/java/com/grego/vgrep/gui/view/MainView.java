@@ -13,31 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.gui.view;
 
 import com.grego.vgrep.gui.control.MainViewController;
-import com.grego.vgrep.gui.model.CompareModel;
 import com.grego.vgrep.gui.model.IModel;
+import javafx.collections.ObservableMap;
+import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Grigorios
  */
-public class MainView extends JFxForm {
-    
-    private final IModel model = new CompareModel();
-    
-    public MainView() {
+public class MainView extends JFxView {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
+
+    private IModel model = null;
+
+    public MainView(IModel model) {
         super("/fxml/MainFXML.fxml");
-        model.attachView(this);
-        ((MainViewController) controller).setModel(model);
+        this.model = model;
+        this.model.attachView((IView) this);
+        ((MainViewController) super.controller).setModel(this.model);
     }
 
     @Override
     public void update() {
-        System.out.println("UpdateFired!!!");
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOGGER.debug("view update has been submited!!");
     }
-    
+
+    public IModel getModel() {
+        return model;
+    }
+
+    @Override
+    protected void initComponets(final ObservableMap<String, Object> componentMapper) {
+        //not yet implemented
+    }
 }
