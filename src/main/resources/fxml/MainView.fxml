@@ -27,17 +27,17 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.5026737967914439" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+    <SplitPane dividerPositions="0.5080213903743316" focusTraversable="true" orientation="VERTICAL" prefHeight="376.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.99990000000253" prefWidth="598.0">
           <children>
-            <TabPane prefHeight="185.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane prefHeight="157.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
               <tabs>
                 <Tab text="Local">
                   <content>
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                       <children>
-                        <Group id="Group" layoutX="199.0" layoutY="44.0" scaleX="1.0" scaleY="1.0">
+                        <Group id="Group" scaleX="1.0" scaleY="1.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="14.0">
                           <children>
                             <TextField id="" fx:id="sourceFilePath" editable="true" focusTraversable="false" layoutX="-44.0" layoutY="0.0" prefWidth="244.0" />
                             <TextField editable="false" focusTraversable="false" layoutX="-44.0" layoutY="44.0" prefWidth="244.0" />
@@ -56,6 +56,11 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <ToolBar prefWidth="598.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+              <items>
+                <Button mnemonicParsing="false" text="find" />
+              </items>
+            </ToolBar>
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

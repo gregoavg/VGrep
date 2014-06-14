@@ -53,7 +53,7 @@ public abstract class JFxView implements IView {
     private void loadContents(String fxmlFilePath) {
         try
         {
-            rootPane = loader.load(getClass().getResource("/fxml/MainFXML.fxml").openStream());
+            rootPane = loader.load(getClass().getResource(fxmlFilePath).openStream());
             controller = loader.getController();
             
             initComponets(loader.getNamespace());

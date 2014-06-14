@@ -26,6 +26,6 @@ public interface IViewManager {
     
     void setDisplay(IView view);
     
-    void setVisibility(boolean state);
+    void setVisibility(boolean visible);
     
 }

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author grrowIndgo_000
  */
-public class XlsReader implements IReader<File, String> {
+public final class XlsReader implements IReader<File, String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsReader.class);
 

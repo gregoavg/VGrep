@@ -24,7 +24,7 @@ import java.io.File;
  *
  * @author Grigorios
  */
-public class FileData extends AData<File> {
+public final class FileData extends AData<File> {
 
     public FileData(File data) {
         super(data);

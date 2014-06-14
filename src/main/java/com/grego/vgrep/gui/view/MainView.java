@@ -18,7 +18,6 @@ package com.grego.vgrep.gui.view;
 import com.grego.vgrep.gui.control.MainViewController;
 import com.grego.vgrep.gui.model.IModel;
 import javafx.collections.ObservableMap;
-import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +25,14 @@ import org.slf4j.LoggerFactory;
  *
  * @author Grigorios
  */
-public class MainView extends JFxView {
+public final class MainView extends JFxView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
     private IModel model = null;
 
     public MainView(IModel model) {
-        super("/fxml/MainFXML.fxml");
+        super("/fxml/MainView.fxml");
         this.model = model;
         this.model.attachView((IView) this);
         ((MainViewController) super.controller).setModel(this.model);

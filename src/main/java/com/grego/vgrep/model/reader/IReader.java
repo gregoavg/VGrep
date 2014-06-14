@@ -11,7 +11,7 @@ import java.io.IOException;
  * @param <S>
  * @param <R>
  */
-public interface IReader<S,R> {
+public interface IReader<S, R> {
     
    R read(S source) throws IOException;
     

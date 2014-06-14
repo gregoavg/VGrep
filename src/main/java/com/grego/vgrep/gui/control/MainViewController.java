@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Grigorios
  */
-public class MainViewController implements Initializable {
+public final class MainViewController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
     
