@@ -28,4 +28,6 @@ public interface IViewManager {
     
     void setVisibility(boolean visible);
     
+    void setDefaultViewDimentions(double width, double height);
+    
 }

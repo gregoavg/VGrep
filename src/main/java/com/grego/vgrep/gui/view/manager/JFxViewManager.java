@@ -18,6 +18,7 @@ package com.grego.vgrep.gui.view.manager;
 
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.JFxView;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -30,13 +31,24 @@ public enum JFxViewManager implements IViewManager {
 
     private final Stage stage = new Stage();
     private JFxView currentDisplay = null;
+    
+    //default stage dimentions
+    private Point2D stageDimentions = new Point2D(stage.getWidth(), stage.getHeight()) ;
 
     @Override
     public void setDisplay(IView view) {
         if(view instanceof JFxView)
         {
+            if(currentDisplay != null)
+            {
+                stageDimentions = new Point2D(stage.getWidth(), stage.getHeight());
+            }
             currentDisplay = (JFxView) view;
             stage.setScene(new Scene(currentDisplay.getRootPane()));
+            
+            stage.setWidth(stageDimentions.getX());
+            stage.setHeight(stageDimentions.getY());
+            //stage.get
         }
     }
     
@@ -54,5 +66,10 @@ public enum JFxViewManager implements IViewManager {
         {
             stage.hide();
         }
+    }
+    
+    @Override
+    public void setDefaultViewDimentions(double width, double height) {
+        stageDimentions = new Point2D(width, height);
     }
 }

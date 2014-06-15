@@ -17,7 +17,8 @@ package com.grego.vgrep.gui.view;
 
 import com.grego.vgrep.gui.control.MainViewController;
 import com.grego.vgrep.gui.model.IModel;
-import javafx.collections.ObservableMap;
+import java.awt.Button;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,7 @@ public final class MainView extends JFxView {
 
     @Override
     public void update() {
-        LOGGER.debug("view update has been submited!!");
+        LOGGER.info("view update has been submited!!");
     }
 
     public IModel getModel() {
@@ -48,7 +49,10 @@ public final class MainView extends JFxView {
     }
 
     @Override
-    protected void initComponets(final ObservableMap<String, Object> componentMapper) {
+    protected void initComponets(final Map<String, Object> componentMapper) {
         //not yet implemented
+        button = (Button) componentMapper.get("funcyButton");
     }
+    
+    private Button button;
 }

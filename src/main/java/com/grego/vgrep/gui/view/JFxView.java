@@ -16,9 +16,9 @@
 package com.grego.vgrep.gui.view;
 
 import java.io.IOException;
-import javafx.collections.ObservableMap;
+import java.util.Map;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public abstract class JFxView implements IView {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
     
     protected final FXMLLoader loader = new FXMLLoader();
-    protected Parent rootPane = null;
+    protected Pane rootPane = null;
     protected Object controller = null;
 
     public JFxView(String fxmlFilePath) {
@@ -48,7 +48,7 @@ public abstract class JFxView implements IView {
         //not implemented
     }
     
-    protected abstract void initComponets(final ObservableMap<String, Object> componentMapper);
+    protected abstract void initComponets(final Map<String, Object> componentMapper);
 
     private void loadContents(String fxmlFilePath) {
         try
@@ -64,7 +64,7 @@ public abstract class JFxView implements IView {
         }
     }
 
-    public Parent getRootPane() {
+    public Pane getRootPane() {
         return rootPane;
     }
 
