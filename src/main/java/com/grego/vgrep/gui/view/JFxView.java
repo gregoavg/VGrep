@@ -15,7 +15,9 @@
  */
 package com.grego.vgrep.gui.view;
 
+import com.grego.vgrep.utils.FileUtils;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -29,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public abstract class JFxView implements IView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
-    
+
     protected final FXMLLoader loader = new FXMLLoader();
     protected Pane rootPane = null;
     protected Object controller = null;
@@ -37,7 +39,7 @@ public abstract class JFxView implements IView {
     public JFxView(String fxmlFilePath) {
         loadContents(fxmlFilePath);
     }
-    
+
     @Override
     public void setVisibility(boolean state) {
         rootPane.setVisible(state);
@@ -47,20 +49,20 @@ public abstract class JFxView implements IView {
     public void dispose() {
         //not implemented
     }
-    
+
     protected abstract void initComponets(final Map<String, Object> componentMapper);
 
     private void loadContents(String fxmlFilePath) {
-        try
+        try (InputStream fileAsStream = FileUtils.getFileAsResourceStream(fxmlFilePath))
         {
-            rootPane = loader.load(getClass().getResource(fxmlFilePath).openStream());
+            rootPane = loader.load(fileAsStream);
             controller = loader.getController();
-            
+
             initComponets(loader.getNamespace());
         }
         catch (IOException ex)
         {
-            LOGGER.warn("I/O exception. Can not load contents from fxml file!",ex);
+            LOGGER.warn("Can not read file!!!", ex);
         }
     }
 
