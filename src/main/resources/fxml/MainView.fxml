@@ -39,10 +39,10 @@
                       <children>
                         <Group id="Group" scaleX="1.0" scaleY="1.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="14.0">
                           <children>
-                            <TextField id="" fx:id="sourceFilePath" editable="true" focusTraversable="false" layoutX="-44.0" layoutY="0.0" prefWidth="244.0" text="" />
-                            <TextField editable="false" focusTraversable="false" layoutX="-44.0" layoutY="44.0" prefWidth="244.0" />
-                            <Button id="" fx:id="addSourceFileButton" layoutX="216.0" layoutY="0.0" mnemonicParsing="false" onAction="#sourceFilePathClick" text="..." />
-                            <Button layoutX="216.0" layoutY="45.0" mnemonicParsing="false" text="..." />
+                            <TextField id="" fx:id="sourceFilePathTextField" editable="false" focusTraversable="false" layoutX="-44.0" layoutY="0.0" prefWidth="244.0" text="" />
+                            <TextField id="targetFilePath" fx:id="targetFilePathTextField" editable="false" focusTraversable="false" layoutX="-44.0" layoutY="44.0" prefWidth="244.0" />
+                            <Button id="" fx:id="selectSourceFileButton" layoutX="216.0" layoutY="0.0" mnemonicParsing="false" text="..." />
+                            <Button fx:id="selectTargetFileButton" layoutX="216.0" layoutY="45.0" mnemonicParsing="false" text="..." />
                           </children>
                         </Group>
                       </children>

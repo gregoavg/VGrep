@@ -30,7 +30,31 @@ public abstract class AData<T> {
         this.data = data;
     }
 
-    public T getData() {
+    public T getActualData() {
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return data != null ? data.toString() : "";
+    }
+          
+    @SuppressWarnings("rawtypes")
+    public static final AData EMPTY_DATA = new EmptyData<>(null);
+    
+    @SuppressWarnings("unchecked")
+    public static final <T> AData<T> emptyData() {
+        return (AData<T>) EMPTY_DATA;
+    }
+    
+    /**
+     * helper class to handle empty data slots on data manager
+     */
+    private static class EmptyData<T> extends AData<T> {
+
+        public EmptyData(T data) {
+            super(data);
+        }
+
     }
 }

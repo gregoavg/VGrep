@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.gui.view.event;
 
-import com.grego.vgrep.model.reader.fileReader.EFileType;
-import com.grego.vgrep.utils.FileUtils;
-import java.io.File;
+import com.grego.vgrep.model.data.EDataType;
+import javafx.event.ActionEvent;
 
 /**
  *
  * @author Grigorios
  */
-public final class FileData extends AData<File> {
-
-    public FileData(File data) {
-        super(data);
-    }
+public final class FileSelectionEvent extends ActionEvent {
     
-     public EFileType getFileType() {
-        return FileUtils.getFileType(super.data);
+    private final EDataType dataType;
+
+    public FileSelectionEvent(EDataType dataType) {
+        this.dataType = dataType;
+    }
+
+    public EDataType getDataType() {
+        return dataType;
     }
 }

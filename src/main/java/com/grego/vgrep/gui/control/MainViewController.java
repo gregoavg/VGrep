@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.gui.control;
 
 import com.grego.vgrep.gui.model.IModel;
+import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
+import com.grego.vgrep.model.data.file.FileData;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,10 +37,10 @@ import org.slf4j.LoggerFactory;
 public final class MainViewController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
-    
+
     private final IViewManager viewManager = JFxViewManager.INSTANCE;
     private IModel model = null;
-      
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -50,11 +53,17 @@ public final class MainViewController implements Initializable {
     public void setModel(IModel model) {
         this.model = model;
     }
-    
-    @FXML
-    public void sourceFilePathClick(ActionEvent event) {
-        //test MVC request to update view need to be changed with actual request
-        model.fireDataChanged();
+
+    public void selectFileButtonClick(ActionEvent event) {
+        FileSelectionEvent fileSelectionEvent = (FileSelectionEvent) event;
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select File");
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null)
+        {
+            model.addData(fileSelectionEvent.getDataType(), new FileData(selectedFile));
+        }
     }
-   
+
 }

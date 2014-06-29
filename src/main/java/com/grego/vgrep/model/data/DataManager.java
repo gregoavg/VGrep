@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.file;
+package com.grego.vgrep.model.data;
 
-import com.grego.vgrep.model.data.AData;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import java.util.Map;
 public final class DataManager implements IDataManager {
 
     private final Map<EDataType, AData> contentMapper = new HashMap<>(2);
-    
+
     @Override
     public void addData(EDataType dataType, AData data) {
         contentMapper.put(dataType, data);
@@ -28,7 +27,8 @@ public final class DataManager implements IDataManager {
 
     @Override
     public AData getData(EDataType dataType) {
-        return contentMapper.get(dataType);
+        return contentMapper.containsKey(dataType) ? 
+                contentMapper.get(dataType) : AData.EMPTY_DATA;
     }
 
     @Override

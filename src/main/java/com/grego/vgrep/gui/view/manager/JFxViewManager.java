@@ -17,10 +17,13 @@
 package com.grego.vgrep.gui.view.manager;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.gui.view.JFxView;
+import com.grego.vgrep.gui.view.javaFx.JFxView;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Singleton View Manager
@@ -29,6 +32,7 @@ import javafx.stage.Stage;
 public enum JFxViewManager implements IViewManager {
     INSTANCE;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(JFxViewManager.class);
     private final Stage stage = new Stage();
     private JFxView currentDisplay = null;
     
@@ -48,7 +52,6 @@ public enum JFxViewManager implements IViewManager {
             
             stage.setWidth(stageDimentions.getX());
             stage.setHeight(stageDimentions.getY());
-            //stage.get
         }
     }
     
@@ -69,7 +72,12 @@ public enum JFxViewManager implements IViewManager {
     }
     
     @Override
-    public void setDefaultViewDimentions(double width, double height) {
+    public void setInitialWindowDimentions(double width, double height) {
         stageDimentions = new Point2D(width, height);
+    }
+
+    @Override
+    public Window getWindow() {
+        return stage;
     }
 }

@@ -13,42 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.file.EDataType;
-import com.grego.vgrep.model.file.DataManager;
-import com.grego.vgrep.model.file.IDataManager;
+import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.DataManager;
+import com.grego.vgrep.model.data.IDataManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.AData;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Grigorios
  */
 public final class CompareModel implements IModel {
-    
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CompareModel.class);
+
     private final Set<IView> attachedViews = new HashSet<>();
     private final IDataManager dataManager = new DataManager();
     private List<IReference> references = new ArrayList<>();
-    
+
     @Override
     public void addData(EDataType dataType, AData data) {
         dataManager.addData(dataType, data);
         fireDataChanged();
     }
-    
+
     @Override
     public void remove(EDataType dataType) {
         dataManager.remove(dataType);
         fireDataChanged();
     }
-    
+
     @Override
     public void clearData() {
         dataManager.clearData();

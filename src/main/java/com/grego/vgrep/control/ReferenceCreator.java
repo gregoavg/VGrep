@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.control;
 
-import com.grego.vgrep.model.file.IDataManager;
+import com.grego.vgrep.model.data.IDataManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
 import java.util.Collection;

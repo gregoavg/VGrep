@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.file;
-
-import com.grego.vgrep.model.data.AData;
+package com.grego.vgrep.model.data;
 
 /**
  *

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.file;
+package com.grego.vgrep.model.data;
 
 /**
  *

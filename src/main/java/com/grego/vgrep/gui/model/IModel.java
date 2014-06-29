@@ -16,7 +16,7 @@
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.file.EDataType;
+import com.grego.vgrep.model.data.EDataType;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.AData;
 import java.util.List;

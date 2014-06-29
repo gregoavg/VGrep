@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.gui.view.manager;
+package com.grego.vgrep.model.data.file;
 
-import com.grego.vgrep.gui.view.IView;
-import javafx.stage.Window;
+import com.grego.vgrep.model.data.AData;
+import com.grego.vgrep.model.reader.fileReader.EFileType;
+import com.grego.vgrep.utils.FileUtils;
+import java.io.File;
 
 /**
  *
  * @author Grigorios
  */
-public interface IViewManager {
+public final class FileData extends AData<File> {
+
+    public FileData(File data) {
+        super(data);
+    }
     
-    void setDisplay(IView view);
-    
-    void setVisibility(boolean visible);
-    
-    void setInitialWindowDimentions(double width, double height);
-    
-    Window getWindow();
-    
+     public EFileType getFileType() {
+        return FileUtils.getFileType(super.data);
+    }
 }

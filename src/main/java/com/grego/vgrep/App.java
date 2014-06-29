@@ -17,7 +17,7 @@ package com.grego.vgrep;
 
 import com.grego.vgrep.gui.model.CompareModel;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
-import com.grego.vgrep.gui.view.MainView;
+import com.grego.vgrep.gui.view.javaFx.MainView;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import java.io.IOException;
 import javafx.application.Application;

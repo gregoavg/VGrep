@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.view;
+package com.grego.vgrep.gui.view.javaFx;
 
+import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.IOException;
 import java.io.InputStream;
