@@ -58,14 +58,14 @@
             </TabPane>
             <ToolBar prefWidth="598.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
               <items>
-                <Button alignment="CENTER" contentDisplay="LEFT" mnemonicParsing="false" text="find" />
+                <Button fx:id="findReferencesButton" alignment="CENTER" contentDisplay="LEFT" mnemonicParsing="false" text="find" />
               </items>
             </ToolBar>
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <SplitPane dividerPositions="0.43288590604026844" focusTraversable="true" prefHeight="183.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="181.0001220703125" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>

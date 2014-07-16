@@ -32,5 +32,5 @@ public interface IViewManager {
     void setInitialWindowDimentions(double width, double height);
     
     Window getWindow();
-    
+
 }

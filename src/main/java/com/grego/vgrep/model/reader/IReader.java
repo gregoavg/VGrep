@@ -5,14 +5,15 @@
 package com.grego.vgrep.model.reader;
 
 import java.io.IOException;
+
 /**
  *
  * @author Grigorios
- * @param <S>
- * @param <R>
  */
-public interface IReader<S, R> {
+public interface IReader {
     
-   R read(S source) throws IOException;
+    void setSource(Object source);
     
+    <T> T read() throws IOException;
+
 }

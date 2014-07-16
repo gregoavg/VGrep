@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.holder;
+package com.grego.vgrep.event;
 
 /**
  *
  * @author Grigorios
- * @param <T> The class type of instance object to be hold
  */
-public interface IHolder<T> {
+public interface IEvent {
     
-    void hold(T t);
+    Object getSource();
     
-    T getHoldingItem(); 
-    
-    void removeItem();
-    
-    boolean isHolding();
 }

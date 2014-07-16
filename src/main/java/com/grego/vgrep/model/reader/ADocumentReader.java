@@ -13,36 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.data.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.ADataFile;
+package com.grego.vgrep.model.reader;
+
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
 
 /**
  *
  * @author Grigorios
  */
-public interface IModel {
+public abstract class ADocumentReader implements IReader {
 
-    void addFile(EDataType dataType, File file);
-    
-    void remove(EDataType dataType);
-    
-    ADataFile getFile(EDataType dataType);
+    protected File source;
 
-    void clearData();
+    public ADocumentReader(File source) {
+        this.source = source;
+    }
 
-    List<IReference> getReferences();
+    public ADocumentReader() {
+        this.source = null;
+    }
 
-    void setReferences(List<IReference> references);
+    @Override
+    public void setSource(Object source) {
+        if(source instanceof File)
+        {
+            this.source = (File) source;
+        }
+    }
     
-    void attachView(IView view);
+    @Override
+    public abstract String read() throws IOException;
     
-    void detachView(IView view);
-    
-    void fireDataChanged();
 }

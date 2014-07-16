@@ -21,6 +21,6 @@ package com.grego.vgrep.model.data;
  * @author Grigorios
  */
 public enum EDataType {
-    SOURCE,
+    INFO,
     TARGET;
 }

@@ -17,10 +17,12 @@ package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.model.data.EDataType;
-import com.grego.vgrep.model.data.DataManager;
-import com.grego.vgrep.model.data.IDataManager;
+import com.grego.vgrep.model.data.SimpleFileManager;
+import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.AData;
+import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.data.DocumentFile;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,30 +38,30 @@ public final class CompareModel implements IModel {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CompareModel.class);
 
     private final Set<IView> attachedViews = new HashSet<>();
-    private final IDataManager dataManager = new DataManager();
+    private final IFileManager fileManager = new SimpleFileManager();
     private List<IReference> references = new ArrayList<>();
 
     @Override
-    public void addData(EDataType dataType, AData data) {
-        dataManager.addData(dataType, data);
+    public void addFile(EDataType dataType, File file) {
+        fileManager.addFile(dataType, new DocumentFile(file));
         fireDataChanged();
     }
 
     @Override
     public void remove(EDataType dataType) {
-        dataManager.remove(dataType);
+        fileManager.remove(dataType);
         fireDataChanged();
     }
 
     @Override
     public void clearData() {
-        dataManager.clearData();
+        fileManager.clearData();
         fireDataChanged();
     }
 
     @Override
-    public AData getData(EDataType contentType) {
-        return dataManager.getData(contentType);
+    public ADataFile getFile(EDataType dataType) {
+        return fileManager.getFile(dataType);
     }
 
     @Override

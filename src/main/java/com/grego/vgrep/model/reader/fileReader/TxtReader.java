@@ -4,9 +4,8 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
-import com.grego.vgrep.model.reader.IReader;
+import com.grego.vgrep.model.reader.ADocumentReader;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -14,10 +13,14 @@ import java.io.IOException;
  * 
  * @author Grigorios
  */
-public final class TxtReader implements IReader<File, String> {
+public final class TxtReader extends ADocumentReader {
+
+    public TxtReader() {
+        super();
+    }
     
     @Override
-    public String read(File source) throws IOException {
+    public String read() throws IOException {
         StringBuilder txtContentBuilder = new StringBuilder();
         BufferedReader br = new BufferedReader(new FileReader(source));
         String line = br.readLine();

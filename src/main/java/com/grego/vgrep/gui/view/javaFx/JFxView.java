@@ -15,13 +15,16 @@
  */
 package com.grego.vgrep.gui.view.javaFx;
 
+import com.grego.vgrep.gui.control.IController;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,8 +37,8 @@ public abstract class JFxView implements IView {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
 
     protected final FXMLLoader loader = new FXMLLoader();
-    protected Pane rootPane = null;
-    protected Object controller = null;
+    protected Scene scene = null;
+    protected IController controller = null;
 
     public JFxView(String fxmlFilePath) {
         loadContents(fxmlFilePath);
@@ -43,22 +46,22 @@ public abstract class JFxView implements IView {
 
     @Override
     public void setVisibility(boolean state) {
-        rootPane.setVisible(state);
+        scene.getRoot().setVisible(state);
     }
 
     @Override
     public void dispose() {
-        //not implemented
+        Stage stage = (Stage) scene.getWindow();
+        stage.setScene(new Scene(new Pane()));
+        stage.hide();
     }
-
-    protected abstract void initComponets(final Map<String, Object> componentMapper);
 
     private void loadContents(String fxmlFilePath) {
         try (InputStream fileAsStream = FileUtils.getFileAsResourceStream(fxmlFilePath))
         {
-            rootPane = loader.load(fileAsStream);
-            controller = loader.getController();
-
+            scene = new Scene(loader.load(fileAsStream));
+            controller = defaultController();
+            
             initComponets(loader.getNamespace());
         }
         catch (IOException ex)
@@ -66,9 +69,19 @@ public abstract class JFxView implements IView {
             LOGGER.warn("Can not read file!!!", ex);
         }
     }
+    
+    protected abstract void initComponets(final Map<String, Object> componentMapper);
+    
+    /**
+     * Override this factory method in order to change the default controller. 
+     * @return <b>JFx Controller</b> as specified in FXML file 
+     */
+    protected IController defaultController() {
+        return loader.getController();
+    }
 
-    public Pane getRootPane() {
-        return rootPane;
+    public Scene getScene() {
+        return scene;
     }
 
     public FXMLLoader getLoader() {

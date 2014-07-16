@@ -40,20 +40,20 @@ public class App extends Application {
      * @param primaryStage
      * @throws java.io.IOException
      */
-    //@Override
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.close();
         
         MainView mainView = new MainView(new CompareModel());
+        viewManager.setInitialWindowDimentions(600, 400);
         viewManager.setDisplay(mainView);
         viewManager.setVisibility(true);
     }
-
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         launch(args);
     }
 

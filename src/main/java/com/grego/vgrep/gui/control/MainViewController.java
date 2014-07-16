@@ -19,14 +19,15 @@ import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
-import com.grego.vgrep.model.data.file.FileData;
+import com.grego.vgrep.model.data.EDataType;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Grigorios
  */
-public final class MainViewController implements Initializable {
+public final class MainViewController implements IController, Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
 
@@ -43,13 +44,15 @@ public final class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        //not implemented
     }
 
+    @Override
     public IModel getModel() {
         return model;
     }
 
+    @Override
     public void setModel(IModel model) {
         this.model = model;
     }
@@ -59,10 +62,23 @@ public final class MainViewController implements Initializable {
         
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        File selectedFile = fileChooser.showOpenDialog(viewManager.getWindow());
         if (selectedFile != null)
         {
-            model.addData(fileSelectionEvent.getDataType(), new FileData(selectedFile));
+            model.addFile(fileSelectionEvent.getDataType(), selectedFile);
+        }
+    }
+    
+    public void findReferences() {
+        try
+        {
+            String readedFile = model.getFile(EDataType.INFO).getReader().read();
+            
+            System.out.println(readedFile);
+        }
+        catch (IOException ex)
+        {
+            java.util.logging.Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -4,23 +4,27 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
-import com.grego.vgrep.model.reader.IReader;
+import com.grego.vgrep.model.reader.ADocumentReader;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-import java.io.File;
 import java.io.IOException;
 
 /**
- * 
+ *
  * @author Grigorios
  */
-public final class PDFReader implements IReader<File, String> {
+public final class PDFReader extends ADocumentReader {
+
+    public PDFReader() {
+        super();
+    }
 
     @Override
-    public String read(File source) throws IOException {
+    public String read() throws IOException {
+        
         PdfReader reader = new PdfReader(source.getPath());
         int numOfPages = reader.getNumberOfPages();
-        
+
         StringBuilder pdfContentBuilder = new StringBuilder();
         for (int pageNum = 1; pageNum <= numOfPages; pageNum++)
         {
@@ -29,4 +33,5 @@ public final class PDFReader implements IReader<File, String> {
         }
         return pdfContentBuilder.toString();
     }
+    
 }

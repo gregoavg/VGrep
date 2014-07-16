@@ -4,8 +4,7 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
-import com.grego.vgrep.model.reader.IReader;
-import java.io.File;
+import com.grego.vgrep.model.reader.ADocumentReader;
 import java.io.IOException;
 import jxl.Cell;
 import jxl.Sheet;
@@ -18,12 +17,16 @@ import org.slf4j.LoggerFactory;
  *
  * @author grrowIndgo_000
  */
-public final class XlsReader implements IReader<File, String> {
+public final class XlsReader extends ADocumentReader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsReader.class);
 
+    public XlsReader() {
+        super();
+    }
+
     @Override
-    public String read(File source) throws IOException {
+    public String read() throws IOException {
        StringBuilder xlsContentBuilder = new StringBuilder();
         try
         {

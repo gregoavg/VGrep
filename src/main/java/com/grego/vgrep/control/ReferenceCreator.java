@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.control;
 
-import com.grego.vgrep.model.data.IDataManager;
+import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
 import java.util.Collection;
@@ -19,7 +19,7 @@ public final class ReferenceCreator {
 
     private final Set<IReference> referenceSet = new HashSet<>();
     
-    public ReferenceCreator(IDataManager fileManager) {
+    public ReferenceCreator(IFileManager fileManager) {
         
     }
     

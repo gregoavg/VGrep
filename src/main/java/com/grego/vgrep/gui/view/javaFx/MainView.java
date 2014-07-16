@@ -40,13 +40,13 @@ public final class MainView extends JFxView {
         super("/fxml/MainView.fxml");
         this.model = model;
         this.model.attachView((IView) this);
-        ((MainViewController) super.controller).setModel(this.model);
+        super.controller.setModel(this.model);
     }
 
     @Override
     public void update() {
-        sourceFilePathTextField.setText(model.getData(EDataType.SOURCE).toString());
-        targetFilePathTextField.setText(model.getData(EDataType.TARGET).toString());
+        sourceFilePathTextField.setText(model.getFile(EDataType.INFO).toString());
+        targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
     }
 
     public IModel getModel() {
@@ -62,12 +62,17 @@ public final class MainView extends JFxView {
         
         sourceFileSelectButton = (Button) componentMapper.get("selectSourceFileButton");
         sourceFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.SOURCE));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.INFO));
         });
         
         targetFileSelectButton = (Button) componentMapper.get("selectTargetFileButton");
         targetFileSelectButton.setOnAction((actionEvent) -> {
             mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.TARGET));
+        });
+        
+        findReferencesButton = (Button) componentMapper.get("findReferencesButton");
+        findReferencesButton.setOnAction((actionEvent)-> {
+            this.dispose();
         });
     }
     
@@ -77,4 +82,5 @@ public final class MainView extends JFxView {
     
     private Button sourceFileSelectButton;
     private Button targetFileSelectButton;
+    private Button findReferencesButton;
 }

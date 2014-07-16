@@ -8,13 +8,13 @@ package com.grego.vgrep.model.data;
  *
  * @author grigo_000
  */
-public interface IDataManager {
+public interface IFileManager {
 
-    void addData(EDataType dataType, AData data);
+    void addFile(EDataType dataType, ADataFile dataFile);
+    
+    ADataFile getFile(EDataType dataType);
     
     void remove(EDataType dataType);
-    
-    AData getData(EDataType dataType);
     
     void clearData();
     

@@ -4,8 +4,8 @@
  */
 package com.grego.vgrep.model.reader.factory;
 
-import com.grego.vgrep.model.reader.fileReader.EFileType;
 import com.grego.vgrep.model.reader.IReader;
+import com.grego.vgrep.model.reader.fileReader.EFileType;
 import com.grego.vgrep.model.reader.fileReader.PDFReader;
 import com.grego.vgrep.model.reader.fileReader.TxtReader;
 import com.grego.vgrep.model.reader.fileReader.XlsReader;
@@ -14,7 +14,7 @@ import com.grego.vgrep.model.reader.fileReader.XlsReader;
  *
  * @author grigo_000
  */
-public class ReaderFactory {
+public final class ReaderFactory {
 
     public static IReader getInstance(EFileType type) {
         switch (type)

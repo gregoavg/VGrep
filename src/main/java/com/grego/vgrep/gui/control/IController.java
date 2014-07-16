@@ -13,36 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.data.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.util.List;
+package com.grego.vgrep.gui.control;
+
+import com.grego.vgrep.gui.model.IModel;
 
 /**
  *
  * @author Grigorios
  */
-public interface IModel {
+public interface IController {
 
-    void addFile(EDataType dataType, File file);
-    
-    void remove(EDataType dataType);
-    
-    ADataFile getFile(EDataType dataType);
+    IModel getModel();
 
-    void clearData();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
+    void setModel(IModel model);
     
-    void attachView(IView view);
-    
-    void detachView(IView view);
-    
-    void fireDataChanged();
 }

@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data.file;
+package com.grego.vgrep.model.data;
 
-import com.grego.vgrep.model.data.AData;
-import com.grego.vgrep.model.reader.fileReader.EFileType;
-import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
 
 /**
  *
  * @author Grigorios
  */
-public final class FileData extends AData<File> {
+public class DocumentFile extends ADataFile {
 
-    public FileData(File data) {
+    public DocumentFile(File data) {
         super(data);
     }
     
-     public EFileType getFileType() {
-        return FileUtils.getFileType(super.data);
-    }
 }
