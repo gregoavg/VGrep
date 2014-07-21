@@ -14,37 +14,26 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.reader;
+package com.grego.vgrep.model.data.document;
 
-import com.grego.vgrep.model.data.document.DocumentContents;
+import com.grego.vgrep.model.data.ADataFile;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  *
  * @author Grigorios
  */
-public abstract class ADocumentReader implements IReader {
+public class DocumentFile extends ADataFile {
 
-    protected File source;
-
-    public ADocumentReader(File source) {
-        this.source = source;
-    }
-
-    public ADocumentReader() {
-        this.source = null;
-    }
-
-    @Override
-    public void setSource(Object source) {
-        if(source instanceof File)
-        {
-            this.source = (File) source;
-        }
+    public DocumentFile(File data) {
+        super(data);
     }
     
-    @Override
-    public abstract DocumentContents read() throws IOException;
+    public DocumentFile(String filePath) throws FileNotFoundException {
+        super(filePath);
+    }
+    
+    
     
 }

@@ -16,7 +16,8 @@
 
 package com.grego.vgrep.utils;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -44,12 +45,10 @@ public class StringUtilsTest extends TestCase {
      */
     public void testKeepLastWord() {
         System.out.println("keepLastWord");
-        String text = "";
-        String expResult = "";
+        String text = "My goal is to test";
+        String expResult = "test";
         String result = StringUtils.keepLastWord(text);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -68,13 +67,10 @@ public class StringUtilsTest extends TestCase {
      */
     public void testTextToLineCollection() {
         System.out.println("textToLineCollection");
-        String text = "";
-        String lineSeperator = "";
-        Collection<String> expResult = null;
-        Collection<String> result = StringUtils.textToLineCollection(text, lineSeperator);
+        String text = "My goal is to test";
+        int expResult = 5;
+        int result = StringUtils.textToLineCollection(text, " ").size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -82,13 +78,14 @@ public class StringUtilsTest extends TestCase {
      */
     public void testGetMaxLineWordCount() {
         System.out.println("getMaxLineWordCount");
-        Collection<String> dataRows = null;
-        String splitter = "";
-        int expResult = 0;
-        int result = StringUtils.getMaxLineWordCount(dataRows, splitter);
+        List<String> dataRows = new ArrayList<>(4);
+        dataRows.add("my goal is to test");
+        dataRows.add("this helps me work better");
+        dataRows.add("with less unexpected mistakes");
+        dataRows.add("that's my way of ninja!");
+        int expResult = 5;
+        int result = StringUtils.getMaxLineWordCount(dataRows, " ");
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

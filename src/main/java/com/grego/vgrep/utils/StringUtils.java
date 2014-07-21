@@ -5,7 +5,6 @@
  */
 package com.grego.vgrep.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -18,11 +17,7 @@ public final class StringUtils {
 
     public static String keepLastWord(String text) {
         String[] textArray = text.trim().split(" ");
-        if (textArray.length > 0)
-        {
-            return textArray[textArray.length - 1];
-        }
-        return null;
+        return CollectionUtils.getLastElement(Arrays.asList(textArray));
     }
 
     public static String[] removeEmptyNodes(String[] stringArray) {

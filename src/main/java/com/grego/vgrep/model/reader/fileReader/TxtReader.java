@@ -4,6 +4,9 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
+import com.grego.vgrep.model.data.document.ContentBuilder;
+import com.grego.vgrep.model.data.document.DocumentContents;
+import com.grego.vgrep.model.data.document.Line;
 import com.grego.vgrep.model.reader.ADocumentReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,16 +23,16 @@ public final class TxtReader extends ADocumentReader {
     }
     
     @Override
-    public String read() throws IOException {
-        StringBuilder txtContentBuilder = new StringBuilder();
+    public DocumentContents read() throws IOException {
+        ContentBuilder builder = new ContentBuilder();
         BufferedReader br = new BufferedReader(new FileReader(source));
-        String line = br.readLine();
-        while (line != null)
+        String lineText = br.readLine();
+        while (lineText != null)
         {
-            txtContentBuilder.append(line).append("\n");
-            line = br.readLine();
+            builder.appendLine(lineText);
+            lineText = br.readLine();
         }
-        return txtContentBuilder.toString();
+        return builder.getContents();
     }
 
 }

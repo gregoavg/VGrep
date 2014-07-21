@@ -18,6 +18,7 @@ package com.grego.vgrep.utils;
 
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 /**
  *

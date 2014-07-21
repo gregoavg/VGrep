@@ -4,6 +4,9 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
+import com.grego.vgrep.model.data.document.ContentBuilder;
+import com.grego.vgrep.model.data.document.DocumentContents;
+import com.grego.vgrep.model.data.document.Line;
 import com.grego.vgrep.model.reader.ADocumentReader;
 import java.io.IOException;
 import jxl.Cell;
@@ -26,26 +29,27 @@ public final class XlsReader extends ADocumentReader {
     }
 
     @Override
-    public String read() throws IOException {
-       StringBuilder xlsContentBuilder = new StringBuilder();
+    public DocumentContents read() throws IOException {
+        ContentBuilder builder = new ContentBuilder();
         try
         {
             Workbook w = Workbook.getWorkbook(source);
             Sheet sheet = w.getSheet(0);
             for (int rowInd = 0; rowInd < sheet.getRows(); rowInd++)
             {
+                StringBuilder lineBuilder = new StringBuilder();
                 for (int colInd = 0; colInd < sheet.getColumns(); colInd++)
                 {
                     Cell cell = sheet.getCell(colInd, rowInd);
-                    xlsContentBuilder.append(cell.getContents()).append(" ");
+                    lineBuilder.append(cell.getContents()).append(" ");
                 }
-                xlsContentBuilder.append("\n");
+                builder.appendLine(lineBuilder.toString());
             }
         }
         catch (BiffException ex)
         {
             LOGGER.error(ex.getMessage());          
         }
-        return xlsContentBuilder.toString();
+        return builder.getContents();
     }
 }

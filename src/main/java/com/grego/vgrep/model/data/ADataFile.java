@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 public abstract class ADataFile {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ADataFile.class);
-
+    
     protected final File sourceFile;
 
     public ADataFile(File data) {

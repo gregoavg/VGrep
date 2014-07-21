@@ -20,6 +20,7 @@ import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.view.manager.IViewManager;
 import com.grego.vgrep.gui.view.manager.JFxViewManager;
 import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.document.DocumentContents;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -72,9 +73,9 @@ public final class MainViewController implements IController, Initializable {
     public void findReferences() {
         try
         {
-            String readedFile = model.getFile(EDataType.INFO).getReader().read();
+            DocumentContents contents = model.getFile(EDataType.INFO).getReader().read();
             
-            System.out.println(readedFile);
+            System.out.println(contents.getLines().get(0));
         }
         catch (IOException ex)
         {

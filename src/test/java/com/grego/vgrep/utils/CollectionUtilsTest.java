@@ -17,6 +17,8 @@
 package com.grego.vgrep.utils;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -48,6 +50,15 @@ public class CollectionUtilsTest extends TestCase {
         String expResult = "last";
         String result = CollectionUtils.getLastElement(Arrays.asList(text.split("\\.")));
       
+        assertEquals(expResult, result);
+    }
+    
+    public void testGetLastElementOfNullList() {
+        System.out.println("getLastElement of null list");
+        List<String> emptyList = Collections.emptyList();
+        String expResult = null;
+        String result = CollectionUtils.getLastElement(emptyList);
+        
         assertEquals(expResult, result);
     }
     

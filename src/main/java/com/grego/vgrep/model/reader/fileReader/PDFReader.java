@@ -4,6 +4,9 @@
  */
 package com.grego.vgrep.model.reader.fileReader;
 
+import com.grego.vgrep.model.data.document.ContentBuilder;
+import com.grego.vgrep.model.data.document.DocumentContents;
+import com.grego.vgrep.model.data.document.Line;
 import com.grego.vgrep.model.reader.ADocumentReader;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
@@ -20,17 +23,20 @@ public final class PDFReader extends ADocumentReader {
     }
 
     @Override
-    public String read() throws IOException {
+    public DocumentContents read() throws IOException {
         PdfReader reader = new PdfReader(source.getPath());
         int numOfPages = reader.getNumberOfPages();
-
-        StringBuilder pdfContentBuilder = new StringBuilder();
+        
+        ContentBuilder builder = new ContentBuilder();
         for (int pageNum = 1; pageNum <= numOfPages; pageNum++)
         {
             String page = PdfTextExtractor.getTextFromPage(reader, pageNum);
-            pdfContentBuilder.append(page).append("\n");
+            for(String lineText : page.split("\n"))
+            {
+                builder.appendLine(lineText);
+            }
         }
-        return pdfContentBuilder.toString();
+        return builder.getContents();
     }
     
 }

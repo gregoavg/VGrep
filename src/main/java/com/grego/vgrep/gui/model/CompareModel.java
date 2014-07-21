@@ -21,7 +21,7 @@ import com.grego.vgrep.model.data.SimpleFileManager;
 import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.DocumentFile;
+import com.grego.vgrep.model.data.document.DocumentFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
