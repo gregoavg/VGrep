@@ -45,7 +45,7 @@ public class App extends Application {
         primaryStage.close();
         
         MainView mainView = new MainView(new CompareModel());
-        viewManager.setInitialWindowDimentions(600, 400);
+        viewManager.setInitialWindowSize(600, 400);
         viewManager.setDisplay(mainView);
         viewManager.setVisibility(true);
     }

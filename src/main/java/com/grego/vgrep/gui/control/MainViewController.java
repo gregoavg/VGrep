@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
@@ -69,6 +68,7 @@ public final class MainViewController implements IController, Initializable {
         }
     }
     
+    //TODO: implement business logic solution for accessing references from document files
     public void findReferences() {
         try
         {
@@ -78,7 +78,7 @@ public final class MainViewController implements IController, Initializable {
         }
         catch (IOException ex)
         {
-            java.util.logging.Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error("", ex);
         }
     }
 

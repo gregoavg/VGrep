@@ -42,10 +42,6 @@ public enum JFxViewManager implements IViewManager {
     public void setDisplay(IView view) {
         if(view instanceof JFxView)
         {
-            if(currentDisplay != null)
-            {
-                stageDimentions = new Point2D(stage.getWidth(), stage.getHeight());
-            }
             currentDisplay = (JFxView) view;
             stage.setScene(currentDisplay.getScene());
             
@@ -71,7 +67,7 @@ public enum JFxViewManager implements IViewManager {
     }
     
     @Override
-    public void setInitialWindowDimentions(double width, double height) {
+    public void setInitialWindowSize(double width, double height) {
         stageDimentions = new Point2D(width, height);
     }
 

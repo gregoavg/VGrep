@@ -7,6 +7,7 @@ package com.grego.vgrep.utils;
 import com.grego.vgrep.model.reader.fileReader.EFileType;
 import java.io.File;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.UnknownFormatFlagsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,7 @@ public final class FileUtils {
 
     public static EFileType getFileType(File file) throws UnknownFormatFlagsException {
         String fileName = file.getName().toLowerCase();
-        int beginIndex = fileName.lastIndexOf(".") + 1;
-        String fileType = fileName.substring(beginIndex).trim();
+        String fileType = CollectionUtils.getLastElement(Arrays.asList(fileName.split("\\.")));
 
         switch (fileType)
         {

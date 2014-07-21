@@ -14,22 +14,29 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.gui.view.manager;
 
-import java.io.File;
+import com.grego.vgrep.gui.view.javaFx.JFxView;
+import java.util.Map;
 
 /**
  *
  * @author Grigorios
  */
-public class DocumentFile extends ADataFile {
+public class SimpleFxView extends JFxView {
 
-    public DocumentFile(File data) {
-        super(data);
+    public SimpleFxView(String fxmlFilePath) {
+        super(fxmlFilePath);
     }
-    
-    public DocumentFile(String filePath) {
-        super(filePath);
+
+    @Override
+    protected void initComponets(Map<String, Object> componentMapper) {
+        //
+    }
+
+    @Override
+    public void update() {
+        //
     }
     
 }

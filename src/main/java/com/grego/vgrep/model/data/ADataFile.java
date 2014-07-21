@@ -43,13 +43,12 @@ public abstract class ADataFile {
     public File getSourceFile() {
         return sourceFile;
     }
-    
+
     public IReader getReader() {
         IReader reader = ReaderFactory.getInstance(FileUtils.getFileType(sourceFile));
         reader.setSource(sourceFile);
         return reader;
     }
-    
 
     @SuppressWarnings("rawtypes")
     private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile(null);

@@ -66,7 +66,8 @@ public abstract class JFxView implements IView {
         }
         catch (IOException ex)
         {
-            LOGGER.warn("Can not read file!!!", ex);
+            LOGGER.warn("Can not read file from path "+ fxmlFilePath +"!", ex);
+            
         }
     }
     

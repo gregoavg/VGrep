@@ -72,7 +72,7 @@ public final class MainView extends JFxView {
         
         findReferencesButton = (Button) componentMapper.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
-            this.dispose();
+            mainViewController.findReferences();
         });
     }
     

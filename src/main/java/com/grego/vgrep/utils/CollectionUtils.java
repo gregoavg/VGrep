@@ -14,22 +14,30 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.utils;
 
-import java.io.File;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
  * @author Grigorios
  */
-public class DocumentFile extends ADataFile {
-
-    public DocumentFile(File data) {
-        super(data);
-    }
+public class CollectionUtils {
     
-    public DocumentFile(String filePath) {
-        super(filePath);
+    /**
+     * Returns the last element of list. If the given list is empty, the
+     * returned value will be null.
+     * @param <T> Class type
+     * @param list List of elements
+     * @return Last element of list
+     */
+    public static <T> T getLastElement(List<T> list) {
+        ListIterator<T> listIterator = list.listIterator();
+        while(listIterator.hasNext())
+        {
+           listIterator.next();
+        }
+        return listIterator.hasPrevious() ? listIterator.previous() : null;
     }
-    
 }

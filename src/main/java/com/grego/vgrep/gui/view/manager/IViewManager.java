@@ -29,7 +29,7 @@ public interface IViewManager {
     
     void setVisibility(boolean visible);
     
-    void setInitialWindowDimentions(double width, double height);
+    void setInitialWindowSize(double width, double height);
     
     Window getWindow();
 

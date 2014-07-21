@@ -21,7 +21,6 @@ public final class PDFReader extends ADocumentReader {
 
     @Override
     public String read() throws IOException {
-        
         PdfReader reader = new PdfReader(source.getPath());
         int numOfPages = reader.getNumberOfPages();
 
