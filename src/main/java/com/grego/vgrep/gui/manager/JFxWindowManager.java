@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.gui.view.manager;
+package com.grego.vgrep.gui.manager;
 
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.JFxView;
@@ -28,16 +28,16 @@ import org.slf4j.LoggerFactory;
  * Singleton View Manager
  * @author Grigorios
  */
-public enum JFxViewManager implements IViewManager {
+public enum JFxWindowManager implements IWindowManager {
     INSTANCE;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JFxViewManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JFxWindowManager.class);
     private final Stage stage = new Stage();
     private JFxView currentDisplay = null;
     
     //default stage dimentions
     private Point2D stageDimentions = new Point2D(stage.getWidth(), stage.getHeight()) ;
-
+    
     @Override
     public void setDisplay(IView view) {
         if(view instanceof JFxView)

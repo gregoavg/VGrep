@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.grego.vgrep.app.factory;
 
-package com.grego.vgrep.model.data.document;
-
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.grego.vgrep.app.IApplicationLauncher;
+import com.grego.vgrep.app.JFxApplicationLauncher;
 
 /**
  *
  * @author Grigorios
  */
-public final class DocumentFile extends ADataFile {
+public final class LauncherFactory {
 
-    public DocumentFile(File data) {
-        super(data);
+    public static IApplicationLauncher getInstance(EApplicationType appType) {
+        switch (appType)
+        {
+            case JavaFX:
+                return new JFxApplicationLauncher();
+            default:
+                return null;
+        }
     }
-    
-    public DocumentFile(String filePath) throws FileNotFoundException {
-        super(filePath);
+
+    public enum EApplicationType {
+
+        JavaFX;
     }
-    
-    
-    
+
 }

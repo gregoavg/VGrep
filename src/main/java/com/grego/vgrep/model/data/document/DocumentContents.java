@@ -6,14 +6,14 @@
 
 package com.grego.vgrep.model.data.document;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  *
  * @author Grego
  */
-public class DocumentContents {
+public final class DocumentContents implements Iterable<Line> {
     
     private final List<Line> lines;
 
@@ -25,11 +25,12 @@ public class DocumentContents {
         return lines;
     }
     
-    public ListIterator<Line> getIterator() {
-        return lines.listIterator();
-    }
-    
     public int getNumberOfLines() {
         return lines.size();
+    }
+
+    @Override
+    public Iterator<Line> iterator() {
+        return lines.listIterator();
     }
 }

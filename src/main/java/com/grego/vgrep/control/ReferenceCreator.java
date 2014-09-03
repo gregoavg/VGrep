@@ -4,11 +4,10 @@
  */
 package com.grego.vgrep.control;
 
-import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.SimpleReference;
-import java.util.Collection;
+import com.grego.vgrep.model.data.document.Line;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -18,33 +17,24 @@ import java.util.Set;
 public final class ReferenceCreator {
 
     private final Set<IReference> referenceSet = new HashSet<>();
-    
-    public ReferenceCreator(IFileManager fileManager) {
-        
-    }
-    
-    private void constructReferences(Collection<String> infoCollection, Collection<String> targetCollection) {
-        
-        for (String info : infoCollection)
+
+    public Set<IReference> findReferences(Iterable source, Iterable target) {
+
+        Iterator<Line> sourceIterator = source.iterator();
+        while (sourceIterator.hasNext())
         {
-            String[] infoLineValues = info.split(" ");
-            for (String regEx : infoLineValues)
-            {
-                for (String target : targetCollection)
-                {
-                    if (target.contains(regEx))
-                    {
-                        IReference ref = new SimpleReference(info, target);
-                        referenceSet.add(ref);
-                    }
-                }
-            }
+            Line sourceLine = sourceIterator.next();
+
+            /*.forEach((Line targetLine) -> {
+             if (targetLine.compareTo(sourceLine) == Equal.integerValue()) {
+             referenceSet.add(new SimpleReference(targetLine.toString(), sourceLine.toString()));
+             }
+             });*/
         }
+        return null;
     }
-    
+
     public Set<IReference> getReferences() {
         return referenceSet;
     }
-    
-
 }

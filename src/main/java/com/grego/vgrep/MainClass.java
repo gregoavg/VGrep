@@ -13,27 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.grego.vgrep;
 
-package com.grego.vgrep.model.data.document;
-
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.grego.vgrep.app.IApplicationLauncher;
+import com.grego.vgrep.app.factory.LauncherFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import static com.grego.vgrep.app.factory.LauncherFactory.EApplicationType.*;
 
 /**
  *
  * @author Grigorios
  */
-public final class DocumentFile extends ADataFile {
+public final class MainClass {
 
-    public DocumentFile(File data) {
-        super(data);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainClass.class);
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        IApplicationLauncher launcher = LauncherFactory.getInstance(JavaFX);
+        launcher.startWithParameters(args);
     }
-    
-    public DocumentFile(String filePath) throws FileNotFoundException {
-        super(filePath);
-    }
-    
-    
-    
+
 }

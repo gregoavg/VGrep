@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data.document;
-
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.io.FileNotFoundException;
+package com.grego.vgrep.utils;
 
 /**
  *
  * @author Grigorios
  */
-public final class DocumentFile extends ADataFile {
+public enum  ECompareResult {
+    Equal(0),
+    NotEqual(-1);
 
-    public DocumentFile(File data) {
-        super(data);
+    
+    private final int result;
+    
+    private ECompareResult(int result) {
+        this.result = result;
     }
-    
-    public DocumentFile(String filePath) throws FileNotFoundException {
-        super(filePath);
+
+    public int integerValue() {
+        return result;
     }
-    
-    
-    
 }

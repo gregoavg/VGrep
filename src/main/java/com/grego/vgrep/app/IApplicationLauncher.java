@@ -14,23 +14,14 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.gui.view.manager;
-
-import com.grego.vgrep.gui.view.IView;
-import javafx.stage.Window;
+package com.grego.vgrep.app;
 
 /**
  *
  * @author Grigorios
  */
-public interface IViewManager {
+public interface IApplicationLauncher {
     
-    void setDisplay(IView view);
+    public void startWithParameters(String[] args);
     
-    void setVisibility(boolean visible);
-    
-    void setInitialWindowSize(double width, double height);
-    
-    Window getWindow();
-
 }

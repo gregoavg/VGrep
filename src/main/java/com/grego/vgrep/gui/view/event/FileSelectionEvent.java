@@ -17,13 +17,12 @@
 package com.grego.vgrep.gui.view.event;
 
 import com.grego.vgrep.model.data.EDataType;
-import javafx.event.ActionEvent;
 
 /**
  *
  * @author Grigorios
  */
-public final class FileSelectionEvent extends ActionEvent {
+public final class FileSelectionEvent extends ViewEvent {
     
     private final EDataType dataType;
 

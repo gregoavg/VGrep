@@ -14,26 +14,22 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data.document;
+package com.grego.vgrep.gui.manager;
 
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.grego.vgrep.gui.view.IView;
 
 /**
  *
  * @author Grigorios
  */
-public final class DocumentFile extends ADataFile {
+public interface IWindowManager {
+    
+    void setDisplay(IView view);
+    
+    void setVisibility(boolean visible);
+    
+    void setInitialWindowSize(double width, double height);
+    
+    Object getWindow();
 
-    public DocumentFile(File data) {
-        super(data);
-    }
-    
-    public DocumentFile(String filePath) throws FileNotFoundException {
-        super(filePath);
-    }
-    
-    
-    
 }

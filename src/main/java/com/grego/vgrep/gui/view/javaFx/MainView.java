@@ -19,6 +19,7 @@ import com.grego.vgrep.gui.control.MainViewController;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.event.FileSelectionEvent;
+import com.grego.vgrep.gui.view.event.ViewEvent;
 import com.grego.vgrep.model.data.EDataType;
 import java.util.Map;
 import javafx.scene.control.Button;
@@ -34,7 +35,7 @@ public final class MainView extends JFxView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
-    private IModel model = null;
+    private final IModel model;
 
     public MainView(IModel model) {
         super("/fxml/MainView.fxml");
@@ -43,9 +44,10 @@ public final class MainView extends JFxView {
         super.controller.setModel(this.model);
     }
 
+    //TODO: create method to upatade tables when file is loaded
     @Override
     public void update() {
-        sourceFilePathTextField.setText(model.getFile(EDataType.INFO).toString());
+        sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
         targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
     }
 
@@ -62,7 +64,7 @@ public final class MainView extends JFxView {
         
         sourceFileSelectButton = (Button) componentMapper.get("selectSourceFileButton");
         sourceFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.INFO));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.SOURCE));
         });
         
         targetFileSelectButton = (Button) componentMapper.get("selectTargetFileButton");
@@ -72,7 +74,8 @@ public final class MainView extends JFxView {
         
         findReferencesButton = (Button) componentMapper.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
-            mainViewController.findReferences();
+            
+            mainViewController.findReferences(new ViewEvent());
         });
     }
     

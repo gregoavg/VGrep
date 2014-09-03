@@ -15,6 +15,8 @@ public interface IReference<S,T> {
     S getSource();
 
     T getTarget();
+
+    @Override
+    public String toString();
     
-    String getReferencedLine();
 }

@@ -13,9 +13,9 @@ import java.util.List;
  *
  * @author Grego
  */
-public class ContentBuilder {
+public final class ContentBuilder {
     
-    List<Line> lines = new ArrayList<>();
+    private final List<Line> lines = new ArrayList<>();
     
     public void appendLine(String text) {
         lines.add(new Line(text));

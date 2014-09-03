@@ -14,26 +14,30 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data.document;
+package com.grego.vgrep.gui.view.event;
 
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.grego.vgrep.event.IEvent;
+import java.util.Objects;
 
 /**
  *
  * @author Grigorios
  */
-public final class DocumentFile extends ADataFile {
+public class ViewEvent implements IEvent {
 
-    public DocumentFile(File data) {
-        super(data);
+    protected final Object eventSource;
+
+    public ViewEvent() {
+        eventSource = new Object();
     }
-    
-    public DocumentFile(String filePath) throws FileNotFoundException {
-        super(filePath);
+
+    public ViewEvent(Object eventSource) {
+        this.eventSource = Objects.requireNonNull(eventSource);
     }
-    
-    
+
+    @Override
+    public Object getSource() {
+        return eventSource;
+    }
     
 }

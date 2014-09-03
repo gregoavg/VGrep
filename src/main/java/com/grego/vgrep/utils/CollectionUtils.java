@@ -13,31 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.utils;
 
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Objects;
 
 /**
  *
  * @author Grigorios
  */
-public class CollectionUtils {
-    
+public final class CollectionUtils {
+
     /**
      * Returns the last element of list. If the given list is empty, the
      * returned value will be null.
+     *
      * @param <T> Class type
      * @param list List of elements
      * @return Last element of list
      */
     public static <T> T getLastElement(List<T> list) {
         ListIterator<T> listIterator = list.listIterator();
-        while(listIterator.hasNext())
+        while (listIterator.hasNext())
         {
-           listIterator.next();
+            listIterator.next();
         }
         return listIterator.hasPrevious() ? listIterator.previous() : null;
     }

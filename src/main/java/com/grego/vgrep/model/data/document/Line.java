@@ -3,40 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grego.vgrep.model.data.document;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import static com.grego.vgrep.utils.ECompareResult.*;
 
 /**
  *
  * @author Grego
  */
-public class Line {
-    
+public final class Line implements Iterable<String>, Comparable<Line> {
+
     private final List<String> columns;
 
     public Line(String text) {
         columns = Arrays.asList(text.split(" "));
     }
-    
+
     public List<String> getColumns() {
         return columns;
-    }
-    
-    public ListIterator<String> getColumnIterator() {
-        return columns.listIterator();
     }
 
     @Override
     public String toString() {
-        StringBuilder strBuilder = new StringBuilder();
-        columns.forEach((word)-> {
+        final StringBuilder strBuilder = new StringBuilder();
+        columns.forEach((word) ->
+        {
             strBuilder.append(word).append(" ");
         });
         return strBuilder.toString();
     }
-    
+
+    @Override
+    public Iterator<String> iterator() {
+        return columns.listIterator();
+    }
+
+    @Override
+    public int compareTo(Line other) {
+        for (String word : this.columns)
+        {
+            for(String otherWord : other.getColumns()) {
+                if(word.equals(otherWord))
+                    return Equal.integerValue();
+            }
+        }
+        return NotEqual.integerValue();
+    }
+
 }

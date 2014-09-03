@@ -18,6 +18,7 @@ package com.grego.vgrep.gui.view.javaFx;
 import com.grego.vgrep.gui.control.IController;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.utils.FileUtils;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -41,7 +42,14 @@ public abstract class JFxView implements IView {
     protected IController controller = null;
 
     public JFxView(String fxmlFilePath) {
-        loadContents(fxmlFilePath);
+        try
+        {
+            loadContents(fxmlFilePath);
+        }
+        catch (FileNotFoundException ex)
+        {
+            LOGGER.error("File not found", ex);
+        }
     }
 
     @Override
@@ -56,7 +64,7 @@ public abstract class JFxView implements IView {
         stage.hide();
     }
 
-    private void loadContents(String fxmlFilePath) {
+    private void loadContents(String fxmlFilePath) throws FileNotFoundException {
         try (InputStream fileAsStream = FileUtils.getFileAsResourceStream(fxmlFilePath))
         {
             scene = new Scene(loader.load(fileAsStream));

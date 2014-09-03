@@ -87,11 +87,11 @@ public abstract class ADataFile {
     /**
      * helper class to handle empty sourceFile slots on sourceFile manager
      */
-    private static class EmptyDataFile extends ADataFile {
+    private static final class EmptyDataFile extends ADataFile {
 
         public EmptyDataFile(File data) {
             super(data);
         }
-
+        
     }
 }

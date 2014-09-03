@@ -4,7 +4,12 @@
  */
 package com.grego.vgrep.model;
 
+import com.grego.vgrep.model.data.EDataType;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
+import static com.grego.vgrep.model.data.EDataType.SOURCE;
+import static com.grego.vgrep.model.data.EDataType.TARGET;
 
 /**
  *
@@ -12,34 +17,27 @@ import java.util.Objects;
  */
 public class SimpleReference implements IReference<String,String> {
 
-    private final String source;
-    private final String target;
+    private final Map<EDataType, String> refMapper = new EnumMap<>(EDataType.class);
 
-    public SimpleReference(String info, String target) {
-        this.source = info;
-        this.target = target;
+    public SimpleReference(String source, String target) {
+        refMapper.put(SOURCE, source);
+        refMapper.put(TARGET, target);
     }
 
     @Override
     public String getSource() {
-        return source;
+        return refMapper.get(SOURCE);
     }
 
     @Override
     public String getTarget() {
-        return target;
-    }
-
-    @Override
-    public String getReferencedLine() {
-        return "Info: " + this.source + " Target: " + this.target;
+        return refMapper.get(TARGET);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.source);
-        hash = 13 * hash + Objects.hashCode(this.target);
+        int hash = 5;
+        hash = 61 * hash + Objects.hashCode(this.refMapper);
         return hash;
     }
 
@@ -54,11 +52,16 @@ public class SimpleReference implements IReference<String,String> {
             return false;
         }
         final SimpleReference other = (SimpleReference) obj;
-        if (!Objects.equals(this.source, other.source))
-        {
-            return false;
-        }
-        return Objects.equals(this.target, other.target);
+        return Objects.equals(this.refMapper, other.refMapper);
     }
+    
+    
+
+    @Override
+    public String toString() {
+        return "Source: " + refMapper.get(SOURCE) + ", Target: " + refMapper.get(TARGET);
+    }
+    
+    
 
 }
