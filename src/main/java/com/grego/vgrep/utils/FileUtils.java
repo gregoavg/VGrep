@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.utils;
 
-import com.grego.vgrep.model.reader.fileReader.EFileType;
+import com.grego.vgrep.model.reader.fileParser.EFileType;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Arrays;

@@ -17,8 +17,11 @@
 package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.reader.AFileReader;
+import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -26,6 +29,10 @@ import java.io.FileNotFoundException;
  */
 public final class DocumentFile extends ADataFile {
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFile.class);
+    
+    private final DocumentContents contents = reader.read();
+    
     public DocumentFile(File data) {
         super(data);
     }
@@ -33,7 +40,14 @@ public final class DocumentFile extends ADataFile {
     public DocumentFile(String filePath) throws FileNotFoundException {
         super(filePath);
     }
-    
-    
+
+    @Override
+    public AFileReader constructReader() {
+        return new DocumentFileReader(super.sourceFile);
+    }
+
+    public DocumentContents getContents() {
+        return contents;
+    }
     
 }

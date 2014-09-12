@@ -6,6 +6,7 @@
 
 package com.grego.vgrep.model.data.document;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,11 @@ public final class DocumentContents implements Iterable<Line> {
 
     public DocumentContents(List<Line> lines) {
         this.lines = lines;
+    }
+
+    public DocumentContents() {
+        lines = new ArrayList<>();
+        lines.add(new Line("Empty document file!!!!"));
     }
     
     public List<Line> getLines() {

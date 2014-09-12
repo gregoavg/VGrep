@@ -21,9 +21,13 @@ import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.view.event.ViewEvent;
 import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.document.DocumentContents;
+import com.grego.vgrep.model.data.document.DocumentFile;
 import java.util.Map;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +53,14 @@ public final class MainView extends JFxView {
     public void update() {
         sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
         targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
+        
+        DocumentContents sContents = ((DocumentFile) model.getFile(EDataType.SOURCE)).getContents();
+        DocumentContents tContents = model.getFile(EDataType.TARGET).getReader().read();
+        
+        String sText = sContents.getLines().get(0).getColumns().get(0);
+        String tText = tContents.getLines().get(0).getColumns().get(0);
+        sourceFileGrid.addRow(0, new Label(sText));
+        targetFileGrid.addRow(0, new Label(tText));
     }
 
     public IModel getModel() {
@@ -77,6 +89,9 @@ public final class MainView extends JFxView {
             
             mainViewController.findReferences(new ViewEvent());
         });
+        
+        sourceFileGrid = (GridPane) componentMapper.get("sourceFileGrid");
+        targetFileGrid = (GridPane) componentMapper.get("targetFileGrid");
     }
     
     //View components declaration area
@@ -86,4 +101,7 @@ public final class MainView extends JFxView {
     private Button sourceFileSelectButton;
     private Button targetFileSelectButton;
     private Button findReferencesButton;
+    
+    private GridPane sourceFileGrid;
+    private GridPane targetFileGrid;
 }

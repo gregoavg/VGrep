@@ -15,9 +15,8 @@
  */
 package com.grego.vgrep.model.data;
 
-import com.grego.vgrep.model.reader.IReader;
-import com.grego.vgrep.model.reader.factory.ReaderFactory;
-import com.grego.vgrep.utils.FileUtils;
+import com.grego.vgrep.model.reader.AFileReader;
+import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.io.File;
 import java.util.Objects;
 import org.slf4j.LoggerFactory;
@@ -31,24 +30,31 @@ public abstract class ADataFile {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ADataFile.class);
     
     protected final File sourceFile;
+    protected final AFileReader reader;
 
     public ADataFile(File data) {
         this.sourceFile = data;
+        this.reader = Objects.requireNonNull(constructReader());
     }
 
     public ADataFile(String filePath) {
-        sourceFile = new File(filePath);
+        sourceFile = Objects.requireNonNull(new File(filePath));
+        this.reader = Objects.requireNonNull(constructReader());
     }
 
     public File getSourceFile() {
         return sourceFile;
     }
 
-    public IReader getReader() {
-        IReader reader = ReaderFactory.getInstance(FileUtils.getFileType(sourceFile));
-        reader.setSource(sourceFile);
+    public AFileReader getReader() {
         return reader;
     }
+    
+    /**
+     * Factory method to provide reader for file
+     * @return reader instance
+     */
+    protected abstract AFileReader constructReader();
 
     @SuppressWarnings("rawtypes")
     private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile(null);
@@ -91,6 +97,11 @@ public abstract class ADataFile {
 
         public EmptyDataFile(File data) {
             super(data);
+        }
+
+        @Override
+        public AFileReader constructReader() {
+            return new DocumentFileReader();
         }
         
     }
