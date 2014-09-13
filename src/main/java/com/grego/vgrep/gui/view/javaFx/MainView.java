@@ -17,12 +17,12 @@ package com.grego.vgrep.gui.view.javaFx;
 
 import com.grego.vgrep.gui.control.MainViewController;
 import com.grego.vgrep.gui.model.IModel;
+import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.view.event.ViewEvent;
 import com.grego.vgrep.model.data.EDataType;
 import com.grego.vgrep.model.data.document.DocumentContents;
-import com.grego.vgrep.model.data.document.DocumentFile;
 import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,11 +39,11 @@ public final class MainView extends JFxView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
-    private final IModel model;
+    private final ViewModel model;
 
     public MainView(IModel model) {
         super("/fxml/MainView.fxml");
-        this.model = model;
+        this.model = (ViewModel) model;
         this.model.attachView((IView) this);
         super.controller.setModel(this.model);
     }
@@ -54,7 +54,7 @@ public final class MainView extends JFxView {
         sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
         targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
         
-        DocumentContents sContents = ((DocumentFile) model.getFile(EDataType.SOURCE)).getContents();
+        DocumentContents sContents = model.getFile(EDataType.SOURCE).getReader().read();
         DocumentContents tContents = model.getFile(EDataType.TARGET).getReader().read();
         
         String sText = sContents.getLines().get(0).getColumns().get(0);

@@ -17,7 +17,7 @@ package com.grego.vgrep.app;
 
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
-import com.grego.vgrep.gui.model.CompareModel;
+import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.MainView;
 import javafx.application.Application;
@@ -34,7 +34,7 @@ public class JFxApplicationLauncher extends Application implements IApplicationL
         stage.close();
         final IWindowManager windowManager = JFxWindowManager.INSTANCE;
         
-        IView mainView = new MainView(new CompareModel());
+        IView mainView = new MainView(new ViewModel());
         windowManager.setInitialWindowSize(600, 400);
         windowManager.setDisplay(mainView);
         windowManager.setVisibility(true);

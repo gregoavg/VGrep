@@ -18,7 +18,6 @@ package com.grego.vgrep.gui.view.javaFx;
 import com.grego.vgrep.gui.control.IController;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.utils.FileUtils;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -38,18 +37,13 @@ public abstract class JFxView implements IView {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
 
     protected final FXMLLoader loader = new FXMLLoader();
-    protected Scene scene = null;
-    protected IController controller = null;
+    protected final Scene scene;
+    protected final IController controller;
 
     public JFxView(String fxmlFilePath) {
-        try
-        {
-            loadContents(fxmlFilePath);
-        }
-        catch (FileNotFoundException ex)
-        {
-            LOGGER.error("File not found", ex);
-        }
+        scene = loadScene(fxmlFilePath);
+        controller = defaultController();
+        initComponets(loader.getNamespace());
     }
 
     @Override
@@ -64,26 +58,24 @@ public abstract class JFxView implements IView {
         stage.hide();
     }
 
-    private void loadContents(String fxmlFilePath) throws FileNotFoundException {
+    private Scene loadScene(String fxmlFilePath) {
         try (InputStream fileAsStream = FileUtils.getFileAsResourceStream(fxmlFilePath))
         {
-            scene = new Scene(loader.load(fileAsStream));
-            controller = defaultController();
-            
-            initComponets(loader.getNamespace());
+            return new Scene(loader.load(fileAsStream));
         }
         catch (IOException ex)
         {
-            LOGGER.warn("Can not read file from path "+ fxmlFilePath +"!", ex);
-            
+            LOGGER.warn("Can not read file from path " + fxmlFilePath + "!", ex);
+            return new Scene(new Pane());
         }
     }
-    
+
     protected abstract void initComponets(final Map<String, Object> componentMapper);
-    
+
     /**
-     * Override this factory method in order to change the default controller. 
-     * @return <b>JFx Controller</b> as specified in FXML file 
+     * Override this factory method in order to change the default controller.
+     *
+     * @return <b>JFx Controller</b> as specified in FXML file
      */
     protected IController defaultController() {
         return loader.getController();

@@ -24,7 +24,7 @@ public final class DocumentContents implements Iterable<Line> {
 
     public DocumentContents() {
         lines = new ArrayList<>();
-        lines.add(new Line("Empty document file!!!!"));
+        lines.add(new Line("No document file inserted"));
     }
     
     public List<Line> getLines() {

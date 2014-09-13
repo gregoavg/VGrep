@@ -20,6 +20,7 @@ import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.view.event.FileSelectionEvent;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
+import com.grego.vgrep.gui.model.ViewModel;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,7 +39,7 @@ public final class MainViewController implements IController, Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
 
     private final IWindowManager viewManager = JFxWindowManager.INSTANCE;
-    private IModel model = null;
+    private ViewModel model = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,7 +53,7 @@ public final class MainViewController implements IController, Initializable {
 
     @Override
     public void setModel(IModel model) {
-        this.model = model;
+        this.model = (ViewModel) model;
     }
 
     public void selectFileButtonClick(IEvent event) {

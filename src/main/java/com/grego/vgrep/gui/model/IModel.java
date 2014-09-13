@@ -16,11 +16,6 @@
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.data.EDataType;
-import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
-import java.util.List;
 
 /**
  *
@@ -28,18 +23,6 @@ import java.util.List;
  */
 public interface IModel {
 
-    void addFile(EDataType dataType, File file);
-    
-    void remove(EDataType dataType);
-    
-    ADataFile getFile(EDataType dataType);
-
-    void clearData();
-
-    List<IReference> getReferences();
-
-    void setReferences(List<IReference> references);
-    
     void attachView(IView view);
     
     void detachView(IView view);

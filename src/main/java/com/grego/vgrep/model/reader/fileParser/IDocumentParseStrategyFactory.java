@@ -4,11 +4,6 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import com.grego.vgrep.model.reader.fileParser.EFileType;
-import com.grego.vgrep.model.reader.fileParser.PDFParser;
-import com.grego.vgrep.model.reader.fileParser.TxtParser;
-import com.grego.vgrep.model.reader.fileParser.XlsParser;
-
 /**
  *
  * @author grigo_000
