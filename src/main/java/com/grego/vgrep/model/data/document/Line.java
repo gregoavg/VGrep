@@ -14,7 +14,7 @@ import static com.grego.vgrep.utils.ECompareResult.*;
  *
  * @author Grego
  */
-public final class Line implements Iterable<String>, Comparable<Line> {
+public final class Line implements Iterable<String>, Comparable<String> {
 
     private final List<String> columns;
 
@@ -42,12 +42,12 @@ public final class Line implements Iterable<String>, Comparable<Line> {
     }
 
     @Override
-    public int compareTo(Line other) {
+    public int compareTo(String otherWord) {
         for (String word : this.columns)
         {
-            for(String otherWord : other.getColumns()) {
-                if(word.equals(otherWord))
-                    return Equal.integerValue();
+            if (word.equals(otherWord))
+            {
+                return Equal.integerValue();
             }
         }
         return NotEqual.integerValue();

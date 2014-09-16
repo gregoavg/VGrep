@@ -41,35 +41,29 @@ public final class ViewModel implements IModel {
     private final IFileManager fileManager = new SimpleFileManager();
     private List<IReference> references = new ArrayList<>();
 
-    //@Override
     public void addFile(EDataType dataType, File file) {
         fileManager.addFile(dataType, new DocumentFile(file));
         fireDataChanged();
     }
 
-    //@Override
     public void remove(EDataType dataType) {
         fileManager.remove(dataType);
         fireDataChanged();
     }
 
-    //@Override
     public void clearData() {
         fileManager.clearData();
         fireDataChanged();
     }
 
-    //@Override
     public ADataFile getFile(EDataType dataType) {
         return fileManager.getFile(dataType);
     }
 
-    //@Override
     public List<IReference> getReferences() {
         return references;
     }
 
-    //@Override
     public void setReferences(List<IReference> references) {
         this.references = references;
     }

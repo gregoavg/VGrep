@@ -76,4 +76,9 @@ public enum JFxWindowManager implements IWindowManager {
         return stage;
     }
     
+    @Override
+    public void setWindowTitle(String title) {
+        stage.setTitle(title);
+    }
+    
 }

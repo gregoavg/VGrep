@@ -43,7 +43,7 @@ public final class MainViewController implements IController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //not implemented
+        //not implemented, used by JavaFx framework
     }
 
     @Override

@@ -43,7 +43,7 @@ public final class XlsParser implements IDocumentParseStrategy {
         }
         catch (BiffException ex)
         {
-            LOGGER.error(ex.getMessage());          
+            LOGGER.error(ex.getMessage());
         }
         return builder.getContents();
     }

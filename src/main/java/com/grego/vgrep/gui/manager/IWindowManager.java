@@ -32,4 +32,6 @@ public interface IWindowManager {
     
     Object getWindow();
 
+    void setWindowTitle(String title);
+
 }

@@ -39,7 +39,7 @@ public abstract class ADataFile {
 
     public ADataFile(String filePath) {
         sourceFile = Objects.requireNonNull(new File(filePath));
-        this.reader = Objects.requireNonNull(constructReader());
+        reader = Objects.requireNonNull(constructReader());
     }
 
     public File getSourceFile() {
@@ -100,7 +100,7 @@ public abstract class ADataFile {
         }
 
         @Override
-        public AFileReader constructReader() {
+        protected AFileReader constructReader() {
             return new DocumentFileReader();
         }
         

@@ -37,6 +37,7 @@ public class JFxApplicationLauncher extends Application implements IApplicationL
         IView mainView = new MainView(new ViewModel());
         windowManager.setInitialWindowSize(600, 400);
         windowManager.setDisplay(mainView);
+        windowManager.setWindowTitle("Visual File Grep");
         windowManager.setVisibility(true);
     }
 

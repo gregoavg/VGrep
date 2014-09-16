@@ -15,6 +15,7 @@
  */
 package com.grego.vgrep.utils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -39,5 +40,17 @@ public final class CollectionUtils {
             listIterator.next();
         }
         return listIterator.hasPrevious() ? listIterator.previous() : null;
+    }
+
+    public static <T> int getMaxNestedDataCount(List<List<T>> dataSet) {
+        int maxElementSize = 0;
+        for (Collection c : dataSet)
+        {
+            if (maxElementSize < c.size())
+            {
+                maxElementSize = c.size();
+            }
+        }
+        return maxElementSize;
     }
 }

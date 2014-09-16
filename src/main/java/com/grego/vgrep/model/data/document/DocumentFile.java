@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.ADataFile;
@@ -30,24 +29,24 @@ import org.slf4j.LoggerFactory;
 public final class DocumentFile extends ADataFile {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFile.class);
-    
+
     private final DocumentContents contents = reader.read();
-    
+
     public DocumentFile(File data) {
         super(data);
     }
-    
+
     public DocumentFile(String filePath) throws FileNotFoundException {
         super(filePath);
     }
 
     @Override
-    public AFileReader constructReader() {
+    protected AFileReader constructReader() {
         return new DocumentFileReader(super.sourceFile);
     }
 
     public DocumentContents getContents() {
         return contents;
     }
-    
+
 }
