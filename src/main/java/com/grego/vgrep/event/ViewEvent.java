@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.gui.view.event;
+package com.grego.vgrep.event;
 
-import com.grego.vgrep.event.IEvent;
 import java.util.Objects;
 
 /**

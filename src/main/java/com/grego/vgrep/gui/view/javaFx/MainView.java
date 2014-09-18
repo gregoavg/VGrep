@@ -16,12 +16,13 @@
 package com.grego.vgrep.gui.view.javaFx;
 
 import com.grego.vgrep.gui.control.MainViewController;
-import com.grego.vgrep.gui.model.TableViewManager;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.gui.view.event.FileSelectionEvent;
-import com.grego.vgrep.gui.view.event.ViewEvent;
+import com.grego.vgrep.event.FileSelectionEvent;
+import com.grego.vgrep.event.ViewEvent;
+import com.grego.vgrep.gui.model.IComponentHandler;
+import com.grego.vgrep.gui.model.TableViewHandler;
 import com.grego.vgrep.model.data.EDataType;
 import java.util.Map;
 import javafx.scene.control.Button;
@@ -52,8 +53,8 @@ public final class MainView extends JFxView {
         sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
         targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
         
-        sourceFileTableManager.setDataFile(model.getFile(EDataType.SOURCE));
-        targetFileTableManager.setDataFile(model.getFile(EDataType.TARGET));
+        sourceTableHandler.setDataModel(model.getFile(EDataType.SOURCE));
+        targetTableHandler.setDataModel(model.getFile(EDataType.TARGET));
     }
 
     public IModel getModel() {
@@ -83,8 +84,8 @@ public final class MainView extends JFxView {
             mainViewController.findReferences(new ViewEvent());
         });
         
-        sourceFileTableManager = new TableViewManager((TableView) componentMapper.get("sourceTableView"));
-        targetFileTableManager = new TableViewManager((TableView) componentMapper.get("targetTableView"));
+        sourceTableHandler = new TableViewHandler((TableView) componentMapper.get("sourceTableView"));
+        targetTableHandler = new TableViewHandler((TableView) componentMapper.get("targetTableView"));
     }
     
     //View components declaration area
@@ -95,6 +96,6 @@ public final class MainView extends JFxView {
     private Button targetFileSelectButton;
     private Button findReferencesButton;
     
-    private TableViewManager sourceFileTableManager;
-    private TableViewManager targetFileTableManager;
+    private IComponentHandler sourceTableHandler;
+    private IComponentHandler targetTableHandler;
 }

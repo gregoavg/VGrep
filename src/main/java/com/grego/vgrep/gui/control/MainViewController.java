@@ -17,7 +17,7 @@ package com.grego.vgrep.gui.control;
 
 import com.grego.vgrep.event.IEvent;
 import com.grego.vgrep.gui.model.IModel;
-import com.grego.vgrep.gui.view.event.FileSelectionEvent;
+import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
@@ -56,15 +56,13 @@ public final class MainViewController implements IController, Initializable {
         this.model = (ViewModel) model;
     }
 
-    public void selectFileButtonClick(IEvent event) {
-        FileSelectionEvent fileSelectionEvent = (FileSelectionEvent) event;
-
+    public void selectFileButtonClick(FileSelectionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
         File selectedFile = fileChooser.showOpenDialog((Window) viewManager.getWindow());
         if (selectedFile != null)
         {
-            model.addFile(fileSelectionEvent.getDataType(), selectedFile);
+            model.addFile(event.getDataType(), selectedFile);
         }
     }
 
