@@ -17,20 +17,16 @@ public abstract class AFileReader {
     
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AFileReader.class);
     
-    protected File file;
-
-    public AFileReader(File file) {
-        this.file = Objects.requireNonNull(file);
-    }
-
-    public AFileReader() {
-        this.file = null;
-    }
-
+    protected File file = null;
+    
     public void setSource(File file) {
-        this.file = Objects.requireNonNull(file);
+        this.file = file;
     }
 
     public abstract <T> T read();
+    
+    public boolean hasFile() {
+        return file != null;
+    }
     
 }

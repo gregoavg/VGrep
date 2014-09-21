@@ -30,16 +30,16 @@ public abstract class ADataFile {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ADataFile.class);
     
     protected final File sourceFile;
-    protected final AFileReader reader;
+    protected final AFileReader reader = Objects.requireNonNull(constructReader());
 
     public ADataFile(File data) {
         this.sourceFile = data;
-        this.reader = Objects.requireNonNull(constructReader());
+        reader.setSource(sourceFile);
     }
 
     public ADataFile(String filePath) {
         sourceFile = Objects.requireNonNull(new File(filePath));
-        reader = Objects.requireNonNull(constructReader());
+        reader.setSource(sourceFile);
     }
 
     public File getSourceFile() {
@@ -103,6 +103,5 @@ public abstract class ADataFile {
         protected AFileReader constructReader() {
             return new DocumentFileReader();
         }
-        
     }
 }

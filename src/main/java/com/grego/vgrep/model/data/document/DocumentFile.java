@@ -42,7 +42,7 @@ public final class DocumentFile extends ADataFile {
 
     @Override
     protected AFileReader constructReader() {
-        return new DocumentFileReader(super.sourceFile);
+        return new DocumentFileReader();
     }
 
     public DocumentContents getContents() {

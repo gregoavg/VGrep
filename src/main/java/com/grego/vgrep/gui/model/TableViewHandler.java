@@ -50,6 +50,7 @@ public class TableViewHandler implements IComponentHandler {
         return table;
     }
 
+    @SuppressWarnings("unchecked")
     private void setupTable() {
         final List<TableColumn> tableColumns = new ArrayList<>();
         List<Line> dataSet = FXCollections.observableArrayList(dataModel.getContents().getLines());

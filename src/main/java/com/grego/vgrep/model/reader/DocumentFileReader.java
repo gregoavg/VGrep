@@ -20,7 +20,6 @@ import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategy;
 import com.grego.vgrep.model.data.document.DocumentContents;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
-import java.io.File;
 import java.io.IOException;
 import org.slf4j.LoggerFactory;
 
@@ -31,14 +30,6 @@ import org.slf4j.LoggerFactory;
 public class DocumentFileReader extends AFileReader {
     
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
-
-    public DocumentFileReader(File file) {
-        super(file);
-    }
-
-    public DocumentFileReader() {
-        super();
-    }
     
     @Override
     public DocumentContents read() {
