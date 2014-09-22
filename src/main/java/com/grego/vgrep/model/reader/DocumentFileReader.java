@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.grego.vgrep.model.reader;
 
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategy;
 import com.grego.vgrep.model.data.document.DocumentContents;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
+import java.io.File;
 import java.io.IOException;
 import org.slf4j.LoggerFactory;
 
@@ -28,21 +28,23 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  */
 public class DocumentFileReader extends AFileReader {
-    
+
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
-    
+
     @Override
     public DocumentContents read() {
-        try
-        {
-            IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory.getInstance(FileUtils.getFileType(file));
-            return parseStrategy.parse(file);
-        }
-        catch (IOException | NullPointerException ex)
-        {
-            LOGGER.error(ex.getMessage());
+        if (dataFile.hasFile()) {
+            File sourceFile = dataFile.getSourceFile();
+            try {
+                IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory
+                        .getInstance(FileUtils.getFileType(sourceFile));
+                return parseStrategy.parse(sourceFile);
+            } 
+            catch (IOException ex) {
+                LOGGER.error(ex.getMessage());
+            }
         }
         return new DocumentContents();
     }
-    
+
 }

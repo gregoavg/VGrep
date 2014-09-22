@@ -8,7 +8,6 @@ import com.grego.vgrep.model.data.document.ContentBuilder;
 import com.grego.vgrep.model.data.document.DocumentContents;
 import java.io.File;
 import java.io.IOException;
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -35,8 +34,8 @@ public final class XlsParser implements IDocumentParseStrategy {
                 StringBuilder lineBuilder = new StringBuilder();
                 for (int colInd = 0; colInd < sheet.getColumns(); colInd++)
                 {
-                    Cell cell = sheet.getCell(colInd, rowInd);
-                    lineBuilder.append(cell.getContents()).append(" ");
+                    String cellContent = sheet.getCell(colInd, rowInd).getContents();
+                    lineBuilder.append(cellContent.trim()).append(" ");
                 }
                 builder.appendLine(lineBuilder.toString());
             }

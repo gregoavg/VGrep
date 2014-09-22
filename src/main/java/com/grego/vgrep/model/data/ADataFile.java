@@ -32,14 +32,16 @@ public abstract class ADataFile {
     protected final File sourceFile;
     protected final AFileReader reader = Objects.requireNonNull(constructReader());
 
+    @SuppressWarnings("unchecked")
     public ADataFile(File data) {
         this.sourceFile = data;
-        reader.setSource(sourceFile);
+        reader.setSource(this);
     }
 
+    @SuppressWarnings("unchecked")
     public ADataFile(String filePath) {
         sourceFile = Objects.requireNonNull(new File(filePath));
-        reader.setSource(sourceFile);
+        reader.setSource(this);
     }
 
     public File getSourceFile() {
@@ -88,6 +90,10 @@ public abstract class ADataFile {
         }
         final ADataFile other = (ADataFile) obj;
         return Objects.equals(this.sourceFile, other.sourceFile);
+    }
+    
+    public boolean hasFile() {
+        return sourceFile != null;
     }
 
     /**

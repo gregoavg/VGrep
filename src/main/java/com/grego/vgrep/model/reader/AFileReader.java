@@ -5,8 +5,8 @@
  */
 package com.grego.vgrep.model.reader;
 
+import com.grego.vgrep.model.data.ADataFile;
 import java.io.File;
-import java.util.Objects;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -17,16 +17,12 @@ public abstract class AFileReader {
     
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AFileReader.class);
     
-    protected File file = null;
+    protected ADataFile dataFile = null;
     
-    public void setSource(File file) {
-        this.file = file;
+    public void setSource(ADataFile file) {
+        this.dataFile = file;
     }
 
     public abstract <T> T read();
-    
-    public boolean hasFile() {
-        return file != null;
-    }
     
 }
