@@ -5,10 +5,11 @@
  */
 package com.grego.vgrep.model.data.document;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import static com.grego.vgrep.utils.ECompareResult.*;
+import com.grego.vgrep.utils.StringUtils;
+import java.util.Arrays;
 
 /**
  *
@@ -17,9 +18,10 @@ import static com.grego.vgrep.utils.ECompareResult.*;
 public final class Line implements Iterable<String>, Comparable<String> {
 
     private final List<String> columns;
-
-    public Line(String text) {
-        columns = Arrays.asList(text.split(" "));
+    private final static String seperator = " ";
+    public Line(String text) { 
+        String[] splitedText = text.split(seperator);
+        columns = Arrays.asList(StringUtils.removeNodes(splitedText, seperator));
     }
 
     public List<String> getColumns() {

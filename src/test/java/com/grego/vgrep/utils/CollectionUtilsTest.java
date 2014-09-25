@@ -53,11 +53,20 @@ public class CollectionUtilsTest extends TestCase {
         assertEquals(expResult, result);
     }
     
-    public void testGetLastElementOfNullList() {
-        System.out.println("getLastElement of null list");
+    public void testGetLastElementOfEmptyList() {
+        System.out.println("getLastElement of empty list");
         List<String> emptyList = Collections.emptyList();
         String expResult = null;
         String result = CollectionUtils.getLastElement(emptyList);
+        
+        assertEquals(expResult, result);
+    }
+    
+    public void testGetLastElementOfNullList() {
+        System.out.println("getLastElement of null list");
+        List<String> nullList = null;
+        String expResult = null;
+        String result = CollectionUtils.getLastElement(nullList);
         
         assertEquals(expResult, result);
     }

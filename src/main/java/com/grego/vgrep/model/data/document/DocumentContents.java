@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grego.vgrep.model.data.document;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
  * @author Grego
  */
 public final class DocumentContents implements Iterable<Line> {
-    
+
     private final List<Line> lines;
 
     public DocumentContents(List<Line> lines) {
@@ -26,11 +25,11 @@ public final class DocumentContents implements Iterable<Line> {
         lines = new ArrayList<>();
         lines.add(new Line("No document file inserted"));
     }
-    
+
     public List<Line> getLines() {
         return lines;
     }
-    
+
     public int getNumberOfLines() {
         return lines.size();
     }

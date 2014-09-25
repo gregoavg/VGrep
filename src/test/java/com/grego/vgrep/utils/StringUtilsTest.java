@@ -54,11 +54,12 @@ public class StringUtilsTest extends TestCase {
     /**
      * Test of removeEmptyNodes method, of class StringUtils.
      */
-    public void testRemoveEmptyNodes() {
+    public void testRemoveNodes() {
         System.out.println("removeEmptyNodes");
         String[] stringArray = { "To", " ", "Treno", " ", "", "Einai", " ", null, "", null }; //size: 8
         int expResult = 3;
-        int result = StringUtils.removeEmptyNodes(stringArray).length;
+        String seperator = " ";
+        int result = StringUtils.removeNodes(stringArray, seperator).length;
         assertEquals(expResult, result);
     }
 

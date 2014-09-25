@@ -15,9 +15,11 @@
  */
 package com.grego.vgrep.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -30,27 +32,35 @@ public final class CollectionUtils {
      * returned value will be null.
      *
      * @param <T> Class type
-     * @param list List of elements
+     * @param collection List of elements
      * @return Last element of list
      */
-    public static <T> T getLastElement(List<T> list) {
-        ListIterator<T> listIterator = list.listIterator();
-        while (listIterator.hasNext())
-        {
-            listIterator.next();
+    public static <T> T getLastElement(Collection<T> collection) {
+        try {
+            return collection != null ? new LinkedList<>(collection).getLast() : null;
         }
-        return listIterator.hasPrevious() ? listIterator.previous() : null;
+        catch(NoSuchElementException ex) {
+            return null;
+        }
     }
 
-    public static <T> int getMaxNestedDataCount(List<List<T>> dataSet) {
+    public static <T> int getMaxNestedDataCount(Collection<Collection<T>> dataSet) {
         int maxElementSize = 0;
-        for (Collection c : dataSet)
-        {
-            if (maxElementSize < c.size())
-            {
-                maxElementSize = c.size();
+        for (Collection collection : dataSet) {
+            if (maxElementSize < collection.size()) {
+                maxElementSize = collection.size();
             }
         }
         return maxElementSize;
+    }
+
+    public static <T> T[] removeNodes(T[] array, T sampleNode) {
+        List<T> reducedList = new ArrayList<>();
+        for(T node : array) {
+            if(!node.equals(sampleNode)) {
+                reducedList.add(node);
+            }
+        }
+        return (T[]) reducedList.toArray();
     }
 }

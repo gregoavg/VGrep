@@ -20,11 +20,10 @@ public final class StringUtils {
         return CollectionUtils.getLastElement(Arrays.asList(textArray));
     }
 
-    public static String[] removeEmptyNodes(String[] stringArray) {
-        List<String> textList = Arrays.asList(stringArray);
-        return textList.stream()
-                .filter((node) -> {
-                    return node != null ? !(node.isEmpty() || node.matches(" ")) : false;
+    public static String[] removeNodes(String[] stringArray, String sampleNode) {
+        return Arrays.stream(stringArray)
+                .filter((String node) -> {
+                    return node != null ? !(node.isEmpty() || node.matches(sampleNode)) : false;
                 })
                 .toArray((elements) -> {
                     return new String[elements];
