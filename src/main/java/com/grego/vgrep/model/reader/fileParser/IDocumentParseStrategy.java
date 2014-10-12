@@ -4,9 +4,9 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import com.grego.vgrep.model.data.document.DocumentContents;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  *
@@ -14,6 +14,6 @@ import java.io.IOException;
  */
 public interface IDocumentParseStrategy {
     
-    DocumentContents parse(File file) throws IOException;
+    Collection<String> parse(File file) throws IOException;
 
 }

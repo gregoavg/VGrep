@@ -22,7 +22,7 @@ import java.util.Objects;
  *
  * @author Grigorios
  */
-public class ViewEvent implements IEvent {
+public abstract class ViewEvent implements IEvent {
 
     protected final Object eventSource;
 

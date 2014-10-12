@@ -6,7 +6,7 @@
 package com.grego.vgrep.model.reader;
 
 import com.grego.vgrep.model.data.ADataFile;
-import java.io.File;
+import com.grego.vgrep.model.data.document.IFileContent;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -23,6 +23,6 @@ public abstract class AFileReader {
         this.dataFile = file;
     }
 
-    public abstract <T> T read();
+    public abstract IFileContent read();
     
 }

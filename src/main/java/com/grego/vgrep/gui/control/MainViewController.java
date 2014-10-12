@@ -15,9 +15,9 @@
  */
 package com.grego.vgrep.gui.control;
 
-import com.grego.vgrep.event.IEvent;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.event.FileSelectionEvent;
+import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
@@ -67,8 +67,8 @@ public final class MainViewController implements IController, Initializable {
     }
 
     //TODO: implement business logic solution for accessing references from document files
-    public void findReferences(IEvent event) {
-         
+    public void findReferences(FindReferencesEvent event) {
+    
     }
 
 }

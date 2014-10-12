@@ -20,10 +20,11 @@ import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.event.FileSelectionEvent;
-import com.grego.vgrep.event.ViewEvent;
+import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.model.IComponentHandler;
 import com.grego.vgrep.gui.model.TableViewHandler;
 import com.grego.vgrep.model.data.EDataType;
+import java.util.List;
 import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -80,8 +81,11 @@ public final class MainView extends JFxView {
         
         findReferencesButton = (Button) componentMapper.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
+            TableView sourceTable = (TableView) sourceTableHandler.getComponent();
+            List<String> patterns = sourceTable.getSelectionModel().getSelectedItems();
+            FindReferencesEvent event = new FindReferencesEvent();
             
-            mainViewController.findReferences(new ViewEvent());
+            mainViewController.findReferences(event);
         });
         
         sourceTableHandler = new TableViewHandler((TableView) componentMapper.get("sourceTableView"));

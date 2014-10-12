@@ -30,7 +30,7 @@ public final class DocumentFile extends ADataFile {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFile.class);
 
-    private final DocumentContents contents = reader.read();
+    private final IFileContent contents = reader.read();
 
     public DocumentFile(File data) {
         super(data);
@@ -45,8 +45,8 @@ public final class DocumentFile extends ADataFile {
         return new DocumentFileReader();
     }
 
-    public DocumentContents getContents() {
-        return contents;
+    public DocumentContent getContents() {
+        return (DocumentContent) contents;
     }
 
 }

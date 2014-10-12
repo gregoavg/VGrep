@@ -4,10 +4,11 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import com.grego.vgrep.model.data.document.ContentBuilder;
-import com.grego.vgrep.model.data.document.DocumentContents;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -23,10 +24,9 @@ public final class XlsParser implements IDocumentParseStrategy {
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsParser.class);
 
     @Override
-    public DocumentContents parse(File file) throws IOException {
-        ContentBuilder builder = new ContentBuilder();
-        try
-        {
+    public Collection<String> parse(File file) throws IOException {
+        List<String> lines = new ArrayList<>();
+        try {
             Workbook w = Workbook.getWorkbook(file);
             Sheet sheet = w.getSheet(0);
             for (int rowInd = 0; rowInd < sheet.getRows(); rowInd++)
@@ -37,13 +37,12 @@ public final class XlsParser implements IDocumentParseStrategy {
                     String cellContent = sheet.getCell(colInd, rowInd).getContents();
                     lineBuilder.append(cellContent.trim()).append(" ");
                 }
-                builder.appendLine(lineBuilder.toString());
+                lines.add(lineBuilder.toString());
             }
         }
-        catch (BiffException ex)
-        {
+        catch (BiffException ex) {
             LOGGER.error(ex.getMessage());
         }
-        return builder.getContents();
+        return lines;
     }
 }

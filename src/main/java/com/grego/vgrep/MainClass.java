@@ -19,7 +19,7 @@ import com.grego.vgrep.app.IApplicationLauncher;
 import com.grego.vgrep.app.factory.LauncherFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.grego.vgrep.app.factory.LauncherFactory.EApplicationType.*;
+import static com.grego.vgrep.app.factory.EApplicationType.*;
 
 /**
  *

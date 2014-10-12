@@ -82,6 +82,7 @@
                     </compilerArguments>
                 </configuration>
             </plugin>  
+            
             <plugin>
                 <!-- copy all dependencies of the app to target folder-->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -141,7 +142,8 @@
                         </configuration>
                     </execution>
                 </executions>  
-            </plugin>   
+            </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

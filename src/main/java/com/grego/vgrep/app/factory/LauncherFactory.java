@@ -33,10 +33,5 @@ public final class LauncherFactory {
                 return null;
         }
     }
-
-    public enum EApplicationType {
-
-        JavaFX;
-    }
-
+    
 }

@@ -4,12 +4,13 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import com.grego.vgrep.model.data.document.ContentBuilder;
-import com.grego.vgrep.model.data.document.DocumentContents;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 
@@ -18,16 +19,17 @@ import java.io.IOException;
 public final class TxtParser implements IDocumentParseStrategy {
     
     @Override
-    public DocumentContents parse(File file) throws IOException {
-        ContentBuilder builder = new ContentBuilder();
+    public Collection<String> parse(File file) throws IOException {
+        List<String> lines = new ArrayList<>();
+        
         BufferedReader br = new BufferedReader(new FileReader(file));
         String lineText = br.readLine();
         while (lineText != null)
         {
-            builder.appendLine(lineText);
+            lines.add(lineText);
             lineText = br.readLine();
         }
-        return builder.getContents();
+        return lines;
     }
 
 }

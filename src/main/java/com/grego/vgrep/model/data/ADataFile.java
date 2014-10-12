@@ -16,7 +16,7 @@
 package com.grego.vgrep.model.data;
 
 import com.grego.vgrep.model.reader.AFileReader;
-import com.grego.vgrep.model.reader.DocumentFileReader;
+import com.grego.vgrep.model.reader.EmptyReader;
 import java.io.File;
 import java.util.Objects;
 import org.slf4j.LoggerFactory;
@@ -31,10 +31,14 @@ public abstract class ADataFile {
     
     protected final File sourceFile;
     protected final AFileReader reader = Objects.requireNonNull(constructReader());
+    
+    public ADataFile() {
+        sourceFile = null;
+    }
 
     @SuppressWarnings("unchecked")
     public ADataFile(File data) {
-        this.sourceFile = data;
+        sourceFile = data;
         reader.setSource(this);
     }
 
@@ -92,10 +96,6 @@ public abstract class ADataFile {
         return Objects.equals(this.sourceFile, other.sourceFile);
     }
     
-    public boolean hasFile() {
-        return sourceFile != null;
-    }
-
     /**
      * helper class to handle empty sourceFile slots on sourceFile manager
      */
@@ -107,7 +107,7 @@ public abstract class ADataFile {
 
         @Override
         protected AFileReader constructReader() {
-            return new DocumentFileReader();
+            return new EmptyReader();
         }
     }
 }

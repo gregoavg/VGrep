@@ -15,12 +15,14 @@
  */
 package com.grego.vgrep.model.reader;
 
+import com.grego.vgrep.model.data.document.DocumentContent;
+import com.grego.vgrep.model.data.document.DocumentContent.ContentBuilder;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategy;
-import com.grego.vgrep.model.data.document.DocumentContents;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -32,19 +34,20 @@ public class DocumentFileReader extends AFileReader {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
 
     @Override
-    public DocumentContents read() {
-        if (dataFile.hasFile()) {
-            File sourceFile = dataFile.getSourceFile();
-            try {
-                IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory
-                        .getInstance(FileUtils.getFileType(sourceFile));
-                return parseStrategy.parse(sourceFile);
-            } 
-            catch (IOException ex) {
-                LOGGER.error(ex.getMessage());
+    public DocumentContent read() {
+        File sourceFile = dataFile.getSourceFile();
+        DocumentContent.ContentBuilder builder = new ContentBuilder(); 
+        try {
+            IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory
+                    .getInstance(FileUtils.getFileType(sourceFile));
+            for(String line : parseStrategy.parse(sourceFile)) {
+                builder.appendLine(line);
             }
         }
-        return new DocumentContents();
+        catch (IOException ex) {
+            LOGGER.error(ex.getMessage());
+        }
+        return builder.createContents();
     }
 
 }

@@ -7,28 +7,37 @@ package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.control.ListCellValueFactory;
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.document.DocumentFile;
+import com.grego.vgrep.model.data.document.DocumentContent;
+import com.grego.vgrep.model.data.document.IFileContent;
 import com.grego.vgrep.model.data.document.Line;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.util.Callback;
 
-public class TableViewHandler implements IComponentHandler {
+public final class TableViewHandler implements IComponentHandler {
 
     private final TableView table;
-    private DocumentFile dataModel;
+    private ADataFile dataModel;
+
+    private final List<TableColumn> tableColumns = new ArrayList<>();
+    private final ObservableList<Line> dataSet = FXCollections.observableArrayList();
 
     public TableViewHandler(TableView table) {
         this.table = table;
+        setupTable();
     }
 
-    public TableViewHandler(TableView table, DocumentFile dataModel) {
+    public TableViewHandler(TableView table, ADataFile dataModel) {
         this.table = table;
         this.dataModel = dataModel;
         setupTable();
+        tableDataChange();
     }
 
     @Override
@@ -38,11 +47,8 @@ public class TableViewHandler implements IComponentHandler {
 
     @Override
     public void setDataModel(ADataFile dataModel) {
-        if(dataModel instanceof DocumentFile)
-        {
-            this.dataModel = (DocumentFile) dataModel;
-            setupTable();
-        }
+        this.dataModel = dataModel;
+        tableDataChange();
     }
 
     @Override
@@ -50,24 +56,33 @@ public class TableViewHandler implements IComponentHandler {
         return table;
     }
 
-    @SuppressWarnings("unchecked")
     private void setupTable() {
-        final List<TableColumn> tableColumns = new ArrayList<>();
-        List<Line> dataSet = FXCollections.observableArrayList(dataModel.getContents().getLines());
-        dataSet.parallelStream().forEach((Line line) ->
+        table.setItems(dataSet);
+        TableViewSelectionModel selectionModel = table.getSelectionModel();
+        selectionModel.setCellSelectionEnabled(true);
+        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void tableDataChange() {
+        tableColumns.clear();
+        Callback listCellValueFactory = new ListCellValueFactory(tableColumns);
+
+        IFileContent content = dataModel.getReader().read();
+        if(content instanceof DocumentContent)
         {
-            while(tableColumns.size() < line.getColumns().size())
-            {
+            dataSet.setAll(((DocumentContent) content).getLines());
+        }
+        dataSet.parallelStream().forEach((line) -> {
+            while (tableColumns.size() < line.getColumns().size()) {
                 TableColumn column = new TableColumn();
-                if(tableColumns.add(column))
-                {
+                if (tableColumns.add(column)) {
                     column.setText(String.valueOf(tableColumns.size()));
                 }
-                column.setCellValueFactory(new ListCellValueFactory(tableColumns));
+                column.setCellValueFactory(listCellValueFactory);
             }
         });
         table.getColumns().setAll(tableColumns);
-        table.setItems((ObservableList) dataSet);
     }
 
 }
