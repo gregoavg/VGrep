@@ -15,11 +15,12 @@
  */
 package com.grego.vgrep;
 
-import com.grego.vgrep.app.IApplicationLauncher;
-import com.grego.vgrep.app.factory.LauncherFactory;
+import com.grego.vgrep.app.factory.ApplicationFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static com.grego.vgrep.app.factory.EApplicationType.*;
+import com.grego.vgrep.app.launcher.ApplicationLauncher;
+import com.grego.vgrep.app.launcher.ILauncher;
 
 /**
  *
@@ -33,8 +34,10 @@ public final class MainClass {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IApplicationLauncher launcher = LauncherFactory.getInstance(JavaFX);
-        launcher.startWithParameters(args);
+        ILauncher appLauncher = ApplicationLauncher.INSTANCE;
+        
+        appLauncher.setLaunchArgs(args);
+        appLauncher.trigLaunch(ApplicationFactory.getInstance(JavaFX));
     }
 
 }

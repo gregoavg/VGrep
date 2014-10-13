@@ -47,6 +47,7 @@ public final class MainView extends JFxView {
         this.model = (ViewModel) model;
         this.model.attachView((IView) this);
         super.controller.setModel(this.model);
+        LOGGER.info("Main View initialized");
     }
 
     @Override
@@ -56,6 +57,7 @@ public final class MainView extends JFxView {
         
         sourceTableHandler.setDataModel(model.getFile(EDataType.SOURCE));
         targetTableHandler.setDataModel(model.getFile(EDataType.TARGET));
+        LOGGER.info("Main View updated by model request");
     }
 
     public IModel getModel() {
@@ -83,13 +85,16 @@ public final class MainView extends JFxView {
         findReferencesButton.setOnAction((actionEvent)-> {
             TableView sourceTable = (TableView) sourceTableHandler.getComponent();
             List<String> patterns = sourceTable.getSelectionModel().getSelectedItems();
-            FindReferencesEvent event = new FindReferencesEvent();
             
+            FindReferencesEvent event = new FindReferencesEvent(sourceTableHandler.getDataModel());
+            event.setPatterns(patterns);
             mainViewController.findReferences(event);
         });
         
         sourceTableHandler = new TableViewHandler((TableView) componentMapper.get("sourceTableView"));
         targetTableHandler = new TableViewHandler((TableView) componentMapper.get("targetTableView"));
+        
+        LOGGER.info("Main View components hava been initialized");
     }
     
     //View components declaration area

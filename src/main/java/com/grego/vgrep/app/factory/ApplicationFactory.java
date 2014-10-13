@@ -15,20 +15,20 @@
  */
 package com.grego.vgrep.app.factory;
 
-import com.grego.vgrep.app.IApplicationLauncher;
-import com.grego.vgrep.app.JFxApplicationLauncher;
+import com.grego.vgrep.app.JFxApplication;
+import com.grego.vgrep.app.launcher.ILaunchable;
 
 /**
  *
  * @author Grigorios
  */
-public final class LauncherFactory {
+public final class ApplicationFactory {
 
-    public static IApplicationLauncher getInstance(EApplicationType appType) {
+    public static ILaunchable getInstance(EApplicationType appType) {
         switch (appType)
         {
             case JavaFX:
-                return new JFxApplicationLauncher();
+                return new JFxApplication();
             default:
                 return null;
         }

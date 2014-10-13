@@ -13,15 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.grego.vgrep.gui.view;
 
-package com.grego.vgrep.app;
+import com.grego.vgrep.gui.view.javaFx.JFxView;
+import java.util.Map;
 
 /**
  *
  * @author Grigorios
  */
-public interface IApplicationLauncher {
-    
-    public void startWithParameters(String[] args);
-    
+public class SimpleFxView extends JFxView {
+
+    public SimpleFxView() {
+        super("/fxml/testView.fxml");
+    }
+
+    @Override
+    protected void initComponets(Map<String, Object> componentMapper) {
+        //
+    }
+
+    @Override
+    public void update() {
+        //
+    }
+
 }

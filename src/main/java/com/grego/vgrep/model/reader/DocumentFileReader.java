@@ -22,7 +22,6 @@ import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import org.slf4j.LoggerFactory;
 
 /**

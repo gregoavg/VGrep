@@ -68,7 +68,7 @@ public final class MainViewController implements IController, Initializable {
 
     //TODO: implement business logic solution for accessing references from document files
     public void findReferences(FindReferencesEvent event) {
-    
+        
     }
 
 }

@@ -15,6 +15,8 @@
  */
 package com.grego.vgrep.app;
 
+import com.grego.vgrep.app.launcher.ILaunchable;
+import com.grego.vgrep.app.launcher.ILauncher;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
@@ -22,29 +24,52 @@ import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Grigorios
  */
-public class JFxApplicationLauncher extends Application implements IApplicationLauncher {
-    
+public class JFxApplication extends Application implements ILaunchable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JFxApplication.class);
+
+    private ILauncher launcher;
+
     @Override
     public void start(Stage stage) throws Exception {
+        LOGGER.info("Application started");
         stage.close();
+
         final IWindowManager windowManager = JFxWindowManager.INSTANCE;
-        
+
         IView mainView = new MainView(new ViewModel());
-        windowManager.setInitialWindowSize(600, 400);
+        windowManager.setWindowSize(600, 400);
         windowManager.setDisplay(mainView);
         windowManager.setWindowTitle("Visual File Grep");
         windowManager.setVisibility(true);
     }
 
     @Override
-    public void startWithParameters(String[] args) {
-        launch(args);
+    public void launch() {
+        String[] args = launcher.getLaunchArgs();
+        if (args != null) {
+            Application.launch(args);
+        } 
+        else {
+            Application.launch();
+        }
     }
 
-    
+    @Override
+    public void setLauncher(ILauncher launcher) {
+        this.launcher = launcher;
+    }
+
+    @Override
+    public void fireLaunchCompleted() {
+        launcher.onLaunchCompleted();
+    }
+
 }

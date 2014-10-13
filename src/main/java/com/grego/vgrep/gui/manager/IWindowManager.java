@@ -28,7 +28,7 @@ public interface IWindowManager {
     
     void setVisibility(boolean visible);
     
-    void setInitialWindowSize(double width, double height);
+    void setWindowSize(double width, double height);
     
     Object getWindow();
 
