@@ -10,3 +10,4 @@ release.properties
 nb-configuration.xml
 nbactions.xml
 nbactions-release-profile.xml
+dependency-reduced-pom.xml
