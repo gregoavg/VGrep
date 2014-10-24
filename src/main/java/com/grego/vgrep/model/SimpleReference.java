@@ -55,13 +55,9 @@ public class SimpleReference implements IReference<String,String> {
         return Objects.equals(this.refMapper, other.refMapper);
     }
     
-    
-
     @Override
     public String toString() {
         return "Source: " + refMapper.get(SOURCE) + ", Target: " + refMapper.get(TARGET);
     }
-    
-    
 
 }

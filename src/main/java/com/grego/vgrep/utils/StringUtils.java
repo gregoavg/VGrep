@@ -7,7 +7,6 @@ package com.grego.vgrep.utils;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class StringUtils {
     public static String[] removeNodes(String[] stringArray, String sampleNode) {
         return Arrays.stream(stringArray)
                 .filter((String node) -> {
-                    return node != null ? !(node.isEmpty() || node.matches(sampleNode)) : false;
+                    return node != null ? !(node.isEmpty() || node.equals(sampleNode)) : false;
                 })
                 .toArray((elements) -> {
                     return new String[elements];

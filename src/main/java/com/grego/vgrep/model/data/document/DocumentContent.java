@@ -44,6 +44,15 @@ public final class DocumentContent implements IFileContent {
         return contentList;
     }
     
+    public String getWordAt(int lineIndex, int columnIndex) {
+        try {
+            Line line = lines.get(lineIndex);
+            return line.getWordAt(columnIndex);
+        }
+        catch(IndexOutOfBoundsException ex) {
+            return null;
+        }
+    }
     
     public final static class ContentBuilder {
 

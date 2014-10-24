@@ -52,7 +52,7 @@ public class JFxApplication extends Application implements ILaunchable {
     }
 
     @Override
-    public void launch() {
+    public synchronized void launch() {
         String[] args = launcher.getLaunchArgs();
         if (args != null) {
             Application.launch(args);

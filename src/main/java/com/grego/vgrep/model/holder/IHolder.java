@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.app.launcher;
+package com.grego.vgrep.model.holder;
 
 /**
  *
  * @author Grigorios
+ * @param <V> value type
  */
-public interface ILaunchable {
+public interface IHolder<V> {
+    
+    V getValue();
 
-    void launch();
-
-    void setLauncher(ILauncher launcher);
-
-    void fireLaunchCompleted();
 }

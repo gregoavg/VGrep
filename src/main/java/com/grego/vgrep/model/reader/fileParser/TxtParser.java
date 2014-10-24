@@ -13,23 +13,22 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Grigorios
  */
 public final class TxtParser implements IDocumentParseStrategy {
-    
+
     @Override
     public Collection<String> parse(File file) throws IOException {
-        List<String> lines = new ArrayList<>();
-        
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String lineText = br.readLine();
-        while (lineText != null)
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) 
         {
-            lines.add(lineText);
-            lineText = br.readLine();
+            List<String> lines = new ArrayList<>();
+            String lineText = br.readLine();
+            while(lineText != null) {
+                lines.add(lineText);
+                lineText = br.readLine();
+            }
+            return lines;
         }
-        return lines;
     }
-
 }

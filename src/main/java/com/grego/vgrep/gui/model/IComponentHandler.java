@@ -5,7 +5,9 @@
  */
 package com.grego.vgrep.gui.model;
 
+import com.grego.vgrep.model.holder.IHolder;
 import com.grego.vgrep.model.data.ADataFile;
+import java.util.List;
 
 /**
  *
@@ -18,5 +20,7 @@ public interface IComponentHandler {
     ADataFile getDataModel();
     
     Object getComponent();
+    
+    List<IHolder> getSelectedValues();
     
 }

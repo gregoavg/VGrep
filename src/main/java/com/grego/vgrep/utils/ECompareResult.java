@@ -31,7 +31,7 @@ public enum  ECompareResult {
         this.result = result;
     }
 
-    public int integerValue() {
+    public int toInteger() {
         return result;
     }
 }

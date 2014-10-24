@@ -21,8 +21,17 @@ import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
+import com.grego.vgrep.model.IReference;
+import com.grego.vgrep.model.holder.IHolder;
+import com.grego.vgrep.model.SimpleReference;
+import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.document.DocumentFile;
+import com.grego.vgrep.model.data.document.Line;
+import com.grego.vgrep.utils.ECompareResult;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
@@ -66,9 +75,24 @@ public final class MainViewController implements IController, Initializable {
         }
     }
 
-    //TODO: implement business logic solution for accessing references from document files
-    public void findReferences(FindReferencesEvent event) {
+    public void findReferences(final FindReferencesEvent event) {
+        final DocumentFile document =  (DocumentFile) model.getFile(EDataType.TARGET);
+        final List<IHolder> wordPatterns = event.getPatterns();
+        List<IReference> references = new ArrayList<>();
         
+        //TODO: optimization
+        for(Line line : document.getContents().getLines()) {
+            for(IHolder<String> wordPattern : wordPatterns) {
+                if(line.compareTo(wordPattern.getValue()) == ECompareResult.Equal.toInteger()) {
+                    references.add(new SimpleReference(wordPattern.getValue(), line.toString()));
+                }
+            }
+        }
+        
+        System.out.println("List of References: ");
+        references.forEach((IReference reference) -> {
+            LOGGER.info(reference.toString());
+        });
     }
 
 }

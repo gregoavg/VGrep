@@ -7,9 +7,12 @@ package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
 import com.grego.vgrep.app.launcher.ILauncher;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -25,12 +28,12 @@ public class JavaFxTestApplication extends Application implements ILaunchable {
      * @throws java.lang.Exception
      */
     private static final AtomicBoolean hasStarted = new AtomicBoolean(false);
-
     private ILauncher launcher;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         hasStarted.set(Boolean.TRUE);
+        System.out.println("JavaFX Runtime initialized!!");
     }
 
     @Override

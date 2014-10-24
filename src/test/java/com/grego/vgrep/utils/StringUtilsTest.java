@@ -57,8 +57,8 @@ public class StringUtilsTest extends TestCase {
     public void testRemoveNodes() {
         System.out.println("removeEmptyNodes");
         String[] stringArray = { "To", " ", "Treno", " ", "", "Einai", " ", null, "", null }; //size: 8
-        int expResult = 3;
-        String seperator = " ";
+        final int expResult = 3;
+        final String seperator = " ";
         int result = StringUtils.removeNodes(stringArray, seperator).length;
         assertEquals(expResult, result);
     }

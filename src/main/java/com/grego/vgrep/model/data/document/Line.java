@@ -5,11 +5,13 @@
  */
 package com.grego.vgrep.model.data.document;
 
+import static com.grego.vgrep.utils.ECompareResult.Equal;
+import static com.grego.vgrep.utils.ECompareResult.NotEqual;
 import java.util.Iterator;
 import java.util.List;
-import static com.grego.vgrep.utils.ECompareResult.*;
 import com.grego.vgrep.utils.StringUtils;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  *
@@ -18,24 +20,47 @@ import java.util.Arrays;
 public final class Line implements Iterable<String>, Comparable<String> {
 
     private final List<String> columns;
-    private final static String seperator = " ";
-    public Line(String text) { 
-        String[] splitedText = text.split(seperator);
-        columns = Arrays.asList(StringUtils.removeNodes(splitedText, seperator));
+    private final static String SEPERATOR = " ";
+
+    public Line(String text) {
+        String[] splitedText = text.split(SEPERATOR);
+        columns = Arrays.asList(StringUtils.removeNodes(splitedText, SEPERATOR));
     }
 
     public List<String> getColumns() {
         return columns;
     }
+    
+    public String getWordAt(int index) {
+        try{
+            return columns.get(index);
+        }
+        catch(IndexOutOfBoundsException ex) {
+            return null;
+        }
+    }
+    
+    public int getWordCount() {
+        return columns.size();
+    }
+
+    @Override
+    public int compareTo(String otherWord) {
+        for(String word : this.columns) {
+            if(word.equals(otherWord)) {
+                return Equal.toInteger();
+            }
+        }
+        return NotEqual.toInteger();
+    }
 
     @Override
     public String toString() {
         final StringBuilder strBuilder = new StringBuilder();
-        columns.forEach((word) ->
-        {
+        columns.forEach((word) -> {
             strBuilder.append(word).append(" ");
         });
-        return strBuilder.toString();
+        return strBuilder.toString().trim();
     }
 
     @Override
@@ -44,15 +69,24 @@ public final class Line implements Iterable<String>, Comparable<String> {
     }
 
     @Override
-    public int compareTo(String otherWord) {
-        for (String word : this.columns)
-        {
-            if (word.equals(otherWord))
-            {
-                return Equal.integerValue();
-            }
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.columns);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
         }
-        return NotEqual.integerValue();
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final String otherLineText = ((Line) obj).toString();
+        final String lineText = this.toString();
+
+        return lineText.equals(otherLineText);
     }
 
 }

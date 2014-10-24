@@ -47,7 +47,7 @@ public final class MainView extends JFxView {
         this.model = (ViewModel) model;
         this.model.attachView((IView) this);
         super.controller.setModel(this.model);
-        LOGGER.info("Main View initialized");
+        LOGGER.info("Main View initialization finished");
     }
 
     @Override
@@ -83,11 +83,9 @@ public final class MainView extends JFxView {
         
         findReferencesButton = (Button) componentMapper.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
-            TableView sourceTable = (TableView) sourceTableHandler.getComponent();
-            List<String> patterns = sourceTable.getSelectionModel().getSelectedItems();
+            final FindReferencesEvent event = new FindReferencesEvent();
+            event.setPatterns(sourceTableHandler.getSelectedValues());
             
-            FindReferencesEvent event = new FindReferencesEvent(sourceTableHandler.getDataModel());
-            event.setPatterns(patterns);
             mainViewController.findReferences(event);
         });
         
