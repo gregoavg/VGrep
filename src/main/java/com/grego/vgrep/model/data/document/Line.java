@@ -48,10 +48,10 @@ public final class Line implements Iterable<String>, Comparable<String> {
     public int compareTo(String otherWord) {
         for(String word : this.columns) {
             if(word.equals(otherWord)) {
-                return Equal.toInteger();
+                return Equal.getIntegerValue();
             }
         }
-        return NotEqual.toInteger();
+        return NotEqual.getIntegerValue();
     }
 
     @Override

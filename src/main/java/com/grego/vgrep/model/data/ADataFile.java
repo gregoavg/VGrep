@@ -16,7 +16,7 @@
 package com.grego.vgrep.model.data;
 
 import com.grego.vgrep.model.reader.AFileReader;
-import com.grego.vgrep.model.reader.EmptyReader;
+import com.grego.vgrep.model.reader.AFileReader.EmptyReader;
 import java.io.File;
 import java.util.Objects;
 import org.slf4j.LoggerFactory;

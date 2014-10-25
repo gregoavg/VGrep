@@ -6,7 +6,8 @@
 package com.grego.vgrep.model.reader;
 
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.document.IFileContent;
+import com.grego.vgrep.model.data.IFileContent;
+import java.util.Collections;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -24,5 +25,18 @@ public abstract class AFileReader {
     }
 
     public abstract IFileContent read();
+    
+    
+    
+    /**
+     * helper class to handle empty sourceFile reader
+     */
+    public static final class EmptyReader extends AFileReader {
+
+        @Override
+        public IFileContent read() {
+            return () -> Collections.emptyList();
+        }
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package com.grego.vgrep.model.data.document;
 
+import com.grego.vgrep.model.data.IFileContent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public final class DocumentContent implements IFileContent {
 
         public ContentBuilder appendLine(String text) {
             indexLines.add(new Line(text));
-            return this;
+            return ContentBuilder.this;
         }
         
         public DocumentContent createContents() {

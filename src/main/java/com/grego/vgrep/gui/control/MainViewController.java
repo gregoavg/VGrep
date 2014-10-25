@@ -83,7 +83,7 @@ public final class MainViewController implements IController, Initializable {
         //TODO: optimization
         for(Line line : document.getContents().getLines()) {
             for(IHolder<String> wordPattern : wordPatterns) {
-                if(line.compareTo(wordPattern.getValue()) == ECompareResult.Equal.toInteger()) {
+                if(line.compareTo(wordPattern.getValue()) == ECompareResult.Equal.getIntegerValue()) {
                     references.add(new SimpleReference(wordPattern.getValue(), line.toString()));
                 }
             }
