@@ -77,12 +77,12 @@ public final class MainViewController implements IController, Initializable {
 
     public void findReferences(final FindReferencesEvent event) {
         final DocumentFile document =  (DocumentFile) model.getFile(EDataType.TARGET);
-        final List<IHolder> wordPatterns = event.getPatterns();
+        final List<IHolder> patternHolders = event.getPatterns();
         List<IReference> references = new ArrayList<>();
-        
+
         //TODO: optimization
         for(Line line : document.getContents().getLines()) {
-            for(IHolder<String> wordPattern : wordPatterns) {
+            for(IHolder<String> wordPattern : patternHolders) {
                 if(line.compareTo(wordPattern.getValue()) == ECompareResult.Equal.getIntegerValue()) {
                     references.add(new SimpleReference(wordPattern.getValue(), line.toString()));
                 }

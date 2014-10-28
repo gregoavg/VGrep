@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -51,7 +50,7 @@ public final class TableViewHandler implements IComponentHandler {
 
     @Override
     public void setDataModel(ADataFile dataModel) {
-        if(dataModel instanceof DocumentFile)
+        if(dataModel instanceof DocumentFile && !Objects.equals(this.dataModel, dataModel))
         {
             this.dataModel = (DocumentFile) dataModel;
             tableDataChange();            
@@ -65,9 +64,9 @@ public final class TableViewHandler implements IComponentHandler {
 
     private void setupTable() {
         table.setItems(dataSet);
-        TableViewSelectionModel selectionModel = table.getSelectionModel();
-        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
-        selectionModel.setCellSelectionEnabled(true);
+        final TableViewSelectionModel columnSelectionModel = new ColumnSelectionModelAdapter(table);
+        table.setSelectionModel(columnSelectionModel);
+        
     }
 
     @SuppressWarnings("unchecked")
