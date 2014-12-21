@@ -5,7 +5,7 @@
 package com.grego.vgrep.model.data;
 
 import java.util.Map;
-import static com.grego.vgrep.model.data.ADataFile.emptyData;
+import static com.grego.vgrep.model.data.ADataFile.getEmptyDataFile;
 import java.util.EnumMap;
 
 /**
@@ -29,7 +29,7 @@ public final class SimpleFileManager implements IFileManager {
     @Override
     public ADataFile getFile(EDataType dataType) {
         return contentMapper.containsKey(dataType) 
-                ? contentMapper.get(dataType) : emptyData();
+                ? contentMapper.get(dataType) : getEmptyDataFile();
     }
 
     @Override

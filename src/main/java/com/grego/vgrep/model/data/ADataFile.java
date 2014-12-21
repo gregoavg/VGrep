@@ -63,10 +63,10 @@ public abstract class ADataFile {
     protected abstract AFileReader constructReader();
 
     @SuppressWarnings("rawtypes")
-    private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile(null);
+    private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile();
 
     @SuppressWarnings("unchecked")
-    public static final ADataFile emptyData() {
+    public static final ADataFile getEmptyDataFile() {
         return EMPTY_DATA_FILE;
     }
 
@@ -101,8 +101,8 @@ public abstract class ADataFile {
      */
     private static final class EmptyDataFile extends ADataFile {
 
-        public EmptyDataFile(File data) {
-            super(data);
+        public EmptyDataFile() {
+            super();
         }
 
         @Override

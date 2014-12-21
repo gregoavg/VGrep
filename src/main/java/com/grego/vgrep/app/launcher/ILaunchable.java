@@ -11,9 +11,6 @@ package com.grego.vgrep.app.launcher;
  */
 public interface ILaunchable {
 
-    void launch();
-
-    void setLauncher(ILauncher launcher);
-
-    void fireLaunchCompleted();
+    void trigLauncher(String[] args);
+    
 }

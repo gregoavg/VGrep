@@ -7,7 +7,6 @@ package com.grego.vgrep.model.data.document;
 
 import static com.grego.vgrep.utils.ECompareResult.Equal;
 import static com.grego.vgrep.utils.ECompareResult.NotEqual;
-import java.util.Iterator;
 import java.util.List;
 import com.grego.vgrep.utils.StringUtils;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.Objects;
  *
  * @author Grego
  */
-public final class Line implements Iterable<String>, Comparable<String> {
+public final class Line implements Comparable<String> {
 
     private final List<String> columns;
     private final static String SEPERATOR = " ";
@@ -61,11 +60,6 @@ public final class Line implements Iterable<String>, Comparable<String> {
             strBuilder.append(word).append(" ");
         });
         return strBuilder.toString().trim();
-    }
-
-    @Override
-    public Iterator<String> iterator() {
-        return columns.listIterator();
     }
 
     @Override
