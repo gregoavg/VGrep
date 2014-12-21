@@ -5,18 +5,14 @@
  */
 package com.grego.vgrep.gui.manager;
 
-import com.grego.vgrep.gui.view.IView;
 import com.grego.vgreo.testRunner.JavaFXJUnit4ClassRunner;
+import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.SimpleFxView;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import junit.framework.Assert;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 /**
@@ -24,28 +20,12 @@ import org.junit.runner.RunWith;
  * @author Grigorios
  */
 @RunWith(JavaFXJUnit4ClassRunner.class)
-public class JFxWindowManagerTest {
+public class JFxWindowManagerTest extends TestCase {
     
     private final IWindowManager windowManager;
     
     public JFxWindowManagerTest() {
         windowManager = JFxWindowManager.INSTANCE;
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     /**

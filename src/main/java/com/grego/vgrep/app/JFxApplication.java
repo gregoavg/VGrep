@@ -16,7 +16,6 @@
 package com.grego.vgrep.app;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
-import com.grego.vgrep.app.launcher.ILauncher;
 import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
@@ -35,8 +34,6 @@ public class JFxApplication extends Application implements ILaunchable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxApplication.class);
 
-    private ILauncher launcher;
-
     @Override
     public void start(Stage stage) throws Exception {
         LOGGER.info("Application started");
@@ -52,8 +49,7 @@ public class JFxApplication extends Application implements ILaunchable {
     }
 
     @Override
-    public synchronized void launch() {
-        String[] args = launcher.getLaunchArgs();
+    public synchronized void trigLauncher(String[] args) {
         if (args != null) {
             Application.launch(args);
         } 
@@ -61,15 +57,4 @@ public class JFxApplication extends Application implements ILaunchable {
             Application.launch();
         }
     }
-
-    @Override
-    public void setLauncher(ILauncher launcher) {
-        this.launcher = launcher;
-    }
-
-    @Override
-    public void fireLaunchCompleted() {
-        launcher.onLaunchCompleted();
-    }
-
 }

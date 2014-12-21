@@ -65,7 +65,7 @@ public final class MainViewController implements IController, Initializable {
         this.model = (ViewModel) model;
     }
 
-    public void selectFileButtonClick(FileSelectionEvent event) {
+    public void selectFileButtonClick(final FileSelectionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
         File selectedFile = fileChooser.showOpenDialog((Window) viewManager.getWindow());
@@ -90,6 +90,7 @@ public final class MainViewController implements IController, Initializable {
         }
         
         System.out.println("List of References: ");
+        System.out.println("Total references found: " + references.size());
         references.forEach((IReference reference) -> {
             LOGGER.info(reference.toString());
         });
