@@ -6,10 +6,7 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
-import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;

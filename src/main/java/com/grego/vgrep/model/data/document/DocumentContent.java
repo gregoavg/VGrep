@@ -7,7 +7,6 @@ package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.IFileContent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

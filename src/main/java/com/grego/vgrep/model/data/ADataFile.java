@@ -15,8 +15,8 @@
  */
 package com.grego.vgrep.model.data;
 
-import com.grego.vgrep.model.reader.AFileReader;
-import com.grego.vgrep.model.reader.AFileReader.EmptyReader;
+import com.grego.vgrep.model.reader.IFileReader;
+import com.grego.vgrep.model.reader.EmptyReader;
 import java.io.File;
 import java.util.Objects;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,12 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  */
 public abstract class ADataFile {
-
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ADataFile.class);
     
     protected final File sourceFile;
-    protected final AFileReader reader = Objects.requireNonNull(constructReader());
+    
+    protected final IFileReader reader = Objects.requireNonNull(constructReader());
+    protected IFileContent content = null;
     
     public ADataFile() {
         sourceFile = null;
@@ -38,12 +39,10 @@ public abstract class ADataFile {
 
     public ADataFile(File data) {
         sourceFile = data;
-        reader.setSource(ADataFile.this);
     }
 
     public ADataFile(String filePath) {
         sourceFile = Objects.requireNonNull(new File(filePath));
-        reader.setSource(ADataFile.this);
     }
 
     public File getSourceFile() {
@@ -54,10 +53,13 @@ public abstract class ADataFile {
      * Factory method to provide reader for file
      * @return reader instance
      */
-    protected abstract AFileReader constructReader();
+    protected abstract IFileReader constructReader();
     
     public IFileContent getContent() {
-        return reader.read();
+        if(Objects.isNull(content)) {
+            content = reader.read(this);
+        }
+        return content;
     }
 
     @SuppressWarnings("rawtypes")
@@ -73,6 +75,7 @@ public abstract class ADataFile {
         return sourceFile != null ? sourceFile.getName() : "";
     }
 
+    //equality check
     @Override
     public int hashCode() {
         int hash = 7;
@@ -94,12 +97,13 @@ public abstract class ADataFile {
         return Objects.equals(this.sourceFile, other.sourceFile);
     }
     
+    
     /**
      * helper class to handle empty sourceFile slots on sourceFile manager
      */
     private static final class EmptyDataFile extends ADataFile {
         @Override
-        protected AFileReader constructReader() {
+        protected IFileReader constructReader() {
             return new EmptyReader();
         }
     }

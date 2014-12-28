@@ -15,9 +15,11 @@
  */
 package com.grego.vgrep.model.reader;
 
+import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.data.IFileContent;
 import com.grego.vgrep.model.data.document.DocumentContent;
 import com.grego.vgrep.model.data.document.DocumentContent.ContentBuilder;
-import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategy;
+import com.grego.vgrep.model.reader.fileParser.EFileType;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
@@ -28,20 +30,19 @@ import org.slf4j.LoggerFactory;
  *
  * @author Grigorios
  */
-public class DocumentFileReader extends AFileReader {
+public class DocumentFileReader implements IFileReader {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
 
     @Override
-    public DocumentContent read() {
+    public IFileContent<String> read(final ADataFile dataFile) {
         File sourceFile = dataFile.getSourceFile();
         DocumentContent.ContentBuilder builder = new ContentBuilder(); 
         try {
-            IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory
-                    .getInstance(FileUtils.getFileType(sourceFile));
-            for(String line : parseStrategy.parse(sourceFile)) {
-                builder.appendLine(line);
-            }
+            final EFileType fileType = FileUtils.getFileType(sourceFile);
+            IDocumentParseStrategyFactory.getInstance(fileType)
+                .parse(sourceFile)
+                .forEach(builder::appendLine);
         }
         catch (IOException ex) {
             LOGGER.error(ex.getMessage());

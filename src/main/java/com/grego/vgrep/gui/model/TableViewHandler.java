@@ -14,8 +14,15 @@ import com.grego.vgrep.model.data.document.Line;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -70,38 +77,44 @@ public final class TableViewHandler implements IComponentHandler {
     @SuppressWarnings("unchecked")
     private void tableDataChange() {
         tableColumns.clear();
-        Callback listCellValueFactory = new ListCellValueFactory(tableColumns);
-
-        IFileContent content = dataModel.getContent();
         dataSet.clear();
-        dataSet.addAll(content.list());
 
-        dataSet.parallelStream().forEach((line) -> {
-            while (tableColumns.size() < line.getWordCount()) {
-                TableColumn column = new TableColumn();
-                if (tableColumns.add(column)) {
-                    column.setText(String.valueOf(tableColumns.size()));
+        Runnable loadFile = () -> {
+            final IFileContent content = dataModel.getContent();
+            Callback listCellValueFactory = new ListCellValueFactory(tableColumns);
+            dataSet.addAll(content.list());
+            dataSet.forEach((Line line) -> {
+                while (tableColumns.size() < line.getWordCount()) {
+                    TableColumn column = new TableColumn();
+                    if (tableColumns.add(column)) {
+                        column.setText(String.valueOf(tableColumns.size()));
+                    }
+                    column.setCellValueFactory(listCellValueFactory);
                 }
-                column.setCellValueFactory(listCellValueFactory);
-            }
-        });
-        table.getColumns().setAll(tableColumns);
+            });
+            Platform.runLater(() -> {
+                table.getColumns().setAll(tableColumns);
+            });
+        };
+        
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(loadFile);
     }
 
     @Override
     public List<IHolder> getSelectedValues() {
         List<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
         final List<IHolder> selectedValues = new ArrayList<>();
-        
+
         selectedCells.forEach((TablePosition position) -> {
             final IFileContent<String> content = dataModel.getContent();
             String selectedValue = content.getElementAt(position.getRow(), position.getColumn());
-            
+
             if (!selectedValue.isEmpty()) {
                 selectedValues.add(new SimpleValueHolder(selectedValue));
             }
         });
-    return selectedValues ;
-}
+        return selectedValues;
+    }
 
 }

@@ -47,7 +47,7 @@ public final class MainViewController implements IController, Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
 
     private final IWindowManager viewManager = JFxWindowManager.INSTANCE;
-    
+
     private ViewModel model = null;
 
     @Override
@@ -66,11 +66,10 @@ public final class MainViewController implements IController, Initializable {
     }
 
     public void selectFileButtonClick(final FileSelectionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+        final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
         File selectedFile = fileChooser.showOpenDialog((Window) viewManager.getWindow());
-        if (selectedFile != null)
-        {
+        if (selectedFile != null) {
             model.addFile(event.getDataType(), selectedFile);
         }
     }
@@ -78,18 +77,18 @@ public final class MainViewController implements IController, Initializable {
     public void findReferences(final FindReferencesEvent event) {
         final ADataFile file = model.getFile(EDataType.TARGET);
         final ADataFile sourceFile = model.getFile(EDataType.SOURCE);
-        
+
         List<IReference> references = new ArrayList<>();
 
         //TODO: optimization
-        for(Comparable line : (List<Comparable>) file.getContent().list()) {
-            for(Comparable sourceLine : (List<Comparable>) sourceFile.getContent().list()) {
-                if(line.compareTo(sourceLine) == Equal.getIntegerValue()) {
+        for (Comparable line : (List<Comparable>) file.getContent().list()) {
+            for (Comparable sourceLine : (List<Comparable>) sourceFile.getContent().list()) {
+                if (line.compareTo(sourceLine) == Equal.getIntegerValue()) {
                     references.add(new SimpleReference(sourceLine.toString(), line.toString()));
                 }
             }
         }
-        
+
         System.out.println("List of References: ");
         System.out.println("Total references found: " + references.size());
         references.forEach((IReference reference) -> {
