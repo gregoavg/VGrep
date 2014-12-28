@@ -22,11 +22,12 @@ public final class IDocumentParseStrategyFactory {
                 return new XlsParser();
             case TXT:
                 return new TxtParser();
+            case OTHER:
+                return new SimpleFileParser();
             default:
-                return (File file) -> { 
+                return () -> {
                     return Collections.emptyList();
-                };
+                }
         }
-    }
-
+        
 }

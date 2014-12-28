@@ -35,7 +35,7 @@ public final class FileUtils {
             case "doc":
                 return EFileType.DOC;
             default:
-                throw new UnknownFormatFlagsException("Unsupported file type exception!");
+                return EFileType.OTHER;
         }
     }
 
