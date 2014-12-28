@@ -25,9 +25,10 @@ public final class IDocumentParseStrategyFactory {
             case OTHER:
                 return new SimpleFileParser();
             default:
-                return () -> {
+                return (File file) -> {
                     return Collections.emptyList();
-                }
+                };
         }
-        
+    }
+    
 }
