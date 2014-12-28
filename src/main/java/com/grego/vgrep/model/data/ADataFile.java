@@ -36,24 +36,18 @@ public abstract class ADataFile {
         sourceFile = null;
     }
 
-    @SuppressWarnings("unchecked")
     public ADataFile(File data) {
         sourceFile = data;
-        reader.setSource(this);
+        reader.setSource(ADataFile.this);
     }
 
-    @SuppressWarnings("unchecked")
     public ADataFile(String filePath) {
         sourceFile = Objects.requireNonNull(new File(filePath));
-        reader.setSource(this);
+        reader.setSource(ADataFile.this);
     }
 
     public File getSourceFile() {
         return sourceFile;
-    }
-
-    public AFileReader getReader() {
-        return reader;
     }
     
     /**
@@ -61,6 +55,10 @@ public abstract class ADataFile {
      * @return reader instance
      */
     protected abstract AFileReader constructReader();
+    
+    public IFileContent getContent() {
+        return reader.read();
+    }
 
     @SuppressWarnings("rawtypes")
     private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile();
@@ -100,11 +98,6 @@ public abstract class ADataFile {
      * helper class to handle empty sourceFile slots on sourceFile manager
      */
     private static final class EmptyDataFile extends ADataFile {
-
-        public EmptyDataFile() {
-            super();
-        }
-
         @Override
         protected AFileReader constructReader() {
             return new EmptyReader();

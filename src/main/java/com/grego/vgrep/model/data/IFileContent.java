@@ -10,9 +10,11 @@ import java.util.List;
 /**
  *
  * @author Grigorios
+ * @param <T> type of elements in this content
  */
-public interface IFileContent {
+public interface IFileContent<T> {
 
-    List<?> listContent();
+    List<Comparable> list();
     
+    T getElementAt(int lineIndex, int rowIndex);
 }

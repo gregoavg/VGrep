@@ -7,51 +7,43 @@ package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.IFileContent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  *
  * @author Grego
  */
-public final class DocumentContent implements IFileContent {
+public final class DocumentContent implements IFileContent<String> {
 
-    private final List<Line> lines;
+    private final List<Line> lines = new ArrayList<>();
 
     public DocumentContent() {
-        lines = new ArrayList<>();
         lines.add(new Line("No document file inserted"));
     }
     
     //called from content builder
     private DocumentContent(List<Line> lines) {
-        this.lines = lines;
+        this.lines.addAll(lines);
     }
-
-    public List<Line> getLines() {
-        return lines;
-    }
-
+    
     public int getNumberOfLines() {
         return lines.size();
     }
 
     @Override
-    public List<String> listContent() {
-        final List<String> contentList = new ArrayList<>();
-        lines.forEach((Line line) -> {
-            contentList.add(line.toString());
-        });
-
-        return contentList;
+    public List<Comparable> list() {
+        return new ArrayList<>(lines);
     }
     
-    public String getWordAt(int lineIndex, int columnIndex) {
+    @Override
+    public String getElementAt(int lineIndex, int columnIndex) {
         try {
             Line line = lines.get(lineIndex);
             return line.getWordAt(columnIndex);
         }
         catch(IndexOutOfBoundsException ex) {
-            return null;
+            return "";
         }
     }
     

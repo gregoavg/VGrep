@@ -29,12 +29,12 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  */
 public enum JFxWindowManager implements IWindowManager {
-
     INSTANCE;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxWindowManager.class);
 
     private final Stage stage = new Stage();
+    
     private JFxView currentDisplay = null;
 
     //default stage dimentions

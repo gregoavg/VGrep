@@ -7,7 +7,6 @@ package com.grego.vgrep.gui.control;
 
 import com.grego.vgrep.model.data.document.Line;
 import java.util.List;
-import java.util.Objects;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
@@ -31,9 +30,6 @@ public class ListCellValueFactory implements Callback<TableColumn.CellDataFeatur
         String cellValue;
         int colIndex = columns.indexOf(param.getTableColumn());
         cellValue = rowDataValue.getWordAt(colIndex);
-        if(Objects.isNull(cellValue)) {
-            cellValue = "";
-        }
         return new SimpleStringProperty(cellValue);
     }
 

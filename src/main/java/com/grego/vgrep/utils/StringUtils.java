@@ -24,8 +24,8 @@ public final class StringUtils {
                 .filter((String node) -> {
                     return node != null ? !(node.isEmpty() || node.equals(sampleNode)) : false;
                 })
-                .toArray((elements) -> {
-                    return new String[elements];
+                .toArray((numOfElements) -> {
+                    return new String[numOfElements];
                 });
     }
 

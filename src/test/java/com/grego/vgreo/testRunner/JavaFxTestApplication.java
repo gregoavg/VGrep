@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
  */
 public class JavaFxTestApplication extends Application implements ILaunchable {
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(JavaFxTestApplication.class);
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("JavaFX Runtime initialized!!");
@@ -35,7 +38,7 @@ public class JavaFxTestApplication extends Application implements ILaunchable {
         try {
             Thread.sleep(300);
         } catch (InterruptedException ex) {
-            Logger.getLogger(JavaFxTestApplication.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.warn(ex.getMessage());
         }
     }
 

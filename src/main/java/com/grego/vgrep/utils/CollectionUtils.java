@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  *
@@ -36,22 +35,9 @@ public final class CollectionUtils {
      * @return Last element of list
      */
     public static <T> T getLastElement(Collection<T> collection) {
-        try {
-            return collection != null ? new LinkedList<>(collection).getLast() : null;
-        }
-        catch(NoSuchElementException ex) {
-            return null;
-        }
-    }
-
-    public static <T> int getMaxNestedDataCount(Collection<Collection<T>> dataSet) {
-        int maxElementSize = 0;
-        for (Collection collection : dataSet) {
-            if (maxElementSize < collection.size()) {
-                maxElementSize = collection.size();
-            }
-        }
-        return maxElementSize;
+        LinkedList<T> elements = collection == null ?
+               new LinkedList<>() : new LinkedList<>(collection);
+        return elements.isEmpty() ? null : elements.getLast();
     }
 
     public static <T> T[] removeNodes(T[] array, T sampleNode) {

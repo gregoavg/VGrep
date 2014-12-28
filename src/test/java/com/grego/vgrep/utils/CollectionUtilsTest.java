@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  *
@@ -30,20 +31,11 @@ public class CollectionUtilsTest extends TestCase {
     public CollectionUtilsTest(String testName) {
         super(testName);
     }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
 
     /**
      * Test of getLastElement method, of class CollectionUtils.
      */
+    @Test
     public void testGetLastElement() {
         System.out.println("getLastElement");
         String text = "first.other.another.last";
@@ -53,6 +45,7 @@ public class CollectionUtilsTest extends TestCase {
         assertEquals(expResult, result);
     }
     
+    @Test
     public void testGetLastElementOfEmptyList() {
         System.out.println("getLastElement of empty list");
         List<String> emptyList = Collections.emptyList();
@@ -62,6 +55,7 @@ public class CollectionUtilsTest extends TestCase {
         assertEquals(expResult, result);
     }
     
+    @Test
     public void testGetLastElementOfNullList() {
         System.out.println("getLastElement of null list");
         List<String> nullList = null;

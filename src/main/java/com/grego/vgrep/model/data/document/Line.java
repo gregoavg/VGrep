@@ -16,7 +16,7 @@ import java.util.Objects;
  *
  * @author Grego
  */
-public final class Line implements Comparable<String> {
+public final class Line implements Comparable<Line> {
 
     private final List<String> columns;
     private final static String SEPERATOR = " ";
@@ -35,7 +35,7 @@ public final class Line implements Comparable<String> {
             return columns.get(index);
         }
         catch(IndexOutOfBoundsException ex) {
-            return null;
+            return "";
         }
     }
     
@@ -44,10 +44,12 @@ public final class Line implements Comparable<String> {
     }
 
     @Override
-    public int compareTo(String otherWord) {
-        for(String word : this.columns) {
-            if(word.equals(otherWord)) {
-                return Equal.getIntegerValue();
+    public int compareTo(Line otherLine) {
+        for(String word : columns) {
+            for( String otherWord : otherLine.getColumns()) {
+                if(otherWord.equals(word)) {
+                    return Equal.getIntegerValue();
+                }
             }
         }
         return NotEqual.getIntegerValue();

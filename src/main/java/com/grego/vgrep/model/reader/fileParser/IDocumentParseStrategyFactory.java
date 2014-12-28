@@ -4,6 +4,9 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
+import java.io.File;
+import java.util.Collections;
+
 /**
  *
  * @author grigo_000
@@ -20,7 +23,9 @@ public final class IDocumentParseStrategyFactory {
             case TXT:
                 return new TxtParser();
             default:
-                return null;
+                return (File file) -> { 
+                    return Collections.emptyList();
+                };
         }
     }
 

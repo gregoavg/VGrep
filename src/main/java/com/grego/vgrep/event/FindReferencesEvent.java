@@ -15,7 +15,7 @@ import java.util.List;
  */
 public final class FindReferencesEvent extends ViewEvent {
     
-    private List<IHolder> patterns = null;
+    private List<IHolder> patterns;
 
     public FindReferencesEvent() {
         super();

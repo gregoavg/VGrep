@@ -45,7 +45,7 @@ public final class DocumentFile extends ADataFile {
         return new DocumentFileReader();
     }
 
-    public DocumentContent getContents() {
+    public DocumentContent getContent() {
         return contents;
     }
 

@@ -21,6 +21,7 @@ import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.MainView;
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -34,6 +35,8 @@ public class JFxApplication extends Application implements ILaunchable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxApplication.class);
 
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
         LOGGER.info("Application started");
@@ -50,11 +53,7 @@ public class JFxApplication extends Application implements ILaunchable {
 
     @Override
     public synchronized void trigLauncher(String[] args) {
-        if (args != null) {
-            Application.launch(args);
-        } 
-        else {
-            Application.launch();
-        }
+        String[] arguments = Objects.requireNonNull(args);
+        Application.launch(arguments);
     }
 }

@@ -22,12 +22,9 @@ import com.grego.vgrep.gui.manager.IWindowManager;
 import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.holder.IHolder;
 import com.grego.vgrep.model.SimpleReference;
+import com.grego.vgrep.model.data.ADataFile;
 import com.grego.vgrep.model.data.EDataType;
-import com.grego.vgrep.model.data.document.DocumentFile;
-import com.grego.vgrep.model.data.document.Line;
-import com.grego.vgrep.utils.ECompareResult;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +36,8 @@ import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.grego.vgrep.utils.ECompareResult.*;
+
 /**
  *
  * @author Grigorios
@@ -48,6 +47,7 @@ public final class MainViewController implements IController, Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainViewController.class);
 
     private final IWindowManager viewManager = JFxWindowManager.INSTANCE;
+    
     private ViewModel model = null;
 
     @Override
@@ -76,15 +76,16 @@ public final class MainViewController implements IController, Initializable {
     }
 
     public void findReferences(final FindReferencesEvent event) {
-        final DocumentFile document =  (DocumentFile) model.getFile(EDataType.TARGET);
-        final List<IHolder> patternHolders = event.getPatterns();
+        final ADataFile file = model.getFile(EDataType.TARGET);
+        final ADataFile sourceFile = model.getFile(EDataType.SOURCE);
+        
         List<IReference> references = new ArrayList<>();
 
         //TODO: optimization
-        for(Line line : document.getContents().getLines()) {
-            for(IHolder<String> wordPattern : patternHolders) {
-                if(line.compareTo(wordPattern.getValue()) == ECompareResult.Equal.getIntegerValue()) {
-                    references.add(new SimpleReference(wordPattern.getValue(), line.toString()));
+        for(Comparable line : (List<Comparable>) file.getContent().list()) {
+            for(Comparable sourceLine : (List<Comparable>) sourceFile.getContent().list()) {
+                if(line.compareTo(sourceLine) == Equal.getIntegerValue()) {
+                    references.add(new SimpleReference(sourceLine.toString(), line.toString()));
                 }
             }
         }

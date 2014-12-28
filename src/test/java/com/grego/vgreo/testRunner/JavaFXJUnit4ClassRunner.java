@@ -6,6 +6,7 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
+import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,12 +15,15 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Grigorios
  */
 public class JavaFXJUnit4ClassRunner extends BlockJUnit4ClassRunner {
+    
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(JavaFXJUnit4ClassRunner.class);
     
     public JavaFXJUnit4ClassRunner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -42,7 +46,7 @@ public class JavaFXJUnit4ClassRunner extends BlockJUnit4ClassRunner {
             latch.await();
         } 
         catch (InterruptedException ex) {
-            Logger.getLogger(JavaFXJUnit4ClassRunner.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.warn(ex.getMessage());
         }
     }
 

@@ -18,8 +18,10 @@ package com.grego.vgrep;
 import com.grego.vgrep.app.factory.ApplicationFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.grego.vgrep.app.factory.EApplicationType.*;
 import com.grego.vgrep.app.launcher.ILaunchable;
+
+//static import of application types 
+import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.*;
 
 /**
  *

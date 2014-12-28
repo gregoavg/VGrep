@@ -19,19 +19,29 @@ import com.grego.vgrep.app.JFxApplication;
 import com.grego.vgrep.app.launcher.ILaunchable;
 
 /**
- *
+ * 
  * @author Grigorios
  */
 public final class ApplicationFactory {
 
+    /**
+     *
+     * @param appType
+     * The application to be instantiated and returned
+     * @return the requested application instance or
+     * the default one if no application of this type exists.
+     */
     public static ILaunchable getInstance(EApplicationType appType) {
-        switch (appType)
-        {
+        switch (appType) {
             case JavaFX:
                 return new JFxApplication();
             default:
-                return null;
+                return new JFxApplication();
         }
+    }
+    
+    public static enum EApplicationType {
+        JavaFX;
     }
     
 }

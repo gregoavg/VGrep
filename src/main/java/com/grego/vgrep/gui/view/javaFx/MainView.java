@@ -24,7 +24,6 @@ import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.model.IComponentHandler;
 import com.grego.vgrep.gui.model.TableViewHandler;
 import com.grego.vgrep.model.data.EDataType;
-import java.util.List;
 import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;

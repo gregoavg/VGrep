@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -35,7 +36,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class ViewModel implements IModel {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ViewModel.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ViewModel.class);
 
     private final Set<IView> attachedViews = new HashSet<>();
     private final IFileManager fileManager = new SimpleFileManager();
