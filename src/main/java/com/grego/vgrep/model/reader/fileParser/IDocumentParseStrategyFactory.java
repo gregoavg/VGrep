@@ -20,7 +20,7 @@ public final class IDocumentParseStrategyFactory {
             case TXT:
                 return new TxtParser();
             default:
-                return null;
+                return new SimpleFileParser();
         }
     }
 

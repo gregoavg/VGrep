@@ -12,5 +12,6 @@ public enum EFileType {
     PDF,
     XLS,
     DOC,
-    TXT;
+    TXT,
+    OTHER // as not supported file type.
 }
