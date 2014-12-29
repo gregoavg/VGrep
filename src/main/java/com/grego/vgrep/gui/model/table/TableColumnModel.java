@@ -1,0 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.grego.vgrep.gui.model.table;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javafx.scene.control.TableColumn;
+
+/**
+ *
+ * @author Grego
+ */
+public final class TableColumnModel {
+
+    private final List<TableColumn> columns = new ArrayList<>();
+
+    private final LineColumnBuilder columnBuilder = new LineColumnBuilder(columns);
+
+    public void scaleTo(Collection elements) {
+        while (columns.size() < elements.size()) {
+            TableColumn column = columnBuilder.create();
+            if (columns.add(column)) {
+                column.setText(String.valueOf(columns.size()));
+            }
+        }
+    }
+
+    public List<TableColumn> getColumns() {
+        return columns;
+    }
+
+    public void clear() {
+        columns.clear();
+    }
+
+}

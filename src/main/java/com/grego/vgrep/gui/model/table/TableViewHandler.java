@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model;
+package com.grego.vgrep.gui.model.table;
 
-import com.grego.vgrep.gui.control.ListCellValueFactory;
+import com.grego.vgrep.gui.model.IComponentHandler;
 import com.grego.vgrep.model.holder.IHolder;
 import com.grego.vgrep.model.holder.SimpleValueHolder;
 import com.grego.vgrep.model.data.ADataFile;
@@ -16,26 +16,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
-import javafx.util.Callback;
 
 public final class TableViewHandler implements IComponentHandler {
 
     private final TableView table;
     private ADataFile dataModel;
-
-    private final List<TableColumn> tableColumns = new ArrayList<>();
-    private final List<Line> dataSet = FXCollections.observableArrayList();
+    
+    private final List<Line> dataSet = FXCollections.observableArrayList();    
+    private final TableColumnModel dataSetColumns = new TableColumnModel();
 
     public TableViewHandler(TableView table) {
         this.table = table;
@@ -69,6 +63,8 @@ public final class TableViewHandler implements IComponentHandler {
 
     private void setupTable() {
         table.setItems((ObservableList) dataSet);
+        table.getColumns().setAll(dataSetColumns.getColumns());
+        
         final TableViewSelectionModel columnSelectionModel = new ColumnSelectionModelAdapter(table);
         table.setSelectionModel(columnSelectionModel);
 
@@ -76,24 +72,18 @@ public final class TableViewHandler implements IComponentHandler {
 
     @SuppressWarnings("unchecked")
     private void tableDataChange() {
-        tableColumns.clear();
+        dataSetColumns.clear();
         dataSet.clear();
-
+        
         Runnable loadFile = () -> {
-            final IFileContent content = dataModel.getContent();
-            Callback listCellValueFactory = new ListCellValueFactory(tableColumns);
+            final IFileContent content = dataModel.getContent();          
             dataSet.addAll(content.list());
+            
             dataSet.forEach((Line line) -> {
-                while (tableColumns.size() < line.getWordCount()) {
-                    TableColumn column = new TableColumn();
-                    if (tableColumns.add(column)) {
-                        column.setText(String.valueOf(tableColumns.size()));
-                    }
-                    column.setCellValueFactory(listCellValueFactory);
-                }
+               dataSetColumns.scaleTo(line.getColumns());
             });
             Platform.runLater(() -> {
-                table.getColumns().setAll(tableColumns);
+                table.getColumns().setAll(dataSetColumns.getColumns());
             });
         };
         

@@ -22,7 +22,7 @@ import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.model.IComponentHandler;
-import com.grego.vgrep.gui.model.TableViewHandler;
+import com.grego.vgrep.gui.model.table.TableViewHandler;
 import com.grego.vgrep.model.data.EDataType;
 import java.util.Map;
 import javafx.scene.control.Button;
