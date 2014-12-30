@@ -11,6 +11,6 @@ package com.grego.vgrep.app.launcher;
  */
 public interface ILaunchable {
 
-    void trigLauncher(String[] args);
+    void invokeLauncher(String[] args);
     
 }

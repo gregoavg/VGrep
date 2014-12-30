@@ -25,7 +25,7 @@ public class JavaFXJUnit4ClassRunner extends BlockJUnit4ClassRunner {
     public JavaFXJUnit4ClassRunner(Class<?> klass) throws InitializationError {
         super(klass);
         final ILaunchable testApp = new JavaFxTestApplication();
-        testApp.trigLauncher(new String[0]);
+        testApp.invokeLauncher(new String[0]);
     }
     
     //Code from: http://awhite.blogspot.gr/2013/04/javafx-junit-testing.html

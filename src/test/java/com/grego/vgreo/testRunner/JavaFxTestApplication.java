@@ -28,7 +28,7 @@ public class JavaFxTestApplication extends Application implements ILaunchable {
     }
 
     @Override
-    public void trigLauncher(String[] args) {
+    public void invokeLauncher(String[] args) {
         // start the JavaFX application
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {

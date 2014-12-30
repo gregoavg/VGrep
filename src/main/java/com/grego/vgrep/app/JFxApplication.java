@@ -52,7 +52,7 @@ public class JFxApplication extends Application implements ILaunchable {
     }
 
     @Override
-    public synchronized void trigLauncher(String[] args) {
+    public synchronized void invokeLauncher(String[] args) {
         String[] arguments = Objects.requireNonNull(args);
         Application.launch(arguments);
     }

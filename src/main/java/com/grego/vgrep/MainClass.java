@@ -16,8 +16,6 @@
 package com.grego.vgrep;
 
 import com.grego.vgrep.app.factory.ApplicationFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.grego.vgrep.app.launcher.ILaunchable;
 
 //static import of application types 
@@ -29,14 +27,12 @@ import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.*;
  */
 public final class MainClass {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainClass.class);
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         ILaunchable app = ApplicationFactory.getInstance(JavaFX);
-        app.trigLauncher(args);
+        app.invokeLauncher(args);
     }
 
 }
