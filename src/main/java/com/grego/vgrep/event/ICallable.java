@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.control.loader;
-
-import com.grego.vgrep.event.ICallable;
-import com.grego.vgrep.model.data.ADataFile;
+package com.grego.vgrep.event;
 
 /**
  *
  * @author Grego
+ * @param <T>
  */
-public interface IContentLoader extends ICallable {
-
-    void loadFrom(ADataFile file);
+public interface ICallable<T> {
     
+    void setCallback(ICallback<T> callback);
 }

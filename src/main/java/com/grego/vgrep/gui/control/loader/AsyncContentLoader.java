@@ -12,25 +12,25 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
-public class AsyncContentLoader implements IContentLoader {
+public final class AsyncContentLoader implements IContentLoader {
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    
-    private ICallback callBack = null;
-    
+
+    private ICallback callback = (data) -> {
+        //empty call back
+    };
+
     @Override
-    public void setCallBack(ICallback callback) {
-        this.callBack = Objects.requireNonNull(callback, "Callback must not be null!");
+    public void setCallback(ICallback callback) {
+        this.callback = Objects.requireNonNull(callback, "Callback must not be null!");
     }
 
     @Override
     public void loadFrom(ADataFile file) {
-        Runnable loadFile = () -> {
+        executor.execute(() -> {
             final IFileContent content = file.getContent();
-            callBack.onReturn(content);
-        };
-        executor.execute(loadFile);
+            callback.onReturn(content);
+        });
     }
-    
+
 }

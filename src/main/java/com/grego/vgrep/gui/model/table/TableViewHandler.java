@@ -76,13 +76,13 @@ public final class TableViewHandler implements IComponentHandler {
                 table.getColumns().setAll(dataSetColumns.getColumns());
             });
         };
-        contentLoader.setCallBack(afterContentLoad);
+        contentLoader.setCallback(afterContentLoad);
     }
 
     @SuppressWarnings("unchecked")
     private void tableDataChange() {
+        dataSet.clear();
         dataSetColumns.clear();
-        dataSet.clear();      
         contentLoader.loadFrom(dataModel);
     }
 
@@ -94,7 +94,6 @@ public final class TableViewHandler implements IComponentHandler {
         selectedCells.forEach((TablePosition position) -> {
             final IFileContent<String> content = dataModel.getContent();
             String selectedValue = content.getElementAt(position.getRow(), position.getColumn());
-
             if (!selectedValue.isEmpty()) {
                 selectedValues.add(new SimpleValueHolder(selectedValue));
             }

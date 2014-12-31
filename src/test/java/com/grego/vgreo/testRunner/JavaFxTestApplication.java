@@ -6,6 +6,7 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -19,26 +20,28 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  */
 public class JavaFxTestApplication extends Application implements ILaunchable {
-
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(JavaFxTestApplication.class);
     
+    private static final CountDownLatch latch = new CountDownLatch(1);
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("JavaFX Runtime initialized!!");
+        LOGGER.info("JavaFX Runtime initialized!!");
+        latch.countDown();
     }
 
     @Override
     public void invokeLauncher(String[] args) {
-        // start the JavaFX application
+        // start the JavaFX application thread
         final ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            Application.launch();
+            Application.launch(args);
         });
-        
+        // wait until JavaFX thread initialization completions
         try {
-            Thread.sleep(300);
+            latch.await();
         } catch (InterruptedException ex) {
-            LOGGER.warn(ex.getMessage());
+            Logger.getLogger(JavaFxTestApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
