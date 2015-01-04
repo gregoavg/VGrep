@@ -71,15 +71,15 @@ public class JFxWindowManagerTest extends TestCase {
     @Test
     public void testSetInitialWindowSize() {
         System.out.println("setInitialWindowSize");
-        double width = 400;
-        double height = 400;
+        int width = 400;
+        int height = 400;
         windowManager.setWindowSize(width, height);
         windowManager.setDisplay(new SimpleFxView());
         Stage stage = (Stage) windowManager.getWindow();
-        double height1 = stage.getHeight();
-        double width1 = stage.getWidth();
-        assertEquals(width, width1);
-        assertEquals(height, height1);
+        Double height1 = stage.getHeight();
+        Double width1 = stage.getWidth();
+        assertEquals(width, width1.intValue());
+        assertEquals(height, height1.intValue());
     }
 
     /**
@@ -100,7 +100,7 @@ public class JFxWindowManagerTest extends TestCase {
     public void testSetWindowTitle() {
         System.out.println("setWindowTitle");
         String title = "";
-        windowManager.setWindowTitle(title);
+        windowManager.setTitle(title);
         String windowTitle = ((Stage)JFxWindowManager.INSTANCE.getWindow()).getTitle();
         assertEquals(title, windowTitle);
     }

@@ -31,7 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * <Code>IModel</code> implementation, for modeling data that need to be
+ * represented by a view.
  * @author Grigorios
  */
 public final class ViewModel implements IModel {
@@ -39,32 +40,77 @@ public final class ViewModel implements IModel {
     private static final Logger LOGGER = LoggerFactory.getLogger(ViewModel.class);
 
     private final Set<IView> attachedViews = new HashSet<>();
+    
+    // Simple placeholder for files
     private final IFileManager fileManager = new SimpleFileManager();
+    
     private List<IReference> references = new ArrayList<>();
 
+    /**
+     * Attaches file to the file manager
+     * 
+     * @param dataType reference type of a file instance.
+     * @param file the file instance to be held by the manager
+     * @see   EDataType
+     * 
+     */
     public void addFile(EDataType dataType, File file) {
         fileManager.addFile(dataType, new DocumentFile(file));
         fireDataChanged();
     }
 
+    /**
+     * Removes a file from the file manager
+     * 
+     * @param dataType reference type of a file instance.
+     * @see   EDataType
+     * 
+     */
     public void remove(EDataType dataType) {
         fileManager.remove(dataType);
         fireDataChanged();
     }
 
+    /**
+     * remove all files in file manager
+     */
     public void clearData() {
         fileManager.clearData();
         fireDataChanged();
     }
 
+    /**
+     * Retrieves an open file from manager
+     * 
+     * @param  dataType reference type of a file instance.
+     * @return a requested file instance from file manager or 
+     *         empty file if none, of this data type, exists in file manager. 
+     * @see    EDataType
+     * 
+     */
     public ADataFile getFile(EDataType dataType) {
         return fileManager.getFile(dataType);
     }
 
+    /**
+     * Returns all references found between the compared files
+     * 
+     * @return list of references found 
+     *         or empty list if no references found. 
+     * @see    IReference
+     * 
+     */
     public List<IReference> getReferences() {
         return references;
     }
 
+    /**
+     * Sets all references found between the compared files
+     * 
+     * @param references list of references 
+     * @see IReference
+     * 
+     */
     public void setReferences(List<IReference> references) {
         this.references = references;
     }

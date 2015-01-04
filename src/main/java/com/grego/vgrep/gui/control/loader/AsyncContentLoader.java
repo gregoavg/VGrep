@@ -12,10 +12,19 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * <b>Asynchronous</b> implementation of <code>IContentLoader</code> interface.
+ * This implementation makes use of callback events in order to inform and provide
+ * clients with the contents of file that emerged after the load process. 
+ * 
+ * @author Grego
+ */
 public final class AsyncContentLoader implements IContentLoader {
-
+    
+    //thread management service
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    //empty callback
     private ICallback callback = (data) -> {
         //empty call back
     };

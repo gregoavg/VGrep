@@ -6,11 +6,19 @@
 package com.grego.vgrep.app.launcher;
 
 /**
- *
+ * Adapter for operations that need to be invoked in order to
+ * initialize or start their behavior
+ * 
  * @author Grigorios
  */
 public interface ILaunchable {
 
+    /**
+     * Invokes launcher with arguments
+     * 
+     * @param args the command arguments
+     * 
+     */
     void invokeLauncher(String[] args);
     
 }

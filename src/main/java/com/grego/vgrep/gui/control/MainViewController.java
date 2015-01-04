@@ -39,7 +39,10 @@ import org.slf4j.LoggerFactory;
 import static com.grego.vgrep.utils.ECompareResult.*;
 
 /**
- *
+ * Implementation of <code>IController</code> for the JavaFX framework.
+ * Serves as <code>MainView</code> controller and it can be also accessed through
+ * <code>FXMLLoader</code> as it implements <code>Initializable</code> interface.
+ * 
  * @author Grigorios
  */
 public final class MainViewController implements IController, Initializable {

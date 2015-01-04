@@ -9,8 +9,6 @@ import com.grego.vgrep.app.launcher.ILaunchable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
@@ -41,7 +39,7 @@ public class JavaFxTestApplication extends Application implements ILaunchable {
         try {
             latch.await();
         } catch (InterruptedException ex) {
-            Logger.getLogger(JavaFxTestApplication.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.error(ex.getLocalizedMessage());
         }
     }
 

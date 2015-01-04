@@ -19,17 +19,20 @@ import com.grego.vgrep.app.JFxApplication;
 import com.grego.vgrep.app.launcher.ILaunchable;
 
 /**
+ * Factory method to provide clients with application instances.
  * 
  * @author Grigorios
  */
 public final class ApplicationFactory {
 
     /**
-     *
-     * @param appType
-     * The application to be instantiated and returned
-     * @return the requested application instance or
-     * the default one if no application of this type exists.
+     * Returns an application instance, defined by a given application type.
+     * 
+     * @param appType the application type to be instantiated and returned
+     * @return        the requested application instance or the default one 
+     *                if no application of this type exists.
+     * @see           EApplicationType
+     * 
      */
     public static ILaunchable getInstance(EApplicationType appType) {
         switch (appType) {
@@ -40,6 +43,11 @@ public final class ApplicationFactory {
         }
     }
     
+    /**
+     * Enumeration of application types that <code>ApplicationFactory</code>
+     * is capable to support.
+     * 
+     */
     public static enum EApplicationType {
         JavaFX;
     }

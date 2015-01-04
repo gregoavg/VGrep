@@ -14,6 +14,12 @@ package com.grego.vgrep.event;
 @FunctionalInterface
 public interface ICallback<T> {
     
+    /**
+     * Invokes the callback method defined at client, with data provided by the caller.
+     * 
+     * @param data the provided data that emerged after caller side operations.
+     * 
+     */
     void onReturn(T data);
     
 }

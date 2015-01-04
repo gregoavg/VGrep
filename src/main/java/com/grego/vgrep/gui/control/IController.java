@@ -19,13 +19,29 @@ package com.grego.vgrep.gui.control;
 import com.grego.vgrep.gui.model.IModel;
 
 /**
- *
+ * Represents an <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC pattern</a>
+ * controller. It keeps track of a model instance, in order to apply changes to it.
+ * 
  * @author Grigorios
  */
 public interface IController {
 
+    /**
+     * Returns the referenced model instance that this controller manages
+     * 
+     * @return <code>IModel</code> instance
+     * @see    IModel
+     * 
+     */
     IModel getModel();
 
+    /**
+     * Provides a model instance to this controller
+     * 
+     * @param model the <code>IModel</code> instance to be managed
+     * @see   IModel
+     * 
+     */
     void setModel(IModel model);
     
 }

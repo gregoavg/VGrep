@@ -22,7 +22,8 @@ import com.grego.vgrep.app.launcher.ILaunchable;
 import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.*;
 
 /**
- *
+ * Application's main class 
+ * 
  * @author Grigorios
  */
 public final class MainClass {

@@ -9,11 +9,22 @@ import com.grego.vgrep.event.ICallable;
 import com.grego.vgrep.model.data.ADataFile;
 
 /**
- *
+ * Representer for instances responsible to load contents from files.
+ * This interface extends and makes use of callable interface, in order to
+ * update loader into callback caller. As callback caller, loader can provide
+ * the emerged content to clients, by invoking the referenced callback method.
+ * 
  * @author Grego
  */
 public interface IContentLoader extends ICallable {
 
+    /**
+     * Loads content from a given <code>ADataFile</code> instance.
+     * 
+     * @param file 
+     * @see   ADataFile
+     * 
+     */
     void loadFrom(ADataFile file);
     
 }
