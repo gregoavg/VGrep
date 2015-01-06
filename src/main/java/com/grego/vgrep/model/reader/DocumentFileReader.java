@@ -15,9 +15,11 @@
  */
 package com.grego.vgrep.model.reader;
 
+import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.data.IFileContent;
 import com.grego.vgrep.model.data.document.DocumentContent;
 import com.grego.vgrep.model.data.document.DocumentContent.ContentBuilder;
-import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategy;
+import com.grego.vgrep.model.reader.fileParser.EFileType;
 import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
 import java.io.File;
@@ -25,27 +27,26 @@ import java.io.IOException;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Implementation of <code>IReader</code> for document files. This type of
+ * reader is able to self-define the file type of the provided data file and
+ * request the appropriate parse strategy in order to use it for traversing the
+ * document. Moreover with the help of <code>ContentBuilder</code>, it collects
+ * and returns the document contents to clients.
  *
  * @author Grigorios
  */
-public class DocumentFileReader extends AFileReader {
+public class DocumentFileReader implements IFileReader {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
 
     @Override
-    public DocumentContent read() {
+    public IFileContent<String> read(final ADataFile dataFile) {
         File sourceFile = dataFile.getSourceFile();
-        DocumentContent.ContentBuilder builder = new ContentBuilder(); 
-        try {
-            IDocumentParseStrategy parseStrategy = IDocumentParseStrategyFactory
-                    .getInstance(FileUtils.getFileType(sourceFile));
-            for(String line : parseStrategy.parse(sourceFile)) {
-                builder.appendLine(line);
-            }
-        }
-        catch (IOException ex) {
-            LOGGER.error(ex.getMessage());
-        }
+        DocumentContent.ContentBuilder builder = new ContentBuilder();
+        final EFileType fileType = FileUtils.getFileType(sourceFile);
+        IDocumentParseStrategyFactory.getInstance(fileType)
+                .parse(sourceFile)
+                .forEach(builder::appendLine);
         return builder.createContents();
     }
 

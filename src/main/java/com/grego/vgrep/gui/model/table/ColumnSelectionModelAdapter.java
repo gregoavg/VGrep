@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model;
+package com.grego.vgrep.gui.model.table;
 
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -16,7 +16,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
  *
  * @author Grigorios
  */
-public class ColumnSelectionModelAdapter extends TableViewSelectionModel {
+public final class ColumnSelectionModelAdapter extends TableViewSelectionModel {
     
     private final TableViewSelectionModel selectionModelAdaptee;
     

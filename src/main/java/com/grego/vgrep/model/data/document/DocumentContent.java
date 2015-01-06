@@ -7,24 +7,27 @@ package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.IFileContent;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 
 /**
- *
- * @author Grego
+ * Implementation of <code>IFileContent</code> for modeling document file
+ * content, that consists of lines that contain words in the form of columns.
+ * 
+ * @author Grigorios
  */
 public final class DocumentContent implements IFileContent<String> {
 
-    private final List<Line> lines = new ArrayList<>();
+    private final List<Line> lines;
 
     public DocumentContent() {
+        this.lines = new ArrayList<>();
         lines.add(new Line("No document file inserted"));
     }
     
     //called from content builder
-    private DocumentContent(List<Line> lines) {
-        this.lines.addAll(lines);
+    private DocumentContent(Collection<Line> lines) {
+        this.lines = new ArrayList<>(lines);
     }
     
     public int getNumberOfLines() {
@@ -47,15 +50,34 @@ public final class DocumentContent implements IFileContent<String> {
         }
     }
     
+    /**
+     * Helper class that makes use of Builder pattern in order to effectively
+     * collect and finally construct a document's content.
+     * 
+     */
     public final static class ContentBuilder {
 
         private final List<Line> indexLines = new ArrayList<>();
 
+        /**
+         * Append a line to this builder
+         * 
+         * @param text all words of one document line.
+         * @return the builder itself. 
+         * 
+         */
         public ContentBuilder appendLine(String text) {
             indexLines.add(new Line(text));
             return ContentBuilder.this;
         }
         
+        /**
+         * Creates and returns an instance of <code>DocumentContent</code>
+         * by invoking it's private constructor with the collection of appended lines.
+         * 
+         * @return
+         * @see DocumentContent
+         */
         public DocumentContent createContents() {
             return new DocumentContent(indexLines);
         }

@@ -4,12 +4,12 @@
  */
 package com.grego.vgrep.model;
 
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.EDataLabel;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import static com.grego.vgrep.model.data.EDataType.SOURCE;
-import static com.grego.vgrep.model.data.EDataType.TARGET;
+import static com.grego.vgrep.model.data.EDataLabel.SOURCE;
+import static com.grego.vgrep.model.data.EDataLabel.TARGET;
 
 /**
  *
@@ -17,7 +17,7 @@ import static com.grego.vgrep.model.data.EDataType.TARGET;
  */
 public class SimpleReference implements IReference<String,String> {
 
-    private final Map<EDataType, String> refMapper = new EnumMap<>(EDataType.class);
+    private final Map<EDataLabel, String> refMapper = new EnumMap<>(EDataLabel.class);
 
     public SimpleReference(String source, String target) {
         refMapper.put(SOURCE, source);

@@ -19,19 +19,53 @@ package com.grego.vgrep.gui.manager;
 import com.grego.vgrep.gui.view.IView;
 
 /**
- *
+ * Represents a supervisor for a managed window that
+ * serves as parent placeholder for views.
+ * 
  * @author Grigorios
  */
 public interface IWindowManager {
     
+    /**
+     * Sets a view as main display in the managed window
+     * 
+     * @param view - view that needs to be displayed
+     * @see   IView
+     * 
+     */
     void setDisplay(IView view);
     
+    /**
+     * Changes managed window visibility
+     * 
+     * @param visible preference state 
+     * 
+     */
     void setVisibility(boolean visible);
     
-    void setWindowSize(double width, double height);
+    /**
+     * Changes default window size
+     * 
+     * @param width  desired window width
+     * @param height desired window height
+     * 
+     */
+    void setWindowSize(int width, int height);
     
+    /**
+     * Returns the managed window
+     * 
+     * @return window object
+     * 
+     */
     Object getWindow();
 
-    void setWindowTitle(String title);
-
+    /**
+     * Sets display title for the window
+     * 
+     * @param title to be displayed
+     * 
+     */
+    void setTitle(String title);
+    
 }

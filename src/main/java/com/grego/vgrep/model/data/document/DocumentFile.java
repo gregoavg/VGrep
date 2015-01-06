@@ -16,21 +16,19 @@
 package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.reader.AFileReader;
+import com.grego.vgrep.model.reader.IFileReader;
 import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Implementation of <code>ADataFile</code> for document files. A document file
+ * provides a document reader to the superclass. The reader is responsible to
+ * parse this document and create a content that consists of lines. 
+ * 
  * @author Grigorios
  */
 public final class DocumentFile extends ADataFile {
-
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFile.class);
-
-    private final DocumentContent contents = (DocumentContent) reader.read();
 
     public DocumentFile(File data) {
         super(data);
@@ -41,12 +39,8 @@ public final class DocumentFile extends ADataFile {
     }
 
     @Override
-    protected AFileReader constructReader() {
+    protected IFileReader constructReader() {
         return new DocumentFileReader();
-    }
-
-    public DocumentContent getContent() {
-        return contents;
     }
 
 }

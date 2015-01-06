@@ -18,12 +18,11 @@ package com.grego.vgrep.gui.view.javaFx;
 import com.grego.vgrep.gui.control.MainViewController;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
-import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.model.IComponentHandler;
-import com.grego.vgrep.gui.model.TableViewHandler;
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.gui.model.table.TableViewHandler;
+import com.grego.vgrep.model.data.EDataLabel;
 import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -32,11 +31,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * JavaFX view implementation that serves as main view for this application.
+ * 
  * @author Grigorios
  */
 public final class MainView extends JFxView {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
     private final ViewModel model;
@@ -44,18 +43,18 @@ public final class MainView extends JFxView {
     public MainView(IModel model) {
         super("/fxml/MainView.fxml");
         this.model = (ViewModel) model;
-        this.model.attachView((IView) this);
+        this.model.attachView(MainView.this);
         super.controller.setModel(this.model);
         LOGGER.info("Main View initialization finished");
     }
 
     @Override
     public void update() {
-        sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
-        targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
+        sourceFilePathTextField.setText(model.getFile(EDataLabel.SOURCE).toString());
+        targetFilePathTextField.setText(model.getFile(EDataLabel.TARGET).toString());
         
-        sourceTableHandler.setDataModel(model.getFile(EDataType.SOURCE));
-        targetTableHandler.setDataModel(model.getFile(EDataType.TARGET));
+        sourceTableHandler.setDataModel(model.getFile(EDataLabel.SOURCE));
+        targetTableHandler.setDataModel(model.getFile(EDataLabel.TARGET));
         LOGGER.info("Main View updated by model request");
     }
 
@@ -64,23 +63,23 @@ public final class MainView extends JFxView {
     }
 
     @Override
-    protected void initComponets(final Map<String, Object> componentMapper) {
+    protected void initComponets(final Map<String, Object> componentMap) {
         MainViewController mainViewController = (MainViewController) super.controller;
         
-        sourceFilePathTextField = (TextField) componentMapper.get("sourceFilePathTextField");
-        targetFilePathTextField = (TextField) componentMapper.get("targetFilePathTextField");
+        sourceFilePathTextField = (TextField) componentMap.get("sourceFilePathTextField");
+        targetFilePathTextField = (TextField) componentMap.get("targetFilePathTextField");
         
-        sourceFileSelectButton = (Button) componentMapper.get("selectSourceFileButton");
+        sourceFileSelectButton = (Button) componentMap.get("selectSourceFileButton");
         sourceFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.SOURCE));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataLabel.SOURCE));
         });
         
-        targetFileSelectButton = (Button) componentMapper.get("selectTargetFileButton");
+        targetFileSelectButton = (Button) componentMap.get("selectTargetFileButton");
         targetFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.TARGET));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataLabel.TARGET));
         });
         
-        findReferencesButton = (Button) componentMapper.get("findReferencesButton");
+        findReferencesButton = (Button) componentMap.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
             final FindReferencesEvent event = new FindReferencesEvent();
             event.setPatterns(sourceTableHandler.getSelectedValues());
@@ -88,8 +87,8 @@ public final class MainView extends JFxView {
             mainViewController.findReferences(event);
         });
         
-        sourceTableHandler = new TableViewHandler((TableView) componentMapper.get("sourceTableView"));
-        targetTableHandler = new TableViewHandler((TableView) componentMapper.get("targetTableView"));
+        sourceTableHandler = new TableViewHandler((TableView) componentMap.get("sourceTableView"));
+        targetTableHandler = new TableViewHandler((TableView) componentMap.get("targetTableView"));
         
         LOGGER.info("Main View components hava been initialized");
     }

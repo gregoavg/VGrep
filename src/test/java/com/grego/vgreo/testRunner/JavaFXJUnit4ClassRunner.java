@@ -6,10 +6,7 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
-import com.grego.vgrep.model.reader.DocumentFileReader;
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -22,19 +19,19 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  */
 public class JavaFXJUnit4ClassRunner extends BlockJUnit4ClassRunner {
-    
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(JavaFXJUnit4ClassRunner.class);
-    
+
     public JavaFXJUnit4ClassRunner(Class<?> klass) throws InitializationError {
         super(klass);
+        
         final ILaunchable testApp = new JavaFxTestApplication();
-        testApp.trigLauncher(new String[0]);
+        testApp.invokeLauncher(new String[0]);
     }
-    
+
     //Code from: http://awhite.blogspot.gr/2013/04/javafx-junit-testing.html
     @Override
     protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
-        // Create a latch which is removed after the super runChild() method completion 
+        // Create a latch which is removed after the super runChild() method completion
         final CountDownLatch latch = new CountDownLatch(1);
         Platform.runLater(() -> {
             // Call super to actually do the work
@@ -44,8 +41,7 @@ public class JavaFXJUnit4ClassRunner extends BlockJUnit4ClassRunner {
         });
         try {
             latch.await();
-        } 
-        catch (InterruptedException ex) {
+        } catch (InterruptedException ex) {
             LOGGER.warn(ex.getMessage());
         }
     }

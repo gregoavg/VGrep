@@ -6,9 +6,11 @@
 package com.grego.vgrep.model.holder;
 
 /**
+ * Simple implementation of <code>IHolder</code>, with one value as a private
+ * class field.
  *
  * @author Grigorios
- * @param <V> Value type
+ * @param <V> type of the holed value.
  */
 public final class SimpleValueHolder<V> implements IHolder<V> {
 

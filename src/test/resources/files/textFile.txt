@@ -1,0 +1,12 @@
+This is a test file
+This is a test file
+This is a test file
+Test 5 whitespaces after line     
+Test 4 empty lines
+
+
+
+
+Test numbers 02655665
+Test symbols ^*(%$%^#^
+    Test 4 whitespaces before line

@@ -8,24 +8,39 @@ import java.io.File;
 import java.util.Collections;
 
 /**
- *
- * @author grigo_000
+ * Static Factory pattern implementation, in order to provide clients with
+ * the appropriate document parse strategy.
+ * 
+ * @author Grigorios
+ * 
  */
 public final class IDocumentParseStrategyFactory {
 
+    /**
+     * Returns a document parse strategy instance, based on 
+     * the provided document file type.
+     * 
+     * @param  type document file type
+     * @return parse strategy if the file type is supported or
+     *         simple parse strategy for unsupported documents.
+     *         Also, on unexpected conditions, a default parse strategy is returned,
+     *         that provides an empty collection.    
+     * @see    EFileType
+     * 
+     */
     public static IDocumentParseStrategy getInstance(EFileType type) {
         switch (type)
         {
             case PDF:
-                return new PDFParser();
+                return new PDFParseStrategy();
             case XLS:
-                return new XlsParser();
+                return new XlsParseStrategy();
             case TXT:
-                return new TxtParser();
+                return new SimpleParseStrategy();
             case OTHER:
-                return new SimpleFileParser();
+                return new SimpleParseStrategy();
             default:
-                return (File file) -> {
+                return (file) -> {
                     return Collections.emptyList();
                 };
         }

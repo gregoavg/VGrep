@@ -10,7 +10,6 @@ import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.SimpleFxView;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +36,7 @@ public class JFxWindowManagerTest extends TestCase {
         IView view = new SimpleFxView();
         JFxWindowManager aWindowManager = (JFxWindowManager) windowManager;
         aWindowManager.setDisplay(view);
-        Assert.assertNotNull(aWindowManager.getCurentDisplay());
+        assertNotNull(aWindowManager.getCurentDisplay());
     }
 
     /**
@@ -63,7 +62,7 @@ public class JFxWindowManagerTest extends TestCase {
         boolean visible = false;
         IWindowManager instance = windowManager;
         instance.setVisibility(visible);
-        Assert.assertFalse(JFxWindowManager.INSTANCE.getWindow().isShowing());
+        assertFalse(JFxWindowManager.INSTANCE.getWindow().isShowing());
     }
 
     /**
@@ -72,15 +71,15 @@ public class JFxWindowManagerTest extends TestCase {
     @Test
     public void testSetInitialWindowSize() {
         System.out.println("setInitialWindowSize");
-        double width = 400;
-        double height = 400;
+        int width = 400;
+        int height = 400;
         windowManager.setWindowSize(width, height);
         windowManager.setDisplay(new SimpleFxView());
         Stage stage = (Stage) windowManager.getWindow();
-        double height1 = stage.getHeight();
-        double width1 = stage.getWidth();
-        Assert.assertEquals(width, width1);
-        Assert.assertEquals(height, height1);
+        Double height1 = stage.getHeight();
+        Double width1 = stage.getWidth();
+        assertEquals(width, width1.intValue());
+        assertEquals(height, height1.intValue());
     }
 
     /**
@@ -91,7 +90,7 @@ public class JFxWindowManagerTest extends TestCase {
         System.out.println("getWindow");
         JFxWindowManager instance = JFxWindowManager.INSTANCE;
         Window window = (Window) windowManager.getWindow();
-        Assert.assertNotNull(window);
+        assertNotNull(window);
     }
 
     /**
@@ -101,9 +100,9 @@ public class JFxWindowManagerTest extends TestCase {
     public void testSetWindowTitle() {
         System.out.println("setWindowTitle");
         String title = "";
-        windowManager.setWindowTitle(title);
+        windowManager.setTitle(title);
         String windowTitle = ((Stage)JFxWindowManager.INSTANCE.getWindow()).getTitle();
-        Assert.assertEquals(title, windowTitle);
+        assertEquals(title, windowTitle);
     }
     
 }

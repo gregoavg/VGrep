@@ -28,14 +28,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * JavaFX framework application initializer implementation, adapted as launchable,
+ * in order to be dynamically compatible with other application instances 
+ * provided by the <code>ApplicationFactory</code> through polymorphic reference
+ * defined by <code>ILaunchable</code> interface.
+ * 
  * @author Grigorios
  */
 public class JFxApplication extends Application implements ILaunchable {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxApplication.class);
-
-    
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -44,15 +45,15 @@ public class JFxApplication extends Application implements ILaunchable {
 
         final IWindowManager windowManager = JFxWindowManager.INSTANCE;
 
-        IView mainView = new MainView(new ViewModel());
+        final IView mainView = new MainView(new ViewModel());
         windowManager.setWindowSize(600, 400);
         windowManager.setDisplay(mainView);
-        windowManager.setWindowTitle("Visual File Grep");
+        windowManager.setTitle("Visual File Grep");
         windowManager.setVisibility(true);
     }
 
     @Override
-    public synchronized void trigLauncher(String[] args) {
+    public synchronized void invokeLauncher(String[] args) {
         String[] arguments = Objects.requireNonNull(args);
         Application.launch(arguments);
     }

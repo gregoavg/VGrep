@@ -29,11 +29,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Abstracted <code>IView</code> implementation for the JavaFX framework.
+ * Serves as parent for all views that need to be compatible with
+ * JavaFX framework and run on it's thread.
+ * 
  * @author Grigorios
+ * 
  */
 public abstract class JFxView implements IView {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
 
     protected final FXMLLoader loader = new FXMLLoader();
@@ -51,13 +54,25 @@ public abstract class JFxView implements IView {
         scene.getRoot().setVisible(state);
     }
 
+    /**
+     * Disposes this view instance by accessing the parent window
+     * and changes it's current main display with a new, empty, stage instance
+     * 
+     */
     @Override
-    public void dispose() {
+    public final void dispose() {
         Stage stage = (Stage) scene.getWindow();
         stage.setScene(new Scene(new Pane()));
         stage.hide();
     }
 
+    /**
+     * Loads content from fxml file, through loader 
+     * @param fxmlFilePath
+     * @return loaded scene if found, else a new instance of scene is returned
+     * @see Scene
+     * 
+     */
     private Scene loadScene(String fxmlFilePath) {
         try (InputStream fileAsStream = FileUtils.getFileAsResourceStream(fxmlFilePath))
         {
@@ -70,22 +85,35 @@ public abstract class JFxView implements IView {
         }
     }
 
+    /**
+     * Initializes displayed components through a provided component map
+     * @param componentMapper a map that holds Control components instances,
+     * in an entry set, with each component name as key
+     * 
+     */
     protected abstract void initComponets(final Map<String, Object> componentMapper);
 
     /**
      * Override this factory method in order to change the default controller.
      *
      * @return <b>JFx Controller</b> as specified in FXML file
+     * @see    IController
+     * 
      */
     protected IController defaultController() {
         return loader.getController();
     }
 
-    public Scene getScene() {
+    /**
+     * Returns the content parent of this view
+     * @return display context
+     * 
+     */
+    public final Scene getScene() {
         return scene;
     }
 
-    public FXMLLoader getLoader() {
+    public final FXMLLoader getLoader() {
         return loader;
     }
 }

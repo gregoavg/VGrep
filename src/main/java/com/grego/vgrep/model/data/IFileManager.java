@@ -5,17 +5,48 @@
 package com.grego.vgrep.model.data;
 
 /**
- *
- * @author grigo_000
+ * Represents a manager for <code>ADataFile</code>. It is able to append,
+ * retrieve and remove data files.
+ * 
+ * @author Grego
+ * 
  */
 public interface IFileManager {
 
-    void addFile(EDataType dataType, ADataFile dataFile);
+    /**
+     * Provides a file, of a particular label, to the manager.
+     * 
+     * @param dataLabel 
+     * @param dataFile file to be stored
+     * @see EDataLabel
+     * @see ADataFile
+     * 
+     */
+    void addFile(EDataLabel dataLabel, ADataFile dataFile);
     
-    ADataFile getFile(EDataType dataType);
+    /**
+     * Retrieves a file of a particular label
+     * 
+     * @param dataLabel type of usage 
+     * @return data file
+     * @see EDataLabel
+     * 
+     */
+    ADataFile getFile(EDataLabel dataLabel);
     
-    void remove(EDataType dataType);
+    /**
+     * Removes file of a particular label
+     * 
+     * @param dataLabel type of usage 
+     * @see EDataLabel
+     * 
+     */
+    void remove(EDataLabel dataLabel);
     
-    void clearData();
+    /**
+     * Removes all stored files.
+     * 
+     */
+    void removeAll();
     
 }
