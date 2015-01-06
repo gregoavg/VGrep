@@ -7,13 +7,14 @@ package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.IFileContent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Implementation of <code>IFileContent</code> for modeling document file
  * content, that consists of lines that contain words in the form of columns.
  * 
- * @author Grego
+ * @author Grigorios
  */
 public final class DocumentContent implements IFileContent<String> {
 
@@ -25,7 +26,7 @@ public final class DocumentContent implements IFileContent<String> {
     }
     
     //called from content builder
-    private DocumentContent(List<Line> lines) {
+    private DocumentContent(Collection<Line> lines) {
         this.lines = new ArrayList<>(lines);
     }
     

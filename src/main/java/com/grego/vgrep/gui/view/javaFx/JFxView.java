@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * JavaFX framework and run on it's thread.
  * 
  * @author Grigorios
- * @see    IView
+ * 
  */
 public abstract class JFxView implements IView {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxView.class);
@@ -60,7 +60,7 @@ public abstract class JFxView implements IView {
      * 
      */
     @Override
-    public void dispose() {
+    public final void dispose() {
         Stage stage = (Stage) scene.getWindow();
         stage.setScene(new Scene(new Pane()));
         stage.hide();
@@ -100,7 +100,7 @@ public abstract class JFxView implements IView {
      * @see    IController
      * 
      */
-    protected final IController defaultController() {
+    protected IController defaultController() {
         return loader.getController();
     }
 
@@ -109,11 +109,11 @@ public abstract class JFxView implements IView {
      * @return display context
      * 
      */
-    public Scene getScene() {
+    public final Scene getScene() {
         return scene;
     }
 
-    public FXMLLoader getLoader() {
+    public final FXMLLoader getLoader() {
         return loader;
     }
 }

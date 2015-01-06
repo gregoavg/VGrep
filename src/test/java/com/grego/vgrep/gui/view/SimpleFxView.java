@@ -19,7 +19,8 @@ import com.grego.vgrep.gui.view.javaFx.JFxView;
 import java.util.Map;
 
 /**
- *
+ * Simple <code>JFxView</code> implementation for test purposes.
+ * 
  * @author Grigorios
  */
 public class SimpleFxView extends JFxView {

@@ -14,6 +14,12 @@ package com.grego.vgrep.model.holder;
  */
 public interface IHolder<V> {
     
+    /**
+     * Returns reference to the holed value
+     * 
+     * @return holed value
+     * 
+     */
     V getValue();
 
 }

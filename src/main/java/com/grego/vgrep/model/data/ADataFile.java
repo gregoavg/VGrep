@@ -90,7 +90,6 @@ public abstract class ADataFile {
         return result;
     }
 
-    @SuppressWarnings("rawtypes")
     private static final ADataFile EMPTY_DATA_FILE = new EmptyDataFile();
 
     /**
