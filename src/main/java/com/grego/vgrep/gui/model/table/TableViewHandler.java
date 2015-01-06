@@ -24,6 +24,16 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 
+/**
+ * Implementation of <code>IComponentHandler</code> specially for managing
+ * JavaFX's <code>TableView</code> control object. It holds a field reference to
+ * <code>TableView</code> component and manages it's dataset by adapting it to a
+ * <code>TableColumnModel</code>. The dataset is populated by a provided data
+ * file from application's model.
+ *
+ * @author Grego
+ *
+ */
 public final class TableViewHandler implements IComponentHandler {
 
     private final TableView table;
@@ -31,6 +41,7 @@ public final class TableViewHandler implements IComponentHandler {
 
     private final List<Line> dataSet = FXCollections.observableArrayList();
     private final TableColumnModel dataSetColumns = new TableColumnModel();
+
     private final IContentLoader contentLoader = new AsyncContentLoader();
 
     public TableViewHandler(TableView table) {
@@ -66,6 +77,11 @@ public final class TableViewHandler implements IComponentHandler {
 
     }
 
+    /**
+     * Configures loader with a callback event that need to be executed after
+     * the lazy initialization of file content.
+     * 
+     */
     private void setupLoader() {
         final ICallback<IFileContent> afterContentLoad = (content) -> {
             dataSet.addAll(content.list());
@@ -88,9 +104,9 @@ public final class TableViewHandler implements IComponentHandler {
 
     @Override
     public List<IHolder> getSelectedValues() {
-        List<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
         final List<IHolder> selectedValues = new ArrayList<>();
 
+        List<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
         selectedCells.forEach((TablePosition position) -> {
             final IFileContent<String> content = dataModel.getContent();
             String selectedValue = content.getElementAt(position.getRow(), position.getColumn());

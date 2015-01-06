@@ -16,7 +16,7 @@
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.EDataLabel;
 import com.grego.vgrep.model.data.SimpleFileManager;
 import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
@@ -49,25 +49,25 @@ public final class ViewModel implements IModel {
     /**
      * Attaches file to the file manager
      * 
-     * @param dataType reference type of a file instance.
+     * @param dataLabel reference type of a file instance.
      * @param file the file instance to be held by the manager
-     * @see   EDataType
+     * @see   EDataLabel
      * 
      */
-    public void addFile(EDataType dataType, File file) {
-        fileManager.addFile(dataType, new DocumentFile(file));
+    public void addFile(EDataLabel dataLabel, File file) {
+        fileManager.addFile(dataLabel, new DocumentFile(file));
         fireDataChanged();
     }
 
     /**
      * Removes a file from the file manager
      * 
-     * @param dataType reference type of a file instance.
-     * @see   EDataType
+     * @param dataLabel reference type of a file instance.
+     * @see   EDataLabel
      * 
      */
-    public void remove(EDataType dataType) {
-        fileManager.remove(dataType);
+    public void remove(EDataLabel dataLabel) {
+        fileManager.remove(dataLabel);
         fireDataChanged();
     }
 
@@ -75,21 +75,21 @@ public final class ViewModel implements IModel {
      * remove all files in file manager
      */
     public void clearData() {
-        fileManager.clearData();
+        fileManager.removeAll();
         fireDataChanged();
     }
 
     /**
      * Retrieves an open file from manager
      * 
-     * @param  dataType reference type of a file instance.
+     * @param  dataLabel reference type of a file instance.
      * @return a requested file instance from file manager or 
      *         empty file if none, of this data type, exists in file manager. 
-     * @see    EDataType
+     * @see    EDataLabel
      * 
      */
-    public ADataFile getFile(EDataType dataType) {
-        return fileManager.getFile(dataType);
+    public ADataFile getFile(EDataLabel dataLabel) {
+        return fileManager.getFile(dataLabel);
     }
 
     /**

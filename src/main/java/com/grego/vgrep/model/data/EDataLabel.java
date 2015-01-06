@@ -17,10 +17,15 @@
 package com.grego.vgrep.model.data;
 
 /**
- *
+ * Enumeration of labels that define data usage. A file could be labeled as
+ * source or target. Source data content is used as parameter and target data
+ * as context. This is helpful for the reference extraction process,
+ * as source data parameters would be compared with target data.
+ * 
  * @author Grigorios
+ * 
  */
-public enum EDataType {
+public enum EDataLabel {
     SOURCE,
     TARGET;
 }

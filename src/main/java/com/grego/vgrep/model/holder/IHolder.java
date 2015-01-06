@@ -6,9 +6,11 @@
 package com.grego.vgrep.model.holder;
 
 /**
- *
+ * Represents a holder of a particular value.
+ * 
  * @author Grigorios
- * @param <V> value type
+ * @param <V> type of the holed value
+ * 
  */
 public interface IHolder<V> {
     

@@ -7,6 +7,7 @@ package com.grego.vgrep.gui.control.loader;
 
 import com.grego.vgrep.event.ICallable;
 import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.data.IFileContent;
 
 /**
  * Representer for instances responsible to load contents from files.
@@ -16,7 +17,7 @@ import com.grego.vgrep.model.data.ADataFile;
  * 
  * @author Grego
  */
-public interface IContentLoader extends ICallable {
+public interface IContentLoader extends ICallable<IFileContent> {
 
     /**
      * Loads content from a given <code>ADataFile</code> instance.

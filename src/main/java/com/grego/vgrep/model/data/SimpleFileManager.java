@@ -9,31 +9,34 @@ import static com.grego.vgrep.model.data.ADataFile.getEmptyDataFile;
 import java.util.EnumMap;
 
 /**
- *
+ * Simple implementation of <code>IFileManager</code>, defined by a map of 
+ * data files to their labels. This map has an entry set, with size defined by
+ * the number of enumerable labels that this application models.
+ * 
  * @author Grigorios
  */
 public final class SimpleFileManager implements IFileManager {
 
-    private final Map<EDataType, ADataFile> contentMapper = new EnumMap<>(EDataType.class);
+    private final Map<EDataLabel, ADataFile> contentMapper = new EnumMap<>(EDataLabel.class);
 
     @Override
-    public void addFile(EDataType dataType, ADataFile dataFile) {
-        contentMapper.put(dataType, dataFile);
+    public void addFile(EDataLabel dataLabel, ADataFile dataFile) {
+        contentMapper.put(dataLabel, dataFile);
     }
 
     @Override
-    public void remove(EDataType dataType) {
-        contentMapper.remove(dataType);
+    public void remove(EDataLabel dataLabel) {
+        contentMapper.remove(dataLabel);
     }
     
     @Override
-    public ADataFile getFile(EDataType dataType) {
-        return contentMapper.containsKey(dataType) 
-                ? contentMapper.get(dataType) : getEmptyDataFile();
+    public ADataFile getFile(EDataLabel dataLabel) {
+        return contentMapper.containsKey(dataLabel) 
+                ? contentMapper.get(dataLabel) : getEmptyDataFile();
     }
 
     @Override
-    public void clearData() {
+    public void removeAll() {
         contentMapper.clear();
     }
 

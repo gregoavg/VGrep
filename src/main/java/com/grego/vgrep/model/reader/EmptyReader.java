@@ -11,7 +11,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * helper class to handle empty sourceFile reader
+ * Helper class to handle empty sourceFile reader. This helper is part of the
+ * application's null object pattern implementation and it's main use is to
+ * eliminate conditional statements about reader capability to read a data file.
+ * 
+ * @author Grego
+ * 
  */
 public final class EmptyReader implements IFileReader {
 

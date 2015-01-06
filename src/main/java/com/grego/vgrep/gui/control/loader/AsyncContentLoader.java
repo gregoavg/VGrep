@@ -24,13 +24,12 @@ public final class AsyncContentLoader implements IContentLoader {
     //thread management service
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    //empty callback
-    private ICallback callback = (data) -> {
-        //empty call back
+    private ICallback<IFileContent> callback = (data) -> {
+        //empty callback
     };
 
     @Override
-    public void setCallback(ICallback callback) {
+    public void setCallback(ICallback<IFileContent> callback) {
         this.callback = Objects.requireNonNull(callback, "Callback must not be null!");
     }
 

@@ -22,7 +22,7 @@ import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.model.IComponentHandler;
 import com.grego.vgrep.gui.model.table.TableViewHandler;
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.EDataLabel;
 import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -50,11 +50,11 @@ public final class MainView extends JFxView {
 
     @Override
     public void update() {
-        sourceFilePathTextField.setText(model.getFile(EDataType.SOURCE).toString());
-        targetFilePathTextField.setText(model.getFile(EDataType.TARGET).toString());
+        sourceFilePathTextField.setText(model.getFile(EDataLabel.SOURCE).toString());
+        targetFilePathTextField.setText(model.getFile(EDataLabel.TARGET).toString());
         
-        sourceTableHandler.setDataModel(model.getFile(EDataType.SOURCE));
-        targetTableHandler.setDataModel(model.getFile(EDataType.TARGET));
+        sourceTableHandler.setDataModel(model.getFile(EDataLabel.SOURCE));
+        targetTableHandler.setDataModel(model.getFile(EDataLabel.TARGET));
         LOGGER.info("Main View updated by model request");
     }
 
@@ -71,12 +71,12 @@ public final class MainView extends JFxView {
         
         sourceFileSelectButton = (Button) componentMap.get("selectSourceFileButton");
         sourceFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.SOURCE));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataLabel.SOURCE));
         });
         
         targetFileSelectButton = (Button) componentMap.get("selectTargetFileButton");
         targetFileSelectButton.setOnAction((actionEvent) -> {
-            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataType.TARGET));
+            mainViewController.selectFileButtonClick(new FileSelectionEvent(EDataLabel.TARGET));
         });
         
         findReferencesButton = (Button) componentMap.get("findReferencesButton");

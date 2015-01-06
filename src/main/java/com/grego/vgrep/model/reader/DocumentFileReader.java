@@ -27,11 +27,15 @@ import java.io.IOException;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Implementation of <code>IReader</code> for document files. This type of reader
+ * is able to self-define the file type of the provided data file and request the
+ * appropriate parse strategy in order to use it for traversing the document.
+ * Moreover with the help of <code>ContentBuilder</code>, it collects and returns
+ * the document contents to clients.
+ * 
  * @author Grigorios
  */
 public class DocumentFileReader implements IFileReader {
-
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
 
     @Override

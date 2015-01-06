@@ -24,7 +24,7 @@ import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.EDataLabel;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -73,13 +73,13 @@ public final class MainViewController implements IController, Initializable {
         fileChooser.setTitle("Select File");
         File selectedFile = fileChooser.showOpenDialog((Window) viewManager.getWindow());
         if (selectedFile != null) {
-            model.addFile(event.getDataType(), selectedFile);
+            model.addFile(event.getDataLabel(), selectedFile);
         }
     }
 
     public void findReferences(final FindReferencesEvent event) {
-        final ADataFile file = model.getFile(EDataType.TARGET);
-        final ADataFile sourceFile = model.getFile(EDataType.SOURCE);
+        final ADataFile file = model.getFile(EDataLabel.TARGET);
+        final ADataFile sourceFile = model.getFile(EDataLabel.SOURCE);
 
         List<IReference> references = new ArrayList<>();
 

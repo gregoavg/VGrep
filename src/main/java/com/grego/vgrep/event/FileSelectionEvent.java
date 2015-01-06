@@ -16,7 +16,7 @@
 
 package com.grego.vgrep.event;
 
-import com.grego.vgrep.model.data.EDataType;
+import com.grego.vgrep.model.data.EDataLabel;
 
 /**
  *
@@ -24,13 +24,13 @@ import com.grego.vgrep.model.data.EDataType;
  */
 public final class FileSelectionEvent extends ViewEvent {
     
-    private final EDataType dataType;
+    private final EDataLabel dataLabel;
 
-    public FileSelectionEvent(EDataType dataType) {
-        this.dataType = dataType;
+    public FileSelectionEvent(EDataLabel dataLabel) {
+        this.dataLabel = dataLabel;
     }
 
-    public EDataType getDataType() {
-        return dataType;
+    public EDataLabel getDataLabel() {
+        return dataLabel;
     }
 }
