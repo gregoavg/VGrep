@@ -5,9 +5,10 @@
  */
 package com.grego.vgrep.gui.model.table;
 
-import java.util.List;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
+
+import java.util.List;
 
 /**
  *

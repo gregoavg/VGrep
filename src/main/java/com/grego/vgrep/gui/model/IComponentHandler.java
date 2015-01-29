@@ -6,50 +6,47 @@
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.model.holder.IHolder;
-import com.grego.vgrep.model.data.ADataFile;
+
 import java.util.List;
 
 /**
  * Represents a manager for view components.
  * 
  * @author Grigorios
+ * @param <T> the type of component that it handles.
+ * @param <M> the type of the model data used as feed
+ *            for the component.
  */
-public interface IComponentHandler {
+public interface IComponentHandler<T, M> {
    
     /**
      * Provides necessary model data to the component handler.
      * 
-     * @param data model to be presented.
-     * @see   ADataFile
-     * 
+     * @param model the data to be used as feed for the component.
      */
-    void setDataModel(ADataFile data);
+    void setModel(M model);
     
     /**
      * Informs clients about the model of the displayed data.
      * 
-     * @return displayed data model
-     * @see    ADataFile
-     * 
+     * @return the model data of this component.
      */
-    ADataFile getDataModel();
+    M getModel();
     
     /**
-     * Returns the component that this manager holds.
+     * Returns the component that this handler holds.
      * 
-     * @return the component being managed
-     * 
+     * @return the component being handled.
      */
-    Object getComponent();
+    T getComponent();
     
     /**
-     * Returns the user selected values
-     * 
-     * @return list of values wrapped in a holder or 
-     *         <b>empty list</b> if nothing is selected.
-     * @see    IHolder
-     * 
+     * Returns  the user selected values
+     *
+     * @param   <E> type of selected values
+     * @return  list of values or <b>empty list</b> if nothing is selected.
+     * @see     IHolder
      */
-    List<IHolder> getSelectedValues();
+    <E> List<E> getSelectedValues();
     
 }

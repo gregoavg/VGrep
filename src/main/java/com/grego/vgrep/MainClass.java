@@ -18,8 +18,9 @@ package com.grego.vgrep;
 import com.grego.vgrep.app.factory.ApplicationFactory;
 import com.grego.vgrep.app.launcher.ILaunchable;
 
-//static import of application types 
-import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.*;
+import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.JavaFX;
+
+//static import of application types
 
 /**
  * Application's main class 

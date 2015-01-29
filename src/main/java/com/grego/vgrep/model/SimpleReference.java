@@ -5,9 +5,11 @@
 package com.grego.vgrep.model;
 
 import com.grego.vgrep.model.data.EDataLabel;
+
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+
 import static com.grego.vgrep.model.data.EDataLabel.SOURCE;
 import static com.grego.vgrep.model.data.EDataLabel.TARGET;
 
@@ -57,7 +59,7 @@ public class SimpleReference implements IReference<String,String> {
     
     @Override
     public String toString() {
-        return "Source: " + refMapper.get(SOURCE) + ", Target: " + refMapper.get(TARGET);
+        return refMapper.get(SOURCE) + " : " + refMapper.get(TARGET);
     }
 
 }

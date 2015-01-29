@@ -16,15 +16,17 @@
 package com.grego.vgrep.model.reader;
 
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IFileContent;
+import com.grego.vgrep.model.data.IContent;
 import com.grego.vgrep.model.data.document.DocumentContent;
 import com.grego.vgrep.model.data.document.DocumentContent.ContentBuilder;
+import com.grego.vgrep.model.data.document.Line;
+import com.grego.vgrep.model.reader.fileParser.DocumentParseStrategyFactory;
 import com.grego.vgrep.model.reader.fileParser.EFileType;
-import com.grego.vgrep.model.reader.fileParser.IDocumentParseStrategyFactory;
 import com.grego.vgrep.utils.FileUtils;
-import java.io.File;
-import java.io.IOException;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.Collection;
 
 /**
  * Implementation of <code>IReader</code> for document files. This type of
@@ -35,18 +37,19 @@ import org.slf4j.LoggerFactory;
  *
  * @author Grigorios
  */
-public class DocumentFileReader implements IFileReader {
+public class DocumentReader implements IReader {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentFileReader.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DocumentReader.class);
 
     @Override
-    public IFileContent<String> read(final ADataFile dataFile) {
+    public IContent<Line> read(final ADataFile dataFile) {
         File sourceFile = dataFile.getSourceFile();
         DocumentContent.ContentBuilder builder = new ContentBuilder();
+
         final EFileType fileType = FileUtils.getFileType(sourceFile);
-        IDocumentParseStrategyFactory.getInstance(fileType)
-                .parse(sourceFile)
-                .forEach(builder::appendLine);
+        final Collection<String> lines = DocumentParseStrategyFactory.getStrategy(fileType)
+                .parse(sourceFile);
+        lines.forEach((String line) -> builder.appendLine(line));
         return builder.createContents();
     }
 

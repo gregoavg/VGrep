@@ -6,12 +6,13 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *

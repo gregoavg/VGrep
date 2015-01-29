@@ -5,6 +5,7 @@
  */
 package com.grego.vgrep.event;
 
+
 /**
  *
  * @author Grego
@@ -21,5 +22,19 @@ public interface ICallback<T> {
      * 
      */
     void onReturn(T data);
+
+    /**
+     * Provides clients with an empty callback.
+     * Useful for <code>ICallable</code> operations that require an not null
+     * implementation of <code>ICallback</code>, but the caller is not
+     * interested in updating it's content on operation completion.
+     *
+     * @param <E> type of data
+     * @return ICallback a callback with empty method body.
+     */
+    static <E> ICallback<E> EMPTY() {
+        return ( noData ) -> { /* Empty method body */ };
+    }
+
     
 }

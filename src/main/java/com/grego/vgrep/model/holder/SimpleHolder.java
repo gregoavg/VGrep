@@ -12,11 +12,11 @@ package com.grego.vgrep.model.holder;
  * @author Grigorios
  * @param <V> type of the holed value.
  */
-public final class SimpleValueHolder<V> implements IHolder<V> {
+public final class SimpleHolder<V> implements IHolder<V> {
 
     private final V value;
 
-    public SimpleValueHolder(V value) {
+    public SimpleHolder(V value) {
         this.value = value;
     }
     

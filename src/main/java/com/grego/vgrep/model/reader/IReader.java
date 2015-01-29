@@ -6,7 +6,7 @@
 package com.grego.vgrep.model.reader;
 
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IFileContent;
+import com.grego.vgrep.model.data.IContent;
 
 /**
  * Represents a reader for data files. It is capable of traversing the file
@@ -15,7 +15,7 @@ import com.grego.vgrep.model.data.IFileContent;
  * @author Grigorios
  * 
  */
-public interface IFileReader {
+public interface IReader {
 
     /**
      * Reads the provided file and returns it's contents.
@@ -23,6 +23,6 @@ public interface IFileReader {
      * @param dataFile the file to read.
      * @return contents of file.
      */
-    IFileContent read(final ADataFile dataFile);
+    IContent<?> read(final ADataFile dataFile);
 
 }

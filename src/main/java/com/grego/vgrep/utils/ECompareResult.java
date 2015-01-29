@@ -17,6 +17,9 @@
 package com.grego.vgrep.utils;
 
 /**
+ * Enumerates the possible outcomes of a comparison
+ * between instances. This enumeration works as helper
+ * for {@link java.util.Comparator} results.
  *
  * @author Grigorios
  */
@@ -24,7 +27,6 @@ public enum  ECompareResult {
     Equal(0),
     NotEqual(-1);
 
-    
     private final int result;
     
     private ECompareResult(int result) {

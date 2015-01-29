@@ -16,6 +16,7 @@
 package com.grego.vgrep.gui.view;
 
 import com.grego.vgrep.gui.view.javaFx.JFxView;
+
 import java.util.Map;
 
 /**

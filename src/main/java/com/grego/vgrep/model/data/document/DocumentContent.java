@@ -5,18 +5,19 @@
  */
 package com.grego.vgrep.model.data.document;
 
-import com.grego.vgrep.model.data.IFileContent;
+import com.grego.vgrep.model.data.IContent;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * Implementation of <code>IFileContent</code> for modeling document file
- * content, that consists of lines that contain words in the form of columns.
+ * Implementation of {@link com.grego.vgrep.model.data.IContent} for modeling
+ * document file content, that consists of lines that contain words in the form of columns.
  * 
  * @author Grigorios
  */
-public final class DocumentContent implements IFileContent<String> {
+public final class DocumentContent implements IContent<Line> {
 
     private final List<Line> lines;
 
@@ -34,11 +35,22 @@ public final class DocumentContent implements IFileContent<String> {
         return lines.size();
     }
 
+    /**
+     * Returns an independent and ready for manipulation, list of content lines.
+     * When the content is provided by this method, clients can freely manipulate
+     * the list, as opposed, by their interest.
+     *
+     * @return a list of lines
+     */
     @Override
-    public List<Comparable> list() {
+    public List<Line> list() {
         return new ArrayList<>(lines);
     }
-    
+
+    public List<Line> getLines() {
+        return lines;
+    }
+
     @Override
     public String getElementAt(int lineIndex, int columnIndex) {
         try {

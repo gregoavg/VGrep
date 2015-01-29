@@ -4,9 +4,10 @@
  */
 package com.grego.vgrep.model.data;
 
-import java.util.Map;
-import static com.grego.vgrep.model.data.ADataFile.getEmptyDataFile;
 import java.util.EnumMap;
+import java.util.Map;
+
+import static com.grego.vgrep.model.data.ADataFile.getEmptyDataFile;
 
 /**
  * Simple implementation of <code>IFileManager</code>, defined by a map of 

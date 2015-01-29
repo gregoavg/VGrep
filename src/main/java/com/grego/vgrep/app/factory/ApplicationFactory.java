@@ -28,10 +28,10 @@ public final class ApplicationFactory {
     /**
      * Returns an application instance, defined by a given application type.
      * 
-     * @param appType the application type to be instantiated and returned
-     * @return        the requested application instance or the default one 
-     *                if no application of this type exists.
-     * @see           EApplicationType
+     * @param appType   the application type to be instantiated and returned
+     * @return          the requested application instance or the default one
+     *                  if no application of this type exists.
+     * @see             EApplicationType
      * 
      */
     public static ILaunchable getInstance(EApplicationType appType) {
@@ -49,7 +49,7 @@ public final class ApplicationFactory {
      * 
      */
     public static enum EApplicationType {
-        JavaFX;
+        JavaFX
     }
     
 }

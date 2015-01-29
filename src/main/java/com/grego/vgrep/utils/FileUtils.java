@@ -5,12 +5,13 @@
 package com.grego.vgrep.utils;
 
 import com.grego.vgrep.model.reader.fileParser.EFileType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.UnknownFormatFlagsException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *

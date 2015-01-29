@@ -5,6 +5,8 @@
  */
 package com.grego.vgrep.event;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Represents a caller who is capable of executing it's operations with callbacks.
  * A callback can be invoked by this representer whenever the event process
@@ -23,5 +25,5 @@ public interface ICallable<T> {
      * @see ICallback
      * 
      */
-    void setCallback(ICallback<T> callback);
+    void setCallback(@NotNull ICallback<T> callback);
 }

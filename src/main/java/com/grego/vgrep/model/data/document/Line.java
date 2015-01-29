@@ -5,12 +5,14 @@
  */
 package com.grego.vgrep.model.data.document;
 
+import com.grego.vgrep.utils.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 import static com.grego.vgrep.utils.ECompareResult.Equal;
 import static com.grego.vgrep.utils.ECompareResult.NotEqual;
-import java.util.List;
-import com.grego.vgrep.utils.StringUtils;
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * Core model data block that contains words in columnar mode. Also it is possible
@@ -100,7 +102,7 @@ public final class Line implements Comparable<Line> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final String otherLineText = ((Line) obj).toString();
+        final String otherLineText = obj.toString();
         final String lineText = this.toString();
 
         return lineText.equals(otherLineText);

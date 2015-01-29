@@ -16,11 +16,12 @@
 
 package com.grego.vgrep.utils;
 
+import junit.framework.TestCase;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import junit.framework.TestCase;
-import org.junit.Test;
 
 /**
  *

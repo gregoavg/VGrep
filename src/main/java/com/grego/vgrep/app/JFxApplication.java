@@ -21,11 +21,13 @@ import com.grego.vgrep.gui.manager.JFxWindowManager;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.MainView;
-import java.util.Objects;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * JavaFX framework application initializer implementation, adapted as launchable,
@@ -35,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Grigorios
  */
-public class JFxApplication extends Application implements ILaunchable {
+public final class JFxApplication extends Application implements ILaunchable {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFxApplication.class);
     
     @Override
@@ -53,8 +55,8 @@ public class JFxApplication extends Application implements ILaunchable {
     }
 
     @Override
-    public synchronized void invokeLauncher(String[] args) {
-        String[] arguments = Objects.requireNonNull(args);
+    public synchronized void invokeLauncher(@NotNull String[] args) {
+        String[] arguments = Objects.requireNonNull(args, "Launch arguments can't be null!");
         Application.launch(arguments);
     }
 }

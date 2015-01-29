@@ -6,13 +6,14 @@
 package com.grego.vgreo.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
-import java.util.concurrent.CountDownLatch;
 import javafx.application.Platform;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  *

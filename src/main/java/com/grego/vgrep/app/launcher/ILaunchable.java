@@ -5,6 +5,8 @@
  */
 package com.grego.vgrep.app.launcher;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Adapter for operations that need to be invoked in order to
  * initialize or start their behavior
@@ -19,6 +21,6 @@ public interface ILaunchable {
      * @param args the command arguments
      * 
      */
-    void invokeLauncher(String[] args);
+    void invokeLauncher(@NotNull String[] args);
     
 }

@@ -18,15 +18,16 @@ package com.grego.vgrep.gui.view.javaFx;
 import com.grego.vgrep.gui.control.IController;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.utils.FileUtils;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 /**
  * Abstracted <code>IView</code> implementation for the JavaFX framework.

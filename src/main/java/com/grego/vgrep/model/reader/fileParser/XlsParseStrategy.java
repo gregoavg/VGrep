@@ -4,16 +4,17 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Parse strategy implementation for XLS documents.
@@ -21,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  *
  */
-public final class XlsParseStrategy implements IDocumentParseStrategy {
+public final class XlsParseStrategy implements IParseStrategy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsParseStrategy.class);
 

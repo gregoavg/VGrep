@@ -6,13 +6,14 @@ package com.grego.vgrep.model.reader.fileParser;
 
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import org.slf4j.LoggerFactory;
 
 /**
  * Parse strategy implementation for PDF documents.
@@ -20,9 +21,9 @@ import org.slf4j.LoggerFactory;
  * @author Grigorios
  *
  */
-public final class PDFParseStrategy implements IDocumentParseStrategy {
+public final class PdfParseStrategy implements IParseStrategy {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PDFParseStrategy.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PdfParseStrategy.class);
 
     @Override
     public Collection<String> parse(File file) {

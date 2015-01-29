@@ -7,7 +7,9 @@ package com.grego.vgrep.gui.control.loader;
 
 import com.grego.vgrep.event.ICallback;
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IFileContent;
+import com.grego.vgrep.model.data.IContent;
+
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,24 +21,23 @@ import java.util.concurrent.Executors;
  * 
  * @author Grego
  */
-public final class AsyncContentLoader implements IContentLoader {
+public final class AsyncContentLoader implements ILoader<ADataFile, IContent> {
     
     //thread management service
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    private ICallback<IFileContent> callback = (data) -> {
-        //empty callback
-    };
+    private ICallback<IContent> callback = ICallback.EMPTY();
 
     @Override
-    public void setCallback(ICallback<IFileContent> callback) {
+    public void setCallback(@NotNull ICallback<IContent> callback) {
         this.callback = Objects.requireNonNull(callback, "Callback must not be null!");
     }
 
     @Override
-    public void loadFrom(ADataFile file) {
+    public void loadTo(ADataFile file) {
         executor.execute(() -> {
-            final IFileContent content = file.getContent();
+            // first call to get file content actually loads the content.
+            IContent content = file.getContent();
             callback.onReturn(content);
         });
     }

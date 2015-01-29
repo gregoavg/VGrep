@@ -5,18 +5,17 @@
 package com.grego.vgrep.model.reader.fileParser;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
- * Represents a parse strategy for document files. It gathers the logic, that
+ * Represents a parse strategy for files. It gathers the logic, that
  * is needed, in order to parse the content of a document.
  * 
  * @author Grigorios
  * 
  */
 @FunctionalInterface
-public interface IDocumentParseStrategy {
+public interface IParseStrategy {
     
     /**
      * Returns the content of a document file, as a collection.
@@ -25,6 +24,6 @@ public interface IDocumentParseStrategy {
      * @return collection of strings
      * 
      */
-    Collection<String> parse(File file);
+    <T> Collection<T> parse(File file);
 
 }

@@ -4,9 +4,6 @@
  */
 package com.grego.vgrep.model.reader.fileParser;
 
-import java.io.File;
-import java.util.Collections;
-
 /**
  * Static Factory pattern implementation, in order to provide clients with
  * the appropriate document parse strategy.
@@ -14,7 +11,7 @@ import java.util.Collections;
  * @author Grigorios
  * 
  */
-public final class IDocumentParseStrategyFactory {
+public final class DocumentParseStrategyFactory {
 
     /**
      * Returns a document parse strategy instance, based on 
@@ -28,21 +25,17 @@ public final class IDocumentParseStrategyFactory {
      * @see    EFileType
      * 
      */
-    public static IDocumentParseStrategy getInstance(EFileType type) {
+    public static IParseStrategy getStrategy(EFileType type) {
         switch (type)
         {
             case PDF:
-                return new PDFParseStrategy();
+                return new PdfParseStrategy();
             case XLS:
                 return new XlsParseStrategy();
             case TXT:
                 return new SimpleParseStrategy();
-            case OTHER:
-                return new SimpleParseStrategy();
             default:
-                return (file) -> {
-                    return Collections.emptyList();
-                };
+                return new SimpleParseStrategy();
         }
     }
     

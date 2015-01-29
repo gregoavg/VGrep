@@ -5,12 +5,13 @@
  */
 package com.grego.vgrep.gui.model.table;
 
-import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
+
+import java.util.List;
 
 /**
  *

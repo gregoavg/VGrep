@@ -6,11 +6,12 @@
 package com.grego.vgrep.gui.model.table;
 
 import com.grego.vgrep.model.data.document.Line;
-import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
+
+import java.util.List;
 
 /**
  *

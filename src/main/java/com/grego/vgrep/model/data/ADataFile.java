@@ -15,11 +15,11 @@
  */
 package com.grego.vgrep.model.data;
 
-import com.grego.vgrep.model.reader.IFileReader;
-import com.grego.vgrep.model.reader.EmptyReader;
+import com.grego.vgrep.model.reader.IReader;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.util.Objects;
-import org.slf4j.LoggerFactory;
 
 /**
  * Abstract model implementation of file. This abstraction works on top of
@@ -36,9 +36,9 @@ public abstract class ADataFile {
 
     protected final File sourceFile;
 
-    protected final IFileReader reader = Objects.requireNonNull(constructReader());
+    protected final IReader reader = Objects.requireNonNull(constructReader());
 
-    protected volatile IFileContent content = null;
+    protected volatile IContent content = null;
 
     public ADataFile() {
         sourceFile = null;
@@ -68,17 +68,17 @@ public abstract class ADataFile {
      *
      * @return reader instance
      */
-    protected abstract IFileReader constructReader();
+    protected abstract IReader constructReader();
 
     /**
      * Double-check idiom for lazy initialization of file content.
      * 
      * @return content of this file
-     * @see IFileContent
+     * @see IContent
      * 
      */
-    public IFileContent getContent() {
-        IFileContent result = content;
+    public IContent getContent() {
+        IContent result = content;
         if (result == null) { // First check (no locking)
             synchronized (this) {
                 result = content;
@@ -137,8 +137,8 @@ public abstract class ADataFile {
     private static final class EmptyDataFile extends ADataFile {
 
         @Override
-        protected IFileReader constructReader() {
-            return new EmptyReader();
+        protected IReader constructReader() {
+            return emptyReader -> IContent.empty();
         }
     }
 }

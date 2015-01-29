@@ -16,8 +16,9 @@
 package com.grego.vgrep.model.data.document;
 
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.reader.IFileReader;
-import com.grego.vgrep.model.reader.DocumentFileReader;
+import com.grego.vgrep.model.reader.DocumentReader;
+import com.grego.vgrep.model.reader.IReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -39,8 +40,8 @@ public final class DocumentFile extends ADataFile {
     }
 
     @Override
-    protected IFileReader constructReader() {
-        return new DocumentFileReader();
+    protected IReader constructReader() {
+        return new DocumentReader();
     }
 
 }

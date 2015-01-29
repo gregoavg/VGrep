@@ -16,19 +16,20 @@
 package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
-import com.grego.vgrep.model.data.EDataLabel;
-import com.grego.vgrep.model.data.SimpleFileManager;
-import com.grego.vgrep.model.data.IFileManager;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.data.EDataLabel;
+import com.grego.vgrep.model.data.IFileManager;
+import com.grego.vgrep.model.data.SimpleFileManager;
 import com.grego.vgrep.model.data.document.DocumentFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <Code>IModel</code> implementation, for modeling data that need to be

@@ -5,24 +5,25 @@
  */
 package com.grego.vgrep.gui.model.table;
 
-import com.grego.vgrep.gui.control.loader.AsyncContentLoader;
 import com.grego.vgrep.event.ICallback;
-import com.grego.vgrep.gui.control.loader.IContentLoader;
+import com.grego.vgrep.gui.control.loader.AsyncContentLoader;
+import com.grego.vgrep.gui.control.loader.ILoader;
 import com.grego.vgrep.gui.model.IComponentHandler;
-import com.grego.vgrep.model.holder.IHolder;
-import com.grego.vgrep.model.holder.SimpleValueHolder;
 import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IFileContent;
+import com.grego.vgrep.model.data.IContent;
 import com.grego.vgrep.model.data.document.Line;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.grego.vgrep.model.holder.IHolder;
+import com.grego.vgrep.model.holder.SimpleHolder;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Implementation of <code>IComponentHandler</code> specially for managing
@@ -34,7 +35,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
  * @author Grego
  *
  */
-public final class TableViewHandler implements IComponentHandler {
+public final class TableViewHandler implements IComponentHandler<TableView, ADataFile> {
 
     private final TableView table;
     private ADataFile dataModel;
@@ -42,7 +43,7 @@ public final class TableViewHandler implements IComponentHandler {
     private final List<Line> dataSet = FXCollections.observableArrayList();
     private final TableColumnModel dataSetColumns = new TableColumnModel();
 
-    private final IContentLoader contentLoader = new AsyncContentLoader();
+    private final ILoader<ADataFile, IContent> contentLoader = new AsyncContentLoader();
 
     public TableViewHandler(TableView table) {
         this.table = table;
@@ -51,12 +52,12 @@ public final class TableViewHandler implements IComponentHandler {
     }
 
     @Override
-    public ADataFile getDataModel() {
+    public ADataFile getModel() {
         return dataModel;
     }
 
     @Override
-    public void setDataModel(ADataFile dataFile) {
+    public void setModel(ADataFile dataFile) {
         if (!Objects.equals(this.dataModel, dataFile)) {
             this.dataModel = dataFile;
             tableDataChange();
@@ -64,7 +65,7 @@ public final class TableViewHandler implements IComponentHandler {
     }
 
     @Override
-    public Object getComponent() {
+    public TableView getComponent() {
         return table;
     }
 
@@ -83,35 +84,30 @@ public final class TableViewHandler implements IComponentHandler {
      * 
      */
     private void setupLoader() {
-        final ICallback<IFileContent> afterContentLoad = (content) -> {
+        final ICallback<IContent> afterContentLoad = (content) -> {
             dataSet.addAll(content.list());
-            dataSet.forEach((Line line) -> {
-                dataSetColumns.scaleTo(line.getColumns());
-            });
-            Platform.runLater(() -> {
-                table.getColumns().setAll(dataSetColumns.getColumns());
-            });
+            dataSet.forEach((line) -> dataSetColumns.scaleTo(line.getColumns()));
+            Platform.runLater(() -> table.getColumns().setAll(dataSetColumns.getColumns()));
         };
         contentLoader.setCallback(afterContentLoad);
     }
 
-    @SuppressWarnings("unchecked")
     private void tableDataChange() {
         dataSet.clear();
         dataSetColumns.clear();
-        contentLoader.loadFrom(dataModel);
+        contentLoader.loadTo(dataModel);
     }
 
     @Override
-    public List<IHolder> getSelectedValues() {
-        final List<IHolder> selectedValues = new ArrayList<>();
+    public List<IHolder<String>> getSelectedValues() {
+        final List<IHolder<String>> selectedValues = new ArrayList<>();
 
         List<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
         selectedCells.forEach((TablePosition position) -> {
-            final IFileContent<String> content = dataModel.getContent();
+            final IContent<String> content = dataModel.getContent();
             String selectedValue = content.getElementAt(position.getRow(), position.getColumn());
             if (!selectedValue.isEmpty()) {
-                selectedValues.add(new SimpleValueHolder(selectedValue));
+                selectedValues.add(new SimpleHolder<>(selectedValue));
             }
         });
         return selectedValues;
