@@ -38,6 +38,7 @@ public abstract class ADataFile {
 
     protected final IReader reader = Objects.requireNonNull(constructReader());
 
+    // Proper declaration for the lazy initialization purpose
     protected volatile IContent content = null;
 
     public ADataFile() {

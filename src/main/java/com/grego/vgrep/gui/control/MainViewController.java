@@ -87,8 +87,9 @@ public final class MainViewController implements IController, Initializable {
         List<IReference> references = new ArrayList<>();
 
 
+        List<Line> listedTargetContent  = targetFile.getContent().list();
         for(IHolder<String> pattern : event.getPatterns()) {
-            for(Line line : (List<Line>) targetFile.getContent().list()) {
+            for(Line line : listedTargetContent) {
                 for(String word : line.getColumns()) {
                     if(word.equals(pattern.getValue())) {
                         references.add(new SimpleReference(pattern.getValue(), line.toString()));
@@ -97,20 +98,10 @@ public final class MainViewController implements IController, Initializable {
             }
             
         }
-        //TODO: optimization
-        /*for (Comparable line : (List<Comparable>) file.getContent().list()) {
-            for (Comparable sourceLine : (List<Comparable>) sourceFile.getContent().list()) {
-                if (line.compareTo(sourceLine) == Equal.getIntegerValue()) {
-                    references.add(new SimpleReference(sourceLine.toString(), line.toString()));
-                }
-            }
-        }*/
 
-        System.out.println("List of References: ");
+        System.out.println("_____________List of References_____________");
         System.out.println("Total references found: " + references.size());
-        references.forEach((IReference reference) -> {
-            LOGGER.info(reference.toString());
-        });
+        references.forEach((reference) -> LOGGER.info(reference.toString()));
     }
 
 }

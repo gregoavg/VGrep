@@ -50,6 +50,7 @@ public final class JFxApplication extends Application implements ILaunchable {
         final IView mainView = new MainView(new ViewModel());
         windowManager.setWindowSize(600, 400);
         windowManager.setDisplay(mainView);
+        windowManager.setIcon("/images/logo.png");
         windowManager.setTitle("Visual File Grep");
         windowManager.setVisibility(true);
     }

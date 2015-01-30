@@ -18,14 +18,18 @@ package com.grego.vgrep.gui.manager;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.javaFx.JFxView;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
 /**
  * Singleton instance implementation of <code>IWindowManager</code> 
- * implementation for the JavaFX framework. It encapsules a JavaFX stage instance
+ * implementation for the JavaFX framework. It encapsulates a JavaFX stage instance
  * as a root window, that serves as parent for JavaFX view instances.
  *
  * @author Grigorios
@@ -40,12 +44,12 @@ public enum JFxWindowManager implements IWindowManager {
     
     private JFxView currentDisplay = null;
 
-    // default stage dimentions
-    private Point2D stageDimentions = new Point2D(800, 600);
+    // default stage size
+    private Point2D stageSize = new Point2D(800, 600);
 
     private JFxWindowManager() {
-        stage.setWidth(stageDimentions.getX());
-        stage.setHeight(stageDimentions.getY());
+        stage.setWidth(stageSize.getX());
+        stage.setHeight(stageSize.getY());
     }
 
     @Override
@@ -58,7 +62,7 @@ public enum JFxWindowManager implements IWindowManager {
         }
     }
 
-    public IView getCurentDisplay() {
+    public IView getCurrentDisplay() {
         return currentDisplay;
     }
 
@@ -75,8 +79,8 @@ public enum JFxWindowManager implements IWindowManager {
 
     @Override
     public void setWindowSize(int width, int height) {
-        stageDimentions = new Point2D(width, height);
-        stageDimentionsChanged();
+        stageSize = new Point2D(width, height);
+        stageSizeChanged();
     }
 
     @Override
@@ -88,17 +92,23 @@ public enum JFxWindowManager implements IWindowManager {
     public void setTitle(String title) {
         stage.setTitle(title);
     }
+
+    @Override
+    public void setIcon(@NotNull String path) {
+        final String iconPath = Objects.requireNonNull(path, "Path to icon must not be null!");
+        stage.getIcons().add(new Image(iconPath));
+    }
     
     /**
      * Updates stage size after the <code>setWindowSize</code> method call.
      */
-    private void stageDimentionsChanged() {
+    private void stageSizeChanged() {
         LOGGER.info("Window Manager's root window size, changed by user request");
-        LOGGER.info("New Window dimentions are set to: "
-                +"Width: " + stageDimentions.getX()
-                +" Hight: " + stageDimentions.getY());
-        stage.setWidth(stageDimentions.getX());
-        stage.setHeight(stageDimentions.getY());
+        LOGGER.info("New Window size is set to: "
+                +"Width: " + stageSize.getX()
+                +" Height: " + stageSize.getY());
+        stage.setWidth(stageSize.getX());
+        stage.setHeight(stageSize.getY());
     }
 
 }

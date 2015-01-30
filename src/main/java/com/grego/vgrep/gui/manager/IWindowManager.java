@@ -18,6 +18,8 @@ package com.grego.vgrep.gui.manager;
 
 import com.grego.vgrep.gui.view.IView;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Represents a supervisor for a managed window that
  * serves as parent placeholder for views.
@@ -67,5 +69,12 @@ public interface IWindowManager {
      * 
      */
     void setTitle(String title);
-    
+
+    /**
+     * Loads a custom image, addressed by the given path,
+     * as main icon of the application window.
+     *
+     * @param path the url path to image icon
+     */
+    void setIcon(@NotNull String path);
 }

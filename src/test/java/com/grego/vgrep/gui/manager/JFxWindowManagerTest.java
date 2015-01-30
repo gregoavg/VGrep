@@ -36,20 +36,20 @@ public class JFxWindowManagerTest extends TestCase {
         IView view = new SimpleFxView();
         JFxWindowManager aWindowManager = (JFxWindowManager) windowManager;
         aWindowManager.setDisplay(view);
-        assertNotNull(aWindowManager.getCurentDisplay());
+        assertNotNull(aWindowManager.getCurrentDisplay());
     }
 
     /**
-     * Test of getCurentDisplay method, of class JFxWindowManager.
+     * Test of getCurrentDisplay method, of class JFxWindowManager.
      */
     @Test
     public void testGetCurentDisplay() {
-        System.out.println("getCurentDisplay");
+        System.out.println("getCurrentDisplay");
         IView view = new SimpleFxView();
         JFxWindowManager.INSTANCE.setDisplay(view);
         
         JFxWindowManager instance = (JFxWindowManager) windowManager;
-        IView windowedView = instance.getCurentDisplay();
+        IView windowedView = instance.getCurrentDisplay();
         assertEquals(view, windowedView);
     }
 
