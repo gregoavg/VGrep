@@ -16,7 +16,7 @@
 
 package com.grego.vgrep.event;
 
-import com.grego.vgrep.model.data.EDataLabel;
+import com.grego.vgrep.model.file.EDataLabel;
 
 /**
  *

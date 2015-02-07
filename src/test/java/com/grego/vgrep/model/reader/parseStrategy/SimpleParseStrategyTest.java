@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.reader.fileParser;
+package com.grego.vgrep.model.reader.parseStrategy;
 
 import org.junit.*;
 

@@ -15,13 +15,13 @@
  */
 package com.grego.vgrep.model.reader;
 
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IContent;
-import com.grego.vgrep.model.data.document.DocumentContent;
-import com.grego.vgrep.model.data.document.DocumentContent.ContentBuilder;
-import com.grego.vgrep.model.data.document.Line;
-import com.grego.vgrep.model.reader.fileParser.DocumentParseStrategyFactory;
-import com.grego.vgrep.model.reader.fileParser.EFileType;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.IContent;
+import com.grego.vgrep.model.file.document.DocumentContent;
+import com.grego.vgrep.model.file.document.DocumentContent.ContentBuilder;
+import com.grego.vgrep.model.file.document.Line;
+import com.grego.vgrep.model.reader.parseStrategy.DocumentParseStrategyFactory;
+import com.grego.vgrep.model.reader.parseStrategy.EFileType;
 import com.grego.vgrep.utils.FileUtils;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class DocumentReader implements IReader {
         final EFileType fileType = FileUtils.getFileType(sourceFile);
         final Collection<String> lines = DocumentParseStrategyFactory.getStrategy(fileType)
                 .parse(sourceFile);
-        lines.forEach((String line) -> builder.appendLine(line));
+        lines.forEach(builder::appendLine);
         return builder.createContents();
     }
 

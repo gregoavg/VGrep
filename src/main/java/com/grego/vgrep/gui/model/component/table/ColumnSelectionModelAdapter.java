@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model.table;
+package com.grego.vgrep.gui.model.component.table;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;

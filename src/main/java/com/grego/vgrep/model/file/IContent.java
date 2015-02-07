@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.model.file;
 
 import java.util.Collections;
 import java.util.List;

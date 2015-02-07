@@ -6,8 +6,8 @@
 package com.grego.vgrep.gui.control.loader;
 
 import com.grego.vgrep.event.ICallback;
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IContent;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.IContent;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;

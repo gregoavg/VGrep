@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.model.file;
 
 /**
  * Represents a manager for <code>ADataFile</code>. It is able to append,

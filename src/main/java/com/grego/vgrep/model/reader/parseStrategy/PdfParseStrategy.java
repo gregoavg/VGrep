@@ -1,4 +1,4 @@
-package com.grego.vgrep.model.reader.fileParser;
+package com.grego.vgrep.model.reader.parseStrategy;
 
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;

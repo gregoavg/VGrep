@@ -18,13 +18,13 @@ package com.grego.vgrep.gui.view.javaFx;
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.control.MainViewController;
-import com.grego.vgrep.gui.model.IComponentHandler;
 import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
-import com.grego.vgrep.gui.model.table.TableViewHandler;
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.EDataLabel;
-import com.grego.vgrep.model.holder.IHolder;
+import com.grego.vgrep.gui.model.component.IComponentHandler;
+import com.grego.vgrep.gui.model.component.table.TableViewHandler;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.EDataLabel;
+import com.grego.vgrep.model.pattern.Pattern;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -86,7 +86,7 @@ public final class MainView extends JFxView {
         findReferencesButton = (Button) componentMap.get("findReferencesButton");
         findReferencesButton.setOnAction((actionEvent)-> {
             final FindReferencesEvent event = new FindReferencesEvent();
-            List<IHolder> patterns = sourceTableHandler.getSelectedValues();
+            List<Pattern> patterns = sourceTableHandler.getSelectedValues();
             event.setPatterns(patterns);
 
             mainViewController.findReferences(event);

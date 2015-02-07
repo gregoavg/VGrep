@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.data.document;
+package com.grego.vgrep.model.file.document;
 
-import com.grego.vgrep.model.data.IContent;
+import com.grego.vgrep.model.file.IContent;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * Implementation of {@link com.grego.vgrep.model.data.IContent} for modeling
+ * Implementation of {@link com.grego.vgrep.model.file.IContent} for modeling
  * document file content, that consists of lines that contain words in the form of columns.
  * 
  * @author Grigorios

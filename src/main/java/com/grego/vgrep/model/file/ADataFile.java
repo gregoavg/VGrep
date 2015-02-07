@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.model.file;
 
 import com.grego.vgrep.model.reader.IReader;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ import java.util.Objects;
 
 /**
  * Abstract model implementation of file. This abstraction works on top of
- * <code>java.io.File</code>, as as a proxy and it holds reference to the real
+ * {@link java.io.File}, as as a proxy and it holds reference to the real
  * file and it's path. Moreover with the use of file reader, it is possible to
  * read it's contents whenever clients demand it (lazy initialization of content).
  *

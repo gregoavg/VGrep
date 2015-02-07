@@ -6,7 +6,7 @@ package com.grego.vgrep.model;
 
 /**
  *
- * @author grigo_000
+ * @author Grigorios
  * @param <S> source of reference 
  * @param <T> target of reference
  */
@@ -17,6 +17,6 @@ public interface IReference<S,T> {
     T getTarget();
 
     @Override
-    public String toString();
+    String toString();
     
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.model.file;
 
 /**
  * Enumeration of labels that define data usage. A file could be labeled as

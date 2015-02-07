@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model;
+package com.grego.vgrep.gui.model.component;
 
 import com.grego.vgrep.model.holder.IHolder;
 
@@ -48,5 +48,7 @@ public interface IComponentHandler<T, M> {
      * @see     IHolder
      */
     <E> List<E> getSelectedValues();
+
+    void accept(IComponentVisitor visitor);
     
 }

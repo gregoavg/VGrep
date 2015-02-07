@@ -5,7 +5,7 @@
  */
 package com.grego.vgrep.event;
 
-import com.grego.vgrep.model.holder.IHolder;
+import com.grego.vgrep.model.pattern.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.List;
  */
 public final class FindReferencesEvent extends ViewEvent {
     
-    private List<IHolder> patterns;
+    private List<Pattern> patterns;
 
     public FindReferencesEvent() {
         super();
         patterns = new ArrayList<>();
     }
 
-    public FindReferencesEvent(List<IHolder> patterns) {
+    public FindReferencesEvent(List<Pattern> patterns) {
         super();
         this.patterns = patterns;
     }
     
-    public List<IHolder> getPatterns() {
+    public List<Pattern> getPatterns() {
         return patterns;
     }
 
-    public void setPatterns(List<IHolder> patterns) {
+    public void setPatterns(List<Pattern> patterns) {
         this.patterns = patterns;
     }
 }

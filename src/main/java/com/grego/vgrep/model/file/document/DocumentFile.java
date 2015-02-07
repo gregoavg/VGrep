@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.model.data.document;
+package com.grego.vgrep.model.file.document;
 
-import com.grego.vgrep.model.data.ADataFile;
+import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.reader.DocumentReader;
 import com.grego.vgrep.model.reader.IReader;
 

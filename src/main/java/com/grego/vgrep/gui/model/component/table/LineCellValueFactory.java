@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model.table;
+package com.grego.vgrep.gui.model.component.table;
 
-import com.grego.vgrep.model.data.document.Line;
+import com.grego.vgrep.model.file.document.Line;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;

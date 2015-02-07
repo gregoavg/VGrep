@@ -17,11 +17,11 @@ package com.grego.vgrep.gui.model;
 
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.model.IReference;
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.EDataLabel;
-import com.grego.vgrep.model.data.IFileManager;
-import com.grego.vgrep.model.data.SimpleFileManager;
-import com.grego.vgrep.model.data.document.DocumentFile;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.EDataLabel;
+import com.grego.vgrep.model.file.IFileManager;
+import com.grego.vgrep.model.file.SimpleFileManager;
+import com.grego.vgrep.model.file.document.DocumentFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

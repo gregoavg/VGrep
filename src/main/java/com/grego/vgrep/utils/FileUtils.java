@@ -4,7 +4,7 @@
  */
 package com.grego.vgrep.utils;
 
-import com.grego.vgrep.model.reader.fileParser.EFileType;
+import com.grego.vgrep.model.reader.parseStrategy.EFileType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

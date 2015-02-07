@@ -4,18 +4,18 @@
  */
 package com.grego.vgrep.model;
 
-import com.grego.vgrep.model.data.EDataLabel;
+import com.grego.vgrep.model.file.EDataLabel;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.grego.vgrep.model.data.EDataLabel.SOURCE;
-import static com.grego.vgrep.model.data.EDataLabel.TARGET;
+import static com.grego.vgrep.model.file.EDataLabel.SOURCE;
+import static com.grego.vgrep.model.file.EDataLabel.TARGET;
 
 /**
  *
- * @author grigo_000
+ * @author Grigorios
  */
 public class SimpleReference implements IReference<String,String> {
 

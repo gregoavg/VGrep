@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.reader.fileParser;
+package com.grego.vgrep.model.reader.parseStrategy;
 
 /**
  * Enumeration of types that this application can support. The <code>OTHER</code>

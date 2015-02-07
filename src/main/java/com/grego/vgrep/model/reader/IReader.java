@@ -5,8 +5,8 @@
  */
 package com.grego.vgrep.model.reader;
 
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IContent;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.IContent;
 
 /**
  * Represents a reader for data files. It is capable of traversing the file

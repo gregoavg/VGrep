@@ -23,10 +23,10 @@ import com.grego.vgrep.gui.model.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.EDataLabel;
-import com.grego.vgrep.model.data.document.Line;
-import com.grego.vgrep.model.holder.IHolder;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.EDataLabel;
+import com.grego.vgrep.model.file.document.Line;
+import com.grego.vgrep.model.pattern.Pattern;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -86,13 +86,12 @@ public final class MainViewController implements IController, Initializable {
         
         List<IReference> references = new ArrayList<>();
 
-
         List<Line> listedTargetContent  = targetFile.getContent().list();
-        for(IHolder<String> pattern : event.getPatterns()) {
+        for(Pattern pattern : event.getPatterns()) {
             for(Line line : listedTargetContent) {
                 for(String word : line.getColumns()) {
-                    if(word.equals(pattern.getValue())) {
-                        references.add(new SimpleReference(pattern.getValue(), line.toString()));
+                    if(word.equals(pattern.getText())) {
+                        references.add(new SimpleReference(pattern.getText() , line.toString()));
                     }
                 }
             }

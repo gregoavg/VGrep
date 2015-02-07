@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.model.data;
+package com.grego.vgrep.model.file;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.grego.vgrep.model.data.ADataFile.getEmptyDataFile;
+import static com.grego.vgrep.model.file.ADataFile.getEmptyDataFile;
 
 /**
  * Simple implementation of <code>IFileManager</code>, defined by a map of 

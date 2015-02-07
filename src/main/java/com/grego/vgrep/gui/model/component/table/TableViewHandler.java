@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgrep.gui.model.table;
+package com.grego.vgrep.gui.model.component.table;
 
-import com.grego.vgrep.event.ICallback;
 import com.grego.vgrep.gui.control.loader.AsyncContentLoader;
 import com.grego.vgrep.gui.control.loader.ILoader;
-import com.grego.vgrep.gui.model.IComponentHandler;
-import com.grego.vgrep.model.data.ADataFile;
-import com.grego.vgrep.model.data.IContent;
-import com.grego.vgrep.model.data.document.Line;
-import com.grego.vgrep.model.holder.IHolder;
-import com.grego.vgrep.model.holder.SimpleHolder;
+import com.grego.vgrep.gui.model.component.IComponentHandler;
+import com.grego.vgrep.gui.model.component.IComponentVisitor;
+import com.grego.vgrep.model.file.ADataFile;
+import com.grego.vgrep.model.file.IContent;
+import com.grego.vgrep.model.file.document.Line;
+import com.grego.vgrep.model.pattern.Pattern;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,6 +68,11 @@ public final class TableViewHandler implements IComponentHandler<TableView, ADat
         return table;
     }
 
+    @Override
+    public void accept(IComponentVisitor visitor) {
+        visitor.visit(this);
+    }
+
     private void setupTable() {
         table.setItems((ObservableList) dataSet);
         table.getColumns().setAll(dataSetColumns.getColumns());
@@ -84,12 +88,12 @@ public final class TableViewHandler implements IComponentHandler<TableView, ADat
      * 
      */
     private void setupLoader() {
-        final ICallback<IContent> afterContentLoad = (content) -> {
+        contentLoader.setCallback((content) -> {
             dataSet.addAll(content.list());
             dataSet.forEach((line) -> dataSetColumns.scaleTo(line.getColumns()));
+
             Platform.runLater(() -> table.getColumns().setAll(dataSetColumns.getColumns()));
-        };
-        contentLoader.setCallback(afterContentLoad);
+        });
     }
 
     private void tableDataChange() {
@@ -99,15 +103,15 @@ public final class TableViewHandler implements IComponentHandler<TableView, ADat
     }
 
     @Override
-    public List<IHolder<String>> getSelectedValues() {
-        final List<IHolder<String>> selectedValues = new ArrayList<>();
+    public List<Pattern> getSelectedValues() {
+        final List<Pattern> selectedValues = new ArrayList<>();
 
         List<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
         selectedCells.forEach((TablePosition position) -> {
             final IContent<String> content = dataModel.getContent();
             String selectedValue = content.getElementAt(position.getRow(), position.getColumn());
             if (!selectedValue.isEmpty()) {
-                selectedValues.add(new SimpleHolder<>(selectedValue));
+                selectedValues.add(new Pattern(selectedValue));
             }
         });
         return selectedValues;
