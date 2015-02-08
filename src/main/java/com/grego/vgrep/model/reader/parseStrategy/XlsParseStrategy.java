@@ -10,11 +10,13 @@ import jxl.read.biff.BiffException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Parse strategy implementation for XLS documents.
@@ -27,7 +29,8 @@ public final class XlsParseStrategy implements IParseStrategy {
     private static final Logger LOGGER = LoggerFactory.getLogger(XlsParseStrategy.class);
 
     @Override
-    public Collection<String> parse(File file) {
+    public Collection<String> parse(@NotNull File file) {
+        Objects.requireNonNull(file, "file can not be null!!");
         List<String> lines = new ArrayList<>();
         try {
             Workbook w = Workbook.getWorkbook(file);

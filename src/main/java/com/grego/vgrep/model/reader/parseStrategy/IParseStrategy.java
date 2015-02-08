@@ -4,6 +4,7 @@
  */
 package com.grego.vgrep.model.reader.parseStrategy;
 
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.util.Collection;
 
@@ -24,6 +25,6 @@ public interface IParseStrategy {
      * @return collection of strings
      * 
      */
-    <T> Collection<T> parse(File file);
+    <T> Collection<T> parse(@NotNull File file);
 
 }

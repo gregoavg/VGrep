@@ -19,11 +19,11 @@ public final class TableColumnModel {
 
     private final List<TableColumn> columns = new ArrayList<>();
 
-    private final LineColumnBuilder columnBuilder = new LineColumnBuilder(columns);
+    private final LineColumnProvider columnProvider = new LineColumnProvider(columns);
 
     public void scaleTo(Collection elements) {
         while (columns.size() < elements.size()) {
-            TableColumn column = columnBuilder.create();
+            TableColumn column = columnProvider.get();
             if (columns.add(column)) {
                 column.setText(String.valueOf(columns.size()));
             }

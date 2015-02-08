@@ -15,10 +15,10 @@
  */
 package com.grego.vgrep.utils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -40,13 +40,9 @@ public final class CollectionUtils {
         return elements.isEmpty() ? null : elements.getLast();
     }
 
-    public static <T> T[] removeNodes(T[] array, T sampleNode) {
-        List<T> reducedList = new ArrayList<>();
-        for(T node : array) {
-            if(!node.equals(sampleNode)) {
-                reducedList.add(node);
-            }
-        }
-        return (T[]) reducedList.toArray();
+    public static <T> Collection<T> removeNodes(T[] array, T sampleNode) {
+        return Arrays.stream(array)
+                .filter((node) -> node != null ? !node.equals(sampleNode) : false)
+                .collect(Collectors.toList());
     }
 }

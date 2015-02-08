@@ -99,7 +99,7 @@ public final class TableViewHandler implements IComponentHandler<TableView, ADat
     private void tableDataChange() {
         dataSet.clear();
         dataSetColumns.clear();
-        contentLoader.loadTo(dataModel);
+        contentLoader.loadFrom(dataModel);
     }
 
     @Override

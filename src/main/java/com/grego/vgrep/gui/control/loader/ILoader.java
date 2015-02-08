@@ -27,6 +27,6 @@ public interface ILoader<T, R> extends ICallable<R> {
      * @param obj the instance to be loaded.
      *
      */
-    void loadTo(T obj);
+    void loadFrom(T obj);
     
 }

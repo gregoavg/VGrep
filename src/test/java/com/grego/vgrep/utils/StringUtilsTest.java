@@ -60,7 +60,7 @@ public class StringUtilsTest extends TestCase {
         String[] stringArray = { "To", " ", "Treno", " ", "", "Einai", " ", null, "", null }; //size: 8
         final int expResult = 3;
         final String seperator = " ";
-        int result = StringUtils.removeNodes(stringArray, seperator).length;
+        int result = StringUtils.removeNodes(stringArray, seperator).size();
         assertEquals(expResult, result);
     }
 

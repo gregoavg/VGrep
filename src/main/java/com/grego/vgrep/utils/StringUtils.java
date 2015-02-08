@@ -7,6 +7,7 @@ package com.grego.vgrep.utils;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -19,14 +20,10 @@ public final class StringUtils {
         return CollectionUtils.getLastElement(Arrays.asList(textArray));
     }
 
-    public static String[] removeNodes(String[] stringArray, String sampleNode) {
+    public static Collection<String> removeNodes(String[] stringArray, String sampleNode) {
         return Arrays.stream(stringArray)
-                .filter((String node) -> {
-                    return node != null ? !(node.isEmpty() || node.equals(sampleNode)) : false;
-                })
-                .toArray((numOfElements) -> {
-                    return new String[numOfElements];
-                });
+                .filter( (String node) -> node != null ? !(node.isEmpty() || node.equals(sampleNode)) : false )
+                .collect(Collectors.toList());
     }
 
     public static Collection<String> textToLineCollection(String text, String lineSeperator) {

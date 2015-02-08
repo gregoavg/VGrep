@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 /**
  * Implementation of <code>ADataFile</code> for document files. A document file
  * provides a document reader to the superclass. The reader is responsible to
- * parse this document and create a content that consists of lines. 
+ * parse this document and get a content that consists of lines.
  * 
  * @author Grigorios
  */

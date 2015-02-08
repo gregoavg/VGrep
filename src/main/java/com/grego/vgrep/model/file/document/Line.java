@@ -7,7 +7,7 @@ package com.grego.vgrep.model.file.document;
 
 import com.grego.vgrep.utils.StringUtils;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,12 +24,13 @@ import static com.grego.vgrep.utils.ECompareResult.NotEqual;
  */
 public final class Line implements Comparable<Line> {
 
-    private final List<String> columns;
     private final static String SEPERATOR = " ";
 
+    private final List<String> columns;
+
     public Line(String text) {
-        String[] splitedText = text.split(SEPERATOR);
-        columns = Arrays.asList(StringUtils.removeNodes(splitedText, SEPERATOR));
+        String[] splitText = text.split(SEPERATOR);
+        columns = new ArrayList<>(StringUtils.removeNodes(splitText, SEPERATOR));
     }
 
     /**

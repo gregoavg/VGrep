@@ -14,15 +14,15 @@ import java.util.List;
  *
  * @author Grego
  */
-public final class LineColumnBuilder {
+public final class LineColumnProvider {
     
     private final Callback lineCellValueFactory;
     
-    public LineColumnBuilder(List<TableColumn> tableColumns) {
+    public LineColumnProvider(List<TableColumn> tableColumns) {
         lineCellValueFactory = new LineCellValueFactory(tableColumns);
     }
     
-    public TableColumn create() {
+    public TableColumn get() {
         final TableColumn column = new TableColumn();
         column.setCellValueFactory(lineCellValueFactory);
         return column;

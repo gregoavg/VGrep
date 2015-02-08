@@ -4,12 +4,10 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Parse strategy implementation for PDF documents.
@@ -22,7 +20,8 @@ public final class PdfParseStrategy implements IParseStrategy {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PdfParseStrategy.class);
 
     @Override
-    public Collection<String> parse(File file) {
+    public Collection<String> parse(@NotNull File file) {
+        Objects.requireNonNull(file, "file can not be null!!");
         List<String> lines = new ArrayList<>();
         try {
             PdfReader reader = new PdfReader(file.getPath());

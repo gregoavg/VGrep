@@ -34,7 +34,7 @@ public final class AsyncContentLoader implements ILoader<ADataFile, IContent> {
     }
 
     @Override
-    public void loadTo(ADataFile file) {
+    public void loadFrom(ADataFile file) {
         executor.execute(() -> {
             // first call to get file content actually loads the content.
             IContent content = file.getContent();

@@ -56,7 +56,7 @@ public class SimpleParseStrategyTest {
     /**
      * Test of parse method for a null file reference.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testParseNullFile() {
         System.out.println("parse null file...");
         File file = null;
