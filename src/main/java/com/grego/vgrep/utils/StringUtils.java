@@ -22,7 +22,8 @@ public final class StringUtils {
 
     public static Collection<String> removeNodes(String[] stringArray, String sampleNode) {
         return Arrays.stream(stringArray)
-                .filter( (String node) -> node != null ? !(node.isEmpty() || node.equals(sampleNode)) : false )
+                .filter( (node) -> node != null && !node.isEmpty() )
+                .filter((node) -> !node.equals(sampleNode))
                 .collect(Collectors.toList());
     }
 
