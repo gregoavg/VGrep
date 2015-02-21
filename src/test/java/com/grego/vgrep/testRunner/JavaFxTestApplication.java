@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grego.vgreo.testRunner;
+package com.grego.vgrep.testRunner;
 
 import com.grego.vgrep.app.launcher.ILaunchable;
 import javafx.application.Application;

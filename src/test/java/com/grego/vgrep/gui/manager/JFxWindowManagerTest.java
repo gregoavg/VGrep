@@ -5,7 +5,7 @@
  */
 package com.grego.vgrep.gui.manager;
 
-import com.grego.vgreo.testRunner.JavaFXJUnit4ClassRunner;
+import com.grego.vgrep.testRunner.JavaFXJUnit4ClassRunner;
 import com.grego.vgrep.gui.view.IView;
 import com.grego.vgrep.gui.view.SimpleFxView;
 import javafx.stage.Stage;

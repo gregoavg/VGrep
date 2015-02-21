@@ -22,7 +22,7 @@ public final class StringUtils {
 
     public static Collection<String> removeNodes(String[] stringArray, String sampleNode) {
         return Arrays.stream(stringArray)
-                .filter( (node) -> node != null && !node.isEmpty() )
+                .filter((node) -> node != null && !node.isEmpty())
                 .filter((node) -> !node.equals(sampleNode))
                 .collect(Collectors.toList());
     }
