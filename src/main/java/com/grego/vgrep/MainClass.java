@@ -15,16 +15,18 @@
  */
 package com.grego.vgrep;
 
-import com.grego.vgrep.app.factory.ApplicationFactory;
-import com.grego.vgrep.app.launcher.ILaunchable;
-
-import static com.grego.vgrep.app.factory.ApplicationFactory.EApplicationType.JavaFX;
+import com.grego.vgrep.gui.model.ViewModel;
+import com.grego.vgrep.gui.view.MainView;
+import com.grego.viewmanager.application.ApplicationFactory;
+import static com.grego.viewmanager.application.ApplicationFactory.EApplicationType.JavaFX;
+import com.grego.viewmanager.application.IApplication;
+import com.grego.viewmanager.mvc.IView;
+import com.grego.viewmanager.window.IWindowManager;
 
 //static import of application types
-
 /**
- * Application's main class 
- * 
+ * Application's main class
+ *
  * @author Grigorios
  */
 public final class MainClass {
@@ -33,7 +35,18 @@ public final class MainClass {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ILaunchable app = ApplicationFactory.getInstance(JavaFX);
+        
+        IApplication app = ApplicationFactory.getInstance(JavaFX);
+        
+        app.onStart((IWindowManager windowManager) -> {
+            final IView mainView = new MainView(new ViewModel());
+            windowManager.setWindowSize(600, 400);
+            windowManager.setDisplay(mainView);
+            windowManager.setIcon("/images/logo.png");
+            windowManager.setTitle("Visual File Grep");
+            windowManager.setVisibility(true);
+        });
+        
         app.invokeLauncher(args);
     }
 

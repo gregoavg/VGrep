@@ -7,8 +7,8 @@ package com.grego.vgrep.gui.model.component.table;
 
 import com.grego.vgrep.gui.control.loader.AsyncContentLoader;
 import com.grego.vgrep.gui.control.loader.ILoader;
-import com.grego.vgrep.gui.model.component.IComponentHandler;
-import com.grego.vgrep.gui.model.component.IComponentVisitor;
+import com.grego.viewmanager.mvc.component.IComponentHandler;
+import com.grego.viewmanager.mvc.component.IComponentVisitor;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.IContent;
 import com.grego.vgrep.model.file.document.Line;

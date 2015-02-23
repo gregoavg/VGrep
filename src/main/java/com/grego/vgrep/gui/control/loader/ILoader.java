@@ -5,7 +5,7 @@
  */
 package com.grego.vgrep.gui.control.loader;
 
-import com.grego.vgrep.event.ICallable;
+import com.grego.viewmanager.event.ICallable;
 
 /**
  * Representer for instances responsible to load external information to objects.

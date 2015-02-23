@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.grego.vgrep.gui.view.javaFx;
+package com.grego.vgrep.gui.view;
+
 
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.control.MainViewController;
-import com.grego.vgrep.gui.model.IModel;
+import com.grego.viewmanager.mvc.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
-import com.grego.vgrep.gui.model.component.IComponentHandler;
+import com.grego.viewmanager.mvc.component.IComponentHandler;
 import com.grego.vgrep.gui.model.component.table.TableViewHandler;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.EDataLabel;
 import com.grego.vgrep.model.pattern.Pattern;
+import com.grego.viewmanager.mvc.JFxView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;

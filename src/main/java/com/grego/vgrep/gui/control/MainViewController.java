@@ -15,11 +15,10 @@
  */
 package com.grego.vgrep.gui.control;
 
+import com.grego.viewmanager.mvc.IController;
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
-import com.grego.vgrep.gui.manager.IWindowManager;
-import com.grego.vgrep.gui.manager.JFxWindowManager;
-import com.grego.vgrep.gui.model.IModel;
+import com.grego.viewmanager.mvc.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
@@ -27,6 +26,8 @@ import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.EDataLabel;
 import com.grego.vgrep.model.file.document.Line;
 import com.grego.vgrep.model.pattern.Pattern;
+import com.grego.viewmanager.window.IWindowManager;
+import com.grego.viewmanager.window.JFxWindowManager;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;

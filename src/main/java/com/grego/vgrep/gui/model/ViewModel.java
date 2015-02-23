@@ -15,13 +15,14 @@
  */
 package com.grego.vgrep.gui.model;
 
-import com.grego.vgrep.gui.view.IView;
+import com.grego.viewmanager.mvc.IModel;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.EDataLabel;
 import com.grego.vgrep.model.file.IFileManager;
 import com.grego.vgrep.model.file.SimpleFileManager;
 import com.grego.vgrep.model.file.document.DocumentFile;
+import com.grego.viewmanager.mvc.IView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

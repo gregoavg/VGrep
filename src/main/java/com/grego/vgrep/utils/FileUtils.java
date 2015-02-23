@@ -5,11 +5,11 @@
 package com.grego.vgrep.utils;
 
 import com.grego.vgrep.model.reader.parseStrategy.EFileType;
+import com.grego.viewmanager.utils.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.UnknownFormatFlagsException;
 
@@ -38,10 +38,6 @@ public final class FileUtils {
             default:
                 return EFileType.OTHER;
         }
-    }
-
-    public static InputStream getFileAsResourceStream(String filePath) {
-        return FileUtils.class.getResourceAsStream(filePath);
     }
 
 }

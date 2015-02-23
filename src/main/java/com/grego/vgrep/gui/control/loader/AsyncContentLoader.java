@@ -5,9 +5,9 @@
  */
 package com.grego.vgrep.gui.control.loader;
 
-import com.grego.vgrep.event.ICallback;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.IContent;
+import com.grego.viewmanager.event.ICallback;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public final class AsyncContentLoader implements ILoader<ADataFile, IContent> {
     //thread management service
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    private ICallback<IContent> callback = ICallback.EMPTY();
+    private ICallback<IContent> callback = ICallback.empty();
 
     @Override
     public void setCallback(@NotNull ICallback<IContent> callback) {
@@ -38,7 +38,7 @@ public final class AsyncContentLoader implements ILoader<ADataFile, IContent> {
         executor.execute(() -> {
             // first call to get file content actually loads the content.
             IContent content = file.getContent();
-            callback.onReturn(content);
+            callback.onCall(content);
         });
     }
 
