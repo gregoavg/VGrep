@@ -15,10 +15,8 @@
  */
 package com.grego.vgrep.gui.control;
 
-import com.grego.viewmanager.mvc.IController;
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
-import com.grego.viewmanager.mvc.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.model.IReference;
 import com.grego.vgrep.model.SimpleReference;
@@ -26,20 +24,20 @@ import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.EDataLabel;
 import com.grego.vgrep.model.file.document.Line;
 import com.grego.vgrep.model.pattern.Pattern;
-import com.grego.viewmanager.window.IWindowManager;
-import com.grego.viewmanager.window.JFxWindowManager;
-import javafx.fxml.Initializable;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.gregoavg.viewmanager.mvc.IController;
+import com.gregoavg.viewmanager.mvc.IModel;
+import com.gregoavg.viewmanager.window.IWindowManager;
+import com.gregoavg.viewmanager.window.JFxWindowManager;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import javafx.fxml.Initializable;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of <code>IController</code> for the JavaFX framework.

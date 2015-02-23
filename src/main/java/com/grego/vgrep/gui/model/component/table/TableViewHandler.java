@@ -7,22 +7,21 @@ package com.grego.vgrep.gui.model.component.table;
 
 import com.grego.vgrep.gui.control.loader.AsyncContentLoader;
 import com.grego.vgrep.gui.control.loader.ILoader;
-import com.grego.viewmanager.mvc.component.IComponentHandler;
-import com.grego.viewmanager.mvc.component.IComponentVisitor;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.IContent;
 import com.grego.vgrep.model.file.document.Line;
 import com.grego.vgrep.model.pattern.Pattern;
+import com.gregoavg.viewmanager.mvc.component.IComponentHandler;
+import com.gregoavg.viewmanager.mvc.component.IComponentVisitor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Implementation of <code>IComponentHandler</code> specially for managing

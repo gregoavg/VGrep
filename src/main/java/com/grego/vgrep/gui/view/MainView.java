@@ -15,26 +15,24 @@
  */
 package com.grego.vgrep.gui.view;
 
-
 import com.grego.vgrep.event.FileSelectionEvent;
 import com.grego.vgrep.event.FindReferencesEvent;
 import com.grego.vgrep.gui.control.MainViewController;
-import com.grego.viewmanager.mvc.IModel;
 import com.grego.vgrep.gui.model.ViewModel;
-import com.grego.viewmanager.mvc.component.IComponentHandler;
 import com.grego.vgrep.gui.model.component.table.TableViewHandler;
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.EDataLabel;
 import com.grego.vgrep.model.pattern.Pattern;
-import com.grego.viewmanager.mvc.JFxView;
+import com.gregoavg.viewmanager.mvc.IModel;
+import com.gregoavg.viewmanager.mvc.JFxView;
+import com.gregoavg.viewmanager.mvc.component.IComponentHandler;
+import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * JavaFX view implementation that serves as main view for this application.

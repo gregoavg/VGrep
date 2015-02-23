@@ -17,11 +17,11 @@ package com.grego.vgrep;
 
 import com.grego.vgrep.gui.model.ViewModel;
 import com.grego.vgrep.gui.view.MainView;
-import com.grego.viewmanager.application.ApplicationFactory;
-import static com.grego.viewmanager.application.ApplicationFactory.EApplicationType.JavaFX;
-import com.grego.viewmanager.application.IApplication;
-import com.grego.viewmanager.mvc.IView;
-import com.grego.viewmanager.window.IWindowManager;
+import com.gregoavg.viewmanager.application.ApplicationFactory;
+import static com.gregoavg.viewmanager.application.ApplicationFactory.EApplicationType.JavaFX;
+import com.gregoavg.viewmanager.application.IApplication;
+import com.gregoavg.viewmanager.mvc.IView;
+import com.gregoavg.viewmanager.window.IWindowManager;
 
 //static import of application types
 /**

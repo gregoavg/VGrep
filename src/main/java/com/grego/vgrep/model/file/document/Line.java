@@ -5,14 +5,12 @@
  */
 package com.grego.vgrep.model.file.document;
 
-import com.grego.viewmanager.utils.StringUtils;
-
+import static com.gregoavg.viewmanager.utils.ECompareResult.Equal;
+import static com.gregoavg.viewmanager.utils.ECompareResult.NotEqual;
+import com.gregoavg.viewmanager.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.grego.viewmanager.utils.ECompareResult.Equal;
-import static com.grego.viewmanager.utils.ECompareResult.NotEqual;
 
 /**
  * Core model data block that contains words in columnar mode. Also it is possible

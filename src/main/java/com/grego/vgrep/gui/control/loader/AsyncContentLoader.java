@@ -7,7 +7,7 @@ package com.grego.vgrep.gui.control.loader;
 
 import com.grego.vgrep.model.file.ADataFile;
 import com.grego.vgrep.model.file.IContent;
-import com.grego.viewmanager.event.ICallback;
+import com.gregoavg.viewmanager.event.ICallback;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
